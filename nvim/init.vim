@@ -11,8 +11,8 @@ set clipboard+=unnamed
 set updatetime=100
 set smartindent
 set incsearch
-set list
-set list listchars=trail:»,tab:»-
+" set list
+" set list listchars=trail:»,tab:»-
 set hlsearch
 hi Search gui=NONE
 hi Search guifg=LightYellow
