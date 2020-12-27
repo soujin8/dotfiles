@@ -1,8 +1,8 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]]
-repo = 'altercation/vim-colors-solarized'
+[[plugins]] # カラースキーマ
+repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'

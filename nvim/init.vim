@@ -1,29 +1,38 @@
 "-------------------------------------------------------------------------------
 " Option
 "-------------------------------------------------------------------------------
+" BSで行頭削除できる
 set backspace=indent,eol,start
+" 行数表示
 set number
+" 改行時に前の行のインデントを継続
 set autoindent
+" tab size
 set tabstop=2
+" 自動インデントでずれる幅
 set shiftwidth=2
+"タブ入力を複数の空白入力に置き換える
 set expandtab
+" clipboard連携 
 set clipboard+=unnamed
+" ファイル更新反映までの時間
 set updatetime=100
+" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
-set incsearch
-" set list
-" set list listchars=trail:»,tab:»-
+" インクリメンタルな検索が可能になる
+" set incsearch
+" 検索結果のハイライト
 set hlsearch
-hi Search gui=NONE
-hi Search guifg=LightYellow
-hi Search guibg=Blue
+" 常にステータスラインを表示する
 set laststatus=2
+" 補完表示時の挙動
 set completeopt=menuone,noinsert
 " 補完表示時のEnterで改行をしない
 inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
-
-syntax on
+" jj=esc
 imap jj <Esc>
+" 構文ハイライトを有効
+syntax enable
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -52,21 +61,7 @@ filetype plugin indent on
 "-------------------------------------------------------------------------------
 " Color scheme
 "-------------------------------------------------------------------------------
-
-" true color
-if exists("&termguicolors") && exists("&winblend")
-  let g:neosolarized_termtrans=1
-  "runtime ~/dotfiles/nvim/solarized_true.vim
-  runtime ./nvim/solarized_true.vim
-  set termguicolors
-  set winblend=0
-  set wildoptions=pum
-  set pumblend=5
-endif
-
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme hybrid
 
 "-------------------------------------------------------------------------------
 " Other plugins
@@ -88,7 +83,7 @@ endif
 " Cursor line
 "-------------------------------------------------------------------------------
 
-" set cursorline
+set cursorline
 " tab config of golang
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal tabstop=4
@@ -97,6 +92,9 @@ autocmd FileType go setlocal shiftwidth=4
 autocmd FileType rb setlocal noexpandtab
 autocmd FileType rb setlocal tabstop=2
 
-runtime! nvim/*.vim
+"-------------------------------------------------------------------------------
+" read file
+"-------------------------------------------------------------------------------
+runtime! ~/dotfiles/nvim/*.vim
 
-source ~/dotfiles/nvim/.vimrc.lightline
+" source ~/dotfiles/nvim/.vimrc.lightline

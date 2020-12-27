@@ -89,3 +89,8 @@ call defx#custom#column('git', 'indicators', {
   \ 'Deleted'   : '✖',
   \ 'Unknown'   : '?'
   \ })
+call defx#custom#option('_', {
+		\ 'show_ignored_files': 1,
+		\ })
+
+call defx#custom#column('git', 'column_length', 1)
