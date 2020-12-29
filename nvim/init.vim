@@ -33,6 +33,8 @@ inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
 imap jj <Esc>
 " 構文ハイライトを有効
 syntax enable
+" プラグインとインデントを有効化
+filetype plugin indent on
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -55,8 +57,6 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-
-filetype plugin indent on
 
 "-------------------------------------------------------------------------------
 " Color scheme

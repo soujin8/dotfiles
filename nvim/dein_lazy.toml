@@ -14,3 +14,15 @@ on_ft = ['toml']
 repo = 'fatih/vim-go'
 on_ft = ['go']
 
+[[plugins]]
+repo = 'ianks/vim-tsx'
+on_ft = ['typescriptreact']
+
+[[plugins]] # vim-markdonwの依存プラグイン
+repo = 'godlygeek/tabular'
+on_ft = ['markdown']
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
+

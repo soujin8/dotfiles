@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]] # カラースキーマ
+[[plugins]]
 repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
@@ -13,13 +13,12 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 merge = 0
+# プラグインのrevisionを指定
 rev = "release"
+# プラグイン追加されたときに実行される
 hook_add = """
 source ~/dotfiles/nvim/coc.rc.vim
 """
-
-[[plugins]]
-repo = 'dense-analysis/ale'
 
 [[plugins]]
 repo = 'Shougo/defx.nvim'
@@ -30,7 +29,6 @@ source ~/dotfiles/nvim/defx.rc.vim
 
 [[plugins]]
 repo = 'kristijanhusak/defx-icons'
-
 
 [[plugins]]
 repo = 'kristijanhusak/defx-git'
@@ -46,4 +44,13 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+mergerd = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
 

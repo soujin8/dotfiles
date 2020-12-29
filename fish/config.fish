@@ -40,3 +40,7 @@ functions --copy cd standard_cd
 function cd
   standard_cd $argv; and ls
 end
+
+# fzf options
+set -x FZF_CTRL_T_OPTS '--preview "head -100 {}" --prompt="P " --header="H" --margin=1,3 --inline-info --reverse --border --height 40%'
+
