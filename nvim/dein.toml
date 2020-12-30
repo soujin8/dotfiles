@@ -13,9 +13,7 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 merge = 0
-# プラグインのrevisionを指定
 rev = "release"
-# プラグイン追加されたときに実行される
 hook_add = """
 source ~/dotfiles/nvim/coc.rc.vim
 """
