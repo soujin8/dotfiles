@@ -110,6 +110,10 @@ let g:go_fmt_command = "goimports"
 " vim-jsx-pretty
 let g:vim_jsx_pretty_disable_tsx = 1
 
+" vim-markdown
+" 折りたたみしない
+let g:vim_markdown_folding_disabled = 1
+
 " Status line
 if !exists('*fugitive#statusline')
   set statusline=%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}[L%l/%L,C%03v]
