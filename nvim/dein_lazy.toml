@@ -15,6 +15,10 @@ repo = 'fatih/vim-go'
 on_ft = ['go']
 
 [[plugins]]
+repo = 'sebdah/vim-delve'
+on_ft = ['go']
+
+[[plugins]]
 repo = 'yuezk/vim-js'
 on_ft = ['javascript', 'javascript.jsx']
 

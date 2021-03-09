@@ -121,6 +121,10 @@ if !exists('*fugitive#statusline')
   set statusline+=%{fugitive#statusline()}
 endif
 
+" vim-delve
+" ;dでその行にブレークポイントを設定
+autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
+
 "-------------------------------------------------------------------------------
 " Cursor line
 "-------------------------------------------------------------------------------

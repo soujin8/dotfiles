@@ -1,3 +1,4 @@
+#!bin/fish
 function ide
   tmux split-window -v
   tmux split-window -h
