@@ -27,19 +27,13 @@ alias gd='git diff'
 alias g='git'
 alias c='clear'
 alias ll='ls -lahG'
+# alias gcop='git branch -a --sort=-authordate | grep -v -e '->' -e '*' | perl -pe 's/^\h+//g' | perl -pe 's#^remotes/origin/###' | perl -nle 'print if !$c{$_}++' | peco | xargs git checkout'
 
 # theme-bobthefish
 set -g fish_prompt_pwd_dir_length 0  # ディレクトリ省略しない
 set -g theme_display_git_master_branch yes # git branch名を表示
 set -g theme_display_date no  # 時刻を表示しないように設定
 set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
-
-# cdしたらls
-functions --copy cd standard_cd
-
-function cd
-  standard_cd $argv; and ls
-end
 
 # fzf options
 set -x FZF_CTRL_T_OPTS '--preview "head -100 {}" --prompt="P " --header="H" --margin=1,3 --inline-info --reverse --border --height 40%'
