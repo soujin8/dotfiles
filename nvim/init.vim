@@ -33,7 +33,7 @@ inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
 imap jj <Esc>
 " プラグインとインデントを有効化
 filetype plugin indent on
-filetype on
+" filetype on
 " 検索パターンにおいて大文字と小文字を区別しない
 set ignorecase
 
@@ -108,7 +108,7 @@ let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 
 " vim-jsx-pretty
-let g:vim_jsx_pretty_disable_tsx = 1
+let g:vim_jsx_pretty_colorful_config = 1
 
 " vim-markdown
 " 折りたたみしない
@@ -151,7 +151,7 @@ nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>g :GFiles<CR>
 nnoremap <silent> <leader>G :GFiles?<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>h :History<CR>
+" nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>r :Rg<CR>
 
 "-------------------------------------------------------------------------------

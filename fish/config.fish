@@ -17,6 +17,11 @@ set -x NODENV_ROOT /Users/hachi/.anyenv/envs/nodenv
 set -x PATH /Users/hachi/.anyenv/envs/nodenv/bin $PATH
 set -x PATH /Users/hachi/.anyenv/envs/nodenv/shims $PATH
 set -x NODENV_SHELL fish
+# Lang
+set -x LANG ja_JP.UTF-8
+set -Ux LC_CTYPE ja_JP.UTF-8
+# Rust
+set -U fish_user_paths $fish_user_paths $HOME/.cargo/bin
 
 # alias
 alias be='bundle exec'
@@ -35,7 +40,7 @@ set -g fish_prompt_pwd_dir_length 0  # ディレクトリ省略しない
 set -g theme_display_git_master_branch yes # git branch名を表示
 set -g theme_display_date no  # 時刻を表示しないように設定
 set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
-
+set -g theme_powerline_fonts no # Powerline font無効化
 # fzf options
 set -x FZF_CTRL_T_OPTS '--preview "head -100 {}" --prompt="P " --header="H" --margin=1,3 --inline-info --reverse --border --height 40%'
 

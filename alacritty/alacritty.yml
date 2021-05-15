@@ -1,0 +1,61 @@
+# Font
+font:
+  nomal:
+    family: Monaco
+    style: Regular
+  bold:
+    family: Monaco
+    style: Bold
+  italic:
+    family: Monaco
+    style: Italic
+  # nomal:
+    # family: Cousine for Powerline
+    # style: Regular
+  # bold:
+    # family: Cousine for Powerline
+    # style: Bold
+  # italic:
+    # family: Cousine for Powerline
+    # style: Italic
+  size: 16.0
+
+# # Colors (Hybrid)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#27292c'
+#     foreground: '#d0d2d1'
+
+#   # Normal colors
+#   normal:
+#     black:   '#35383b'
+#     red:     '#b05655'
+#     green:   '#769972'
+#     yellow:  '#e1a574'
+#     blue:    '#7693ac'
+#     magenta: '#977ba0'
+#     cyan:    '#749e99'
+#     white:   '#848b92'
+
+#   # Bright colors
+#   bright:
+#     black:   '#484c52'
+#     red:     '#d27c7b'
+#     green:   '#dffebe'
+#     yellow:  '#f0d189'
+#     blue:    '#96b1c9'
+#     magenta: '#bfa5c7'
+#     cyan:    '#9fc9c3'
+#     white:   '#fcf7e2'
+
+# login shell
+shell:
+  program: /usr/local/bin/fish
+  args:
+    - --login
+
+env:
+  LC_CTYPE: en_US.UTF-8
+  LANG: en_US.UTF-8
+  # TERM: alacritty

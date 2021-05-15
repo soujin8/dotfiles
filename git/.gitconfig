@@ -11,3 +11,5 @@
 	template = ./commit_template
 [core]
 	pager = git-split-diffs --color | less -RFX
+[fetch]
+  prune = true
