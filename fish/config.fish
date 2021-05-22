@@ -1,5 +1,5 @@
-set -x PATH /usr/local/bin $PATH
-set -x PATH /usr/local/bin $PATH
+set PATH $PATH /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+set fish_user_paths /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin $fish_user_paths
 # golang
 set -x GOPATH $HOME/go
 set -x PATH $PATH /usr/local/go/bin $GOPATH/bin /bin /usr/bin
