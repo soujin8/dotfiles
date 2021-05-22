@@ -14,7 +14,12 @@ set shiftwidth=2
 "タブ入力を複数の空白入力に置き換える
 set expandtab
 " clipboard連携 
-set clipboard+=unnamed
+if has('mac')
+  set clipboard+=unnamed
+endif
+if has('unix')
+  set clipboard=unnamedplus
+endif
 " ファイル更新反映までの時間
 set updatetime=100
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する

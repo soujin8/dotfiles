@@ -1,7 +1,3 @@
-" Define mappings
-"cnoreabbrev sf Defx -listed -new
-"      \ -columns=indent:mark:icon:icons:filename:git:size
-"      \ -buffer-name=tab`tabpagenr()`<CR>
 nnoremap <silent>sf :<C-u>Defx -listed -resume
       \ -columns=indent:mark:icon:icons:filename:git:size
       \ -buffer-name=tab`tabpagenr()`

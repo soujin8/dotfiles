@@ -26,10 +26,6 @@ on_ft = ['javascript', 'javascript.jsx']
 repo = 'maxmellon/vim-jsx-pretty'
 on_ft = ['typescript', 'typescript.tsx', 'typescriptreact']
 
-#[[plugins]]
-#repo = 'ianks/vim-tsx'
-#on_ft = ['typescript', 'typescript.tsx']
-
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = ['typescript', 'typescript.tsx', 'typescriptreact']

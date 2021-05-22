@@ -1,6 +1,3 @@
-
-repo = 'Shougo/dein.vim'
-
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 
@@ -26,13 +23,13 @@ source ~/dotfiles/nvim/defx.rc.vim
 """
 
 [[plugins]]
-repo = 'kristijanhusak/defx-icons'
-
-[[plugins]]
 repo = 'kristijanhusak/defx-git'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
