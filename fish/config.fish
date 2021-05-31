@@ -1,14 +1,17 @@
-set PATH $PATH /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-set fish_user_paths /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin $fish_user_paths
 # golang
 set -x GOPATH $HOME/go
 set -x PATH $PATH /usr/local/go/bin $GOPATH/bin /bin /usr/bin
-# anyenv
+## anyenv
 set -x PATH $HOME/.anyenv/bin $PATH
-# Lang
+set -x NODENV_ROOT $HOME/.anyenv/envs/nodenv
+set -x PATH $HOME/.anyenv/envs/ndenv/bin $PATH
+set -x PATH $NDENV_ROOT/shims $PATH
+set -x NODENV_SHELL fish
+eval (anyenv init - | source)
+## Lang
 set -x LANG en_US.utf8
-# Rust cargo
-set -x PATH $HOME/.cargo/bin
+## Rust cargo
+set -x PATH $HOME/.cargo/bin $PATH
 
 # alias
 alias be='bundle exec'

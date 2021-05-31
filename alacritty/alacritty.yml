@@ -39,7 +39,7 @@ colors:
 
 # login shell
 shell:
-  program: /usr/bin/bash
+  program: /usr/bin/fish
   args:
     - --login
 

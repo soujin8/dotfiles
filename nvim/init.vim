@@ -5,6 +5,8 @@
 set backspace=indent,eol,start
 " 行数表示
 set number
+" 相対行数を表示
+set relativenumber
 " 改行時に前の行のインデントを継続
 set autoindent
 " tab size
@@ -41,11 +43,10 @@ filetype plugin indent on
 " filetype on
 " 検索パターンにおいて大文字と小文字を区別しない
 set ignorecase
-
-"augroup SyntaxSettings
-"    autocmd!
-"    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
-"augroup END
+" カーソルラインの表示
+"set cursorline
+" 構文ハイライトを有効
+:syntax on
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -101,6 +102,9 @@ endif
 "-------------------------------------------------------------------------------
 " Color scheme
 "-------------------------------------------------------------------------------
+set background=dark
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
 
 "-------------------------------------------------------------------------------
@@ -133,8 +137,6 @@ autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
 "-------------------------------------------------------------------------------
 " Cursor line
 "-------------------------------------------------------------------------------
-
-set cursorline
 " tab config of golang
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal tabstop=4
@@ -160,11 +162,8 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>r :Rg<CR>
 
 "-------------------------------------------------------------------------------
-" read file
+" import divided file
 "-------------------------------------------------------------------------------
-runtime! ~/dotfiles/nvim/*.vim
+runtime ~/dotfiles/nvim/*.vim
+runtime ~/dotfiles/nvim/.vimrc.lightline
 
-source ~/dotfiles/nvim/.vimrc.lightline
-
-" 構文ハイライトを有効
-:syntax on
