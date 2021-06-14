@@ -45,8 +45,6 @@ filetype plugin indent on
 set ignorecase
 " カーソルラインの表示
 "set cursorline
-" 構文ハイライトを有効
-:syntax on
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -167,3 +165,5 @@ nnoremap <silent> <leader>r :Rg<CR>
 runtime ~/dotfiles/nvim/*.vim
 runtime ~/dotfiles/nvim/.vimrc.lightline
 
+" 構文ハイライトを有効
+"syntax on
