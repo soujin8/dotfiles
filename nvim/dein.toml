@@ -1,5 +1,5 @@
-#[[plugins]]
-repo = 'w0ng/vim-hybrid'
+# [[plugins]]
+# repo = 'kristijanhusak/vim-hybrid-material'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -37,8 +37,8 @@ repo = 'Shougo/unite.vim'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
-#[[plugins]]
-#repo = 'jiangmiao/auto-pairs'
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
 
 [[plugins]]
 repo = 'junegunn/fzf'
@@ -57,3 +57,10 @@ repo = 'wsdjeg/dein-ui.vim'
 
 [[plugins]]
 repo = 'prettier/vim-prettier'
+build = 'npm install'
+
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+
+[[plugins]]
+repo = 'mattn/vim-goimports'

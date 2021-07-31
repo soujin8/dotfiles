@@ -26,13 +26,6 @@ alias ll='ls -lahG'
 alias d='docker'
 alias dc='docker-compose'
 
-# theme-bobthefish
-#set -g fish_prompt_pwd_dir_length 0  # ディレクトリ省略しない
-#set -g theme_display_git_master_branch yes # git branch名を表示
-#set -g theme_display_date no  # 時刻を表示しないように設定
-#set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
-#set -g theme_powerline_fonts no # Powerline font無効化
-
 # theme pure-fish/pure
 set -g pure_enable_single_line_prompt true
 set -g pure_color_mute yellow
