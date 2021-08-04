@@ -39,7 +39,7 @@ font:
 
 # login shell
 shell:
-  program: /usr/bin/fish
+  program: /usr/bin/zsh
   args:
     - --login
 

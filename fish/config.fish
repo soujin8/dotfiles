@@ -25,6 +25,7 @@ alias c='clear'
 alias ll='ls -lahG'
 alias d='docker'
 alias dc='docker-compose'
+alias k='kubectl'
 
 # theme pure-fish/pure
 set -g pure_enable_single_line_prompt true

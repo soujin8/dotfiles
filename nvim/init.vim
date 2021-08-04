@@ -43,8 +43,8 @@ filetype plugin indent on
 " filetype on
 " 検索パターンにおいて大文字と小文字を区別しない
 set ignorecase
-" カーソルラインの表示
-"set cursorline
+" スワップファイルを作らない
+set noswapfile
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -134,7 +134,7 @@ endif
 autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
 
 "-------------------------------------------------------------------------------
-" Cursor line
+" Tab Config each language
 "-------------------------------------------------------------------------------
 " tab config of golang
 autocmd FileType go setlocal noexpandtab
