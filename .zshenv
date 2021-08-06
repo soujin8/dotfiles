@@ -1,5 +1,6 @@
 export LANG=en_US.utf8
 export LANGUAGE=en
+export PATH="$HOME/.local/bin:$PATH"
 
 # for anyenv
 if [ -e "$HOME/.anyenv" ];
@@ -17,6 +18,7 @@ if [ -e "/usr/local/go" ];
 then
   export GOPATH=$HOME/go
   export PATH=$PATH:/usr/local/go/bin
+  export PATH=$PATH:$GOPATH/bin
 fi
 
 # for cargo
