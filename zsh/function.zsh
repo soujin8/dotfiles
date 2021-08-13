@@ -16,3 +16,5 @@ function dev() {
         tmux rename-session ${repo_name//./-}
     fi
 }
+zle -N dev
+bindkey '^g' dev

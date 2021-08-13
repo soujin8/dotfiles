@@ -1,6 +1,7 @@
 export LANG=en_US.utf8
 export LANGUAGE=en
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # for anyenv
 if [ -e "$HOME/.anyenv" ];

@@ -64,3 +64,16 @@ repo = 'dhruvasagar/vim-table-mode'
 
 [[plugins]]
 repo = 'mattn/vim-goimports'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+#[[plugins]]
+#repo = 'neovim/nvim-lspconfig'
+#
+#[[plugins]]
+#repo = 'mattn/vim-lsp-settings'
+#
+#[[plugins]]
+#repo = 'glepnir/lspsaga.nvim'
+

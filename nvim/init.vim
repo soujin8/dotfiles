@@ -100,14 +100,10 @@ endif
 "-------------------------------------------------------------------------------
 " Color scheme
 "-------------------------------------------------------------------------------
-" set background=dark
-" let g:hybrid_custom_term_colors = 1
-" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-" colorscheme hybrid
-" colorscheme hybrid_material
+colorscheme iceberg
 
 "-------------------------------------------------------------------------------
-" Other plugins
+" plugin config
 "-------------------------------------------------------------------------------
 
 " vim-go
@@ -163,8 +159,5 @@ nnoremap <silent> <leader>r :Rg<CR>
 "-------------------------------------------------------------------------------
 " import divided file
 "-------------------------------------------------------------------------------
-runtime ~/dotfiles/nvim/*.vim
-" runtime ~/dotfiles/nvim/.vimrc.lightline
+runtime ~/dotfiles/nvim/*.rc.vim
 
-" 構文ハイライトを有効
-"syntax on
