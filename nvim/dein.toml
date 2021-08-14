@@ -77,3 +77,5 @@ repo = 'cocopon/iceberg.vim'
 #[[plugins]]
 #repo = 'glepnir/lspsaga.nvim'
 
+[[plugins]]
+repo = 'skanehira/preview-markdown.vim'

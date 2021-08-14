@@ -45,6 +45,8 @@ filetype plugin indent on
 set ignorecase
 " スワップファイルを作らない
 set noswapfile
+" 新しいウィンドウを→に開く
+set splitright
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -128,6 +130,9 @@ endif
 " vim-delve
 " ;dでその行にブレークポイントを設定
 autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
+
+" preview-markdown
+nnoremap <Leader>md :PreviewMarkdown<CR>
 
 "-------------------------------------------------------------------------------
 " Tab Config each language
