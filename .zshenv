@@ -2,6 +2,7 @@ export LANG=en_US.utf8
 export LANGUAGE=en
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH='/bin:/sbin':"$PATH"
 
 # for anyenv
 if [ -e "$HOME/.anyenv" ];
@@ -27,3 +28,6 @@ if [ -e "$HOME/.cargo" ];
 then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+# for linuxbrew
+export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
