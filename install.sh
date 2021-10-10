@@ -75,3 +75,7 @@ fi
 echo "Finish the installation of homebrew."
 echo ""
 
+
+# TODO git clone tpm (tmux plugin)
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
