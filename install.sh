@@ -1,13 +1,22 @@
-#!/bin/bash
-# 配置したい設定ファイル
-#dotfiles=(.zshrc tmux/.tmux.conf git/.gitconfig)
-dotfiles= .zshrc
+#!/bin/sh
 
-# シンボリックリンクをホームディレクトリ直下に作成
-for file in "${dotfiles[@]}"; do
-	ln -svf $files ~/
+echo "Start symlink"
+
+# dotfilesディレクトリにある、ドットから始まり2文字以上の名前のファイルに対して
+for f in .??*; do
+    [ "$f" = ".git" ] && continue
+    [ "$f" = ".gitconfig.local.template" ] && continue
+    [ "$f" = ".gitmodules" ] && continue
+    [ "$f" = ".gitignore" ] && continue
+
+    # シンボリックリンクを貼る
+    ln -snfv ${PWD}/"$f" ~/
 done
 
-ln -sf ~/dotfiles/nvim ~/.config 
-ln -sf ~/dotfiles/alacritty ~/.config 
+# nvim alacrittyなどディレクトリごとシンボリックリンク
+for f in nvim alacritty; do
+    ln -snfv ${PWD}/"$f" ~/.config
+done
+
+echo "End symlink"
 
