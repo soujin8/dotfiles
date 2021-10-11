@@ -18,3 +18,7 @@ function dev() {
 }
 zle -N dev
 bindkey '^g' dev
+
+function reload() {
+  exec $SHELL -l
+}

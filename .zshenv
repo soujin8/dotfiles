@@ -1,7 +1,8 @@
-export LANG=en_US.utf8
-export LANGUAGE=en
+# export LANG=en_US.utf8
+# export LANGUAGE=en
+export LANG=jp_JP.utf8
+export LANGUAGE=jp
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH='/bin:/sbin':"$PATH"
 
 # for anyenv
@@ -31,3 +32,9 @@ fi
 
 # for linuxbrew
 export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
+
+# for krew (kubectl plugin manager)
+if [ -e "$HOME/.krew" ];
+then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
