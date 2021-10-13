@@ -39,7 +39,7 @@ font:
 
 # login shell
 shell:
-  program: /usr/bin/zsh
+  program: /bin/zsh
   args:
     - --login
 
