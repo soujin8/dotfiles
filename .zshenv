@@ -8,25 +8,25 @@ export PATH='/bin:/sbin':"$PATH"
 # for anyenv
 if [ -e "$HOME/.anyenv" ];
 then
-    # export ANYENV_ROOT="$HOME/.anyenv"
-    # export PATH="$ANYENV_ROOT/bin:$PATH"
-    # if command -v anyenv 1>/dev/null 2>&1
+    export ANYENV_ROOT="$HOME/.anyenv"
+    export PATH="$ANYENV_ROOT/bin:$PATH"
+    if command -v anyenv 1>/dev/null 2>&1
+    then
+        eval "$(anyenv init -)"
+    fi
+    # if ! [ -f /tmp/anyenv.cache ]
     # then
-    #     eval "$(anyenv init -)"
+    #    anyenv init - --no-rehash > /tmp/anyenv.cache
+    #    zcompile /tmp/anyenv.cache
     # fi
-    if ! [ -f /tmp/anyenv.cache ]
-    then
-       anyenv init - --no-rehash > /tmp/anyenv.cache
-       zcompile /tmp/anyenv.cache
-    fi
-    source /tmp/anyenv.cache
+    # source /tmp/anyenv.cache
 
-    if ! [ -f /tmp/nodeenv.cache ]
-    then
-       nodenv init - > /tmp/nodeenv.cache
-       zcompile /tmp/nodeenv.cache
-    fi
-    source /tmp/nodeenv.cache
+    # if ! [ -f /tmp/nodeenv.cache ]
+    # then
+    #    nodenv init - > /tmp/nodeenv.cache
+    #    zcompile /tmp/nodeenv.cache
+    # fi
+    # source /tmp/nodeenv.cache
 fi
 
 # for golang
@@ -44,10 +44,14 @@ then
 fi
 
 # for linuxbrew
-export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
+if [ -e "/home/linuxbrew" ];
+then
+  export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
+fi
 
 # for krew (kubectl plugin manager)
 if [ -e "$HOME/.krew" ];
 then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
+
