@@ -33,3 +33,8 @@ source $SCRIPT_DIR/zsh/function.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# for anyenv
+if command -v anyenv 1>/dev/null 2>&1
+then
+  eval "$(anyenv init -)"
+fi
