@@ -79,3 +79,11 @@ repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'skanehira/preview-markdown.vim'
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+
+[[plugins]]
+repo = 'romgrk/barbar.nvim'
+depends = 'nvim-web-devicons'
+

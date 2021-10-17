@@ -47,29 +47,16 @@ set ignorecase
 set noswapfile
 " 新しいウィンドウを→に開く
 set splitright
+" True Colorを使用する
+set termguicolors
+" buffer切替時に編集中ファイルを保存しなくてもOKにする
+set hidden
 
 "-------------------------------------------------------------------------------
 " Dein
 "-------------------------------------------------------------------------------
 
-"let s:dein_dir = expand('~/.cache/dein')
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-"if dein#load_state(s:dein_dir)
-"  call dein#begin(s:dein_dir)
-"
-"  let g:rc_dir = expand('~/dotfiles/nvim')
-"  let s:toml = g:rc_dir . '/dein.toml'
-"  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-"  call dein#load_toml(s:toml,      {'lazy': 0})
-"  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-"
-"  call dein#end()
-"  call dein#save_state()
-"endif
-"if dein#check_install()
-"  call dein#install()
-"endif
-
 if &compatible
   set nocompatible
 endif
@@ -153,13 +140,36 @@ autocmd FileType rb setlocal tabstop=2
 " let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
 " let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
+"-------------------------------------------------------------------------------
+" key bind
+"-------------------------------------------------------------------------------
+nnoremap Y y$
+" Leader を Space に設定
 let mapleader = "\<Space>"
-nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>g :GFiles<CR>
-nnoremap <silent> <leader>G :GFiles?<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
+
+" barbar.nvim
+nnoremap <silent> <C-j> :BufferPrevious<CR>
+nnoremap <silent> <C-k> :BufferNext<CR>
+nnoremap <silent> <C-c> :BufferClose<CR>
+
+" fzf.vim
+nmap <Leader>f [fzf]
+nnoremap <silent> [fzf]f :Files<CR>
+nnoremap <silent> [fzf]g :GFiles<CR>
+nnoremap <silent> [fzf]G :GFiles?<CR>
+nnoremap <silent> [fzf]b :Buffers<CR>
 " nnoremap <silent> <leader>h :History<CR>
-nnoremap <silent> <leader>r :Rg<CR>
+nnoremap <silent> [fzf]r :Rg<CR>
+
+" vim-fugitive
+nmap <Leader>g [git]
+nnoremap <silent> [git]a :Git add %:p<CR><CR>
+nnoremap <silent> [git]c :Gcommit<CR><CR>
+nnoremap <silent> [git]s :Gstatus<CR>
+nnoremap <silent> [git]gp :Gpush<CR>
+nnoremap <silent> [git]gd :Gdiff<CR>
+nnoremap <silent> [git]gl :Glog<CR>
+nnoremap <silent> [git]gb :Gblame<CR>
 
 "-------------------------------------------------------------------------------
 " import divided file
