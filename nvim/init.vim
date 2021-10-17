@@ -166,10 +166,10 @@ nmap <Leader>g [git]
 nnoremap <silent> [git]a :Git add %:p<CR><CR>
 nnoremap <silent> [git]c :Gcommit<CR><CR>
 nnoremap <silent> [git]s :Gstatus<CR>
-nnoremap <silent> [git]gp :Gpush<CR>
-nnoremap <silent> [git]gd :Gdiff<CR>
-nnoremap <silent> [git]gl :Glog<CR>
-nnoremap <silent> [git]gb :Gblame<CR>
+nnoremap <silent> [git]p :Gpush<CR>
+nnoremap <silent> [git]d :Gdiff<CR>
+nnoremap <silent> [git]l :Glog<CR>
+nnoremap <silent> [git]b :Gblame<CR>
 
 "-------------------------------------------------------------------------------
 " import divided file
