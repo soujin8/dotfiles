@@ -8,7 +8,7 @@
 	defaultBranch = main
 	templatedir = ~/.git-templates/git-secrets
 [commit]
-	template = ./commit_template
+	template = ~/dotfiles/git/.commit_template
 [core]
   editor = nvim
 	pager = LESSCHARSET=utf-8 less
