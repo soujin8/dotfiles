@@ -7,24 +7,31 @@ nnoremap <silent>sf :<C-u>Defx
       \ -search=`expand('%:p')`<CR>
 nnoremap <silent>fi :<C-u>Defx -new `expand('%:p:h')` -search=`expand('%:p')`<CR>
 
-" call defx#custom#column('icon', {
-"       \ 'directory_icon': '▸',
-"       \ 'opened_icon': '▾',
-"       \ 'root_icon': ' ',
-"       \ })
-
-
-" nnoremap <silent>sf :<C-u> Defx <CR>
-
-" call defx#custom#option('_', {
-"       \  'winwidth': 40,
-"       \  'split': 'vertical',
-"       \  'direction': 'topleft',
-"       \  'show_ignored_files': 1,
-"       \  'buffer_name': 'exlorer',
-"       \  'toggle': 1,
-"       \  'resume': 1,
-"       \})
+call defx#custom#column('icon', {
+      \ 'directory_icon': '▸',
+      \ 'opened_icon': '▾',
+      \ 'root_icon': ' ',
+      \ })
+call defx#custom#column('icon', {
+      \ 'directory_icon': '▸',
+      \ 'opened_icon': '▾',
+      \ 'root_icon': ' ',
+      \ })
+call defx#custom#column('git', 'indicators', {
+  \ 'Modified'  : 'M',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '✭',
+  \ 'Renamed'   : '➜',
+  \ 'Unmerged'  : '═',
+  \ 'Ignored'   : '☒',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '?'
+  \ })
+call defx#custom#option('_', {
+		\ 'show_ignored_files': 1,
+		\ })
+call defx#custom#column('git', 'column_length', 1)
+call defx#custom#option('_', {'columns': 'icons:filename'})
 
 autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
@@ -92,24 +99,3 @@ autocmd FileType defx call s:defx_my_settings()
 	  \ defx#do_action('change_vim_cwd')
 	endfunction
 
-" call defx#custom#column('icon', {
-"       \ 'directory_icon': '▸',
-"       \ 'opened_icon': '▾',
-"       \ 'root_icon': ' ',
-"       \ })
-" call defx#custom#column('git', 'indicators', {
-"   \ 'Modified'  : 'M',
-"   \ 'Staged'    : '✚',
-"   \ 'Untracked' : '✭',
-"   \ 'Renamed'   : '➜',
-"   \ 'Unmerged'  : '═',
-"   \ 'Ignored'   : '☒',
-"   \ 'Deleted'   : '✖',
-"   \ 'Unknown'   : '?'
-"   \ })
-" call defx#custom#option('_', {
-" 		\ 'show_ignored_files': 1,
-" 		\ })
-
-" call defx#custom#column('git', 'column_length', 1)
-" call defx#custom#option('_', {'columns': 'icons:filename'})

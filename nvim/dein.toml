@@ -9,7 +9,6 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
-merge = 0
 rev = "release"
 hook_add = """
 source ~/dotfiles/nvim/coc.rc.vim
@@ -43,7 +42,6 @@ repo = 'jiangmiao/auto-pairs'
 [[plugins]]
 repo = 'junegunn/fzf'
 build = './install --bin'
-mergerd = 0
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
