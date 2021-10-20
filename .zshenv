@@ -1,6 +1,6 @@
 # export LANG=en_US.utf8
 # export LANGUAGE=en
-export LANG=jp_JP.utf8
+export LANG=ja_JP.utf8
 export LANGUAGE=jp
 export PATH="$HOME/.local/bin:$PATH"
 export PATH='/bin:/sbin':"$PATH"

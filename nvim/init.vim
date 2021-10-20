@@ -16,18 +16,18 @@ set shiftwidth=2
 "タブ入力を複数の空白入力に置き換える
 set expandtab
 " clipboard連携 
-if has('mac')
+" if has('mac')
   set clipboard+=unnamed
-endif
-if has('unix')
-  set clipboard=unnamedplus
-endif
+" endif
+" if has('unix')
+"   set clipboard=unnamedplus
+" endif
 " ファイル更新反映までの時間
 set updatetime=100
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
 " インクリメンタルな検索が可能になる
-" set incsearch
+set incsearch
 " 検索結果のハイライト
 set hlsearch
 " 常にステータスラインを表示する
@@ -51,6 +51,22 @@ set splitright
 set termguicolors
 " buffer切替時に編集中ファイルを保存しなくてもOKにする
 set hidden
+
+set guifont=HackGenNerd\ Console\ 14
+set encoding=UTF-8
+
+" NOTE: If barbar's option dict isn't created yet, create it
+let bufferline = get(g:, 'bufferline', {})
+" Enable/disable close button
+let bufferline.closable = v:false
+
+" フォルダアイコンを表示
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -164,12 +180,12 @@ nnoremap <silent> [fzf]r :Rg<CR>
 " vim-fugitive
 nmap <Leader>g [git]
 nnoremap <silent> [git]a :Git add %:p<CR><CR>
-nnoremap <silent> [git]c :Gcommit<CR><CR>
-nnoremap <silent> [git]s :Gstatus<CR>
-nnoremap <silent> [git]p :Gpush<CR>
+nnoremap <silent> [git]c :Git commit<CR><CR>
+nnoremap <silent> [git]s :Git<CR>
+nnoremap <silent> [git]p :Git push<CR>
 nnoremap <silent> [git]d :Gdiff<CR>
-nnoremap <silent> [git]l :Glog<CR>
-nnoremap <silent> [git]b :Gblame<CR>
+nnoremap <silent> [git]l :Gclog<CR>
+nnoremap <silent> [git]b :Git blame<CR>
 
 "-------------------------------------------------------------------------------
 " import divided file

@@ -22,3 +22,4 @@ bindkey '^g' dev
 function reload() {
   exec $SHELL -l
 }
+
