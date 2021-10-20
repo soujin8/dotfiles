@@ -9,10 +9,7 @@ font:
   italic:
     family: HackGenNerd Console
     style: Italic
-  size: 14.0
-
-env:
-  TERM: xterm-256color
+  size: 10.0
 
 # # Colors (Hybrid)
 colors:
@@ -54,10 +51,8 @@ env:
   # LANG: en_US.UTF-8
   LC_CTYPE: ja_JP.UTF-8
   LANG: ja_JP.UTF-8
-  # TERM: alacritty
+  TERM: xterm-256color
 
 save_to_clipboard: true
+
 #key_bindings:
- # - { key: C, mods: Control, action: Copy when: !was_last_press && not_running}
- # - { key: C, mods: Control, action: Terminate when: was_last_press || running } 
- #- { key: V, mods: Control, action: Paste } 
