@@ -51,7 +51,9 @@ set splitright
 set termguicolors
 " buffer切替時に編集中ファイルを保存しなくてもOKにする
 set hidden
-
+" fugitive.vime Diffを立て分割にする
+set diffopt+=vertical
+" vimで使用するフォント
 set guifont=HackGenNerd\ Console\ 14
 set encoding=UTF-8
 
