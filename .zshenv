@@ -4,6 +4,7 @@ export LANG=ja_JP.utf8
 export LANGUAGE=jp
 export PATH="$HOME/.local/bin:$PATH"
 export PATH='/bin:/sbin':"$PATH"
+export PATH="$HOME/node_modules/.bin:$PATH"
 
 # for anyenv
 if [ -e "$HOME/.anyenv" ];

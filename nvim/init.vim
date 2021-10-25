@@ -136,9 +136,6 @@ endif
 " ;dでその行にブレークポイントを設定
 autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
 
-" preview-markdown
-nnoremap <Leader>md :PreviewMarkdown<CR>
-
 "-------------------------------------------------------------------------------
 " Tab Config each language
 "-------------------------------------------------------------------------------
@@ -188,6 +185,9 @@ nnoremap <silent> [git]p :Git push<CR>
 nnoremap <silent> [git]d :Gdiff<CR>
 nnoremap <silent> [git]l :Gclog<CR>
 nnoremap <silent> [git]b :Git blame<CR>
+
+" preview-markdown
+nnoremap <Leader>md :PreviewMarkdown<CR>
 
 "-------------------------------------------------------------------------------
 " import divided file
