@@ -9,7 +9,7 @@ font:
   italic:
     family: HackGenNerd Console
     style: Italic
-  size: 10.0
+  size: 14.0
 
 # # Colors (Hybrid)
 colors:
@@ -47,11 +47,12 @@ shell:
     - --login
 
 env:
+  TERM: xterm-256color
+  # TERM: alacritty
   # LC_CTYPE: en_US.UTF-8
   # LANG: en_US.UTF-8
   LC_CTYPE: ja_JP.UTF-8
   LANG: ja_JP.UTF-8
-  TERM: xterm-256color
 
 save_to_clipboard: true
 
