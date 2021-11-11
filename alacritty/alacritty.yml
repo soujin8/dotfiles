@@ -9,7 +9,7 @@ font:
   italic:
     family: HackGenNerd Console
     style: Italic
-  size: 14.0
+  size: 10.0
 
 # # Colors (Hybrid)
 colors:
