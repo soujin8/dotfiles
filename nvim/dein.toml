@@ -1,6 +1,3 @@
-# [[plugins]]
-# repo = 'kristijanhusak/vim-hybrid-material'
-
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 
@@ -65,15 +62,6 @@ repo = 'mattn/vim-goimports'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-
-#[[plugins]]
-#repo = 'neovim/nvim-lspconfig'
-#
-#[[plugins]]
-#repo = 'mattn/vim-lsp-settings'
-#
-#[[plugins]]
-#repo = 'glepnir/lspsaga.nvim'
 
 [[plugins]]
 repo = 'skanehira/preview-markdown.vim'
