@@ -73,3 +73,30 @@ repo = 'kyazdani42/nvim-web-devicons'
 repo = 'romgrk/barbar.nvim'
 depends = 'nvim-web-devicons'
 
+[[plugins]]
+repo = 'elzr/vim-json'
+
+[[plugins]]
+repo = 'dag/vim-fish'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'sebdah/vim-delve'
+
+[[plugins]]
+repo = 'yuezk/vim-js'
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]] # vim-markdonwの依存プラグイン
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+depends = 'tabular'
