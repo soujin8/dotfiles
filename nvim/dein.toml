@@ -7,25 +7,10 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = "release"
-hook_add = """
-source ~/dotfiles/nvim/coc.rc.vim
-"""
-
-[[plugins]]
-repo = 'Shougo/defx.nvim'
-depends = ['defx-git', 'defx-icons']
-hook_add = """
-source ~/dotfiles/nvim/defx.rc.vim
-"""
-
-[[plugins]]
-repo = 'kristijanhusak/defx-git'
+merged = 0
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
-
-[[plugins]]
-repo = 'kristijanhusak/defx-icons'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
@@ -38,11 +23,17 @@ repo = 'jiangmiao/auto-pairs'
 
 [[plugins]]
 repo = 'junegunn/fzf'
-build = './install --bin'
+build = './install --all'
+merged = 0
 
 [[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'fzf'
+repo = 'yuki-yano/fzf-preview.vim'
+rev = 'release/rpc'
+
+# fzfの代わりにfzf-preview使ってみるので一旦コメントアウト
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
+# depends = 'fzf'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -50,9 +41,9 @@ repo = 'tpope/vim-commentary'
 [[plugins]]
 repo = 'wsdjeg/dein-ui.vim'
 
-[[plugins]]
-repo = 'prettier/vim-prettier'
-build = 'npm install'
+# [[plugins]]
+# repo = 'prettier/vim-prettier'
+# build = 'npm install'
 
 [[plugins]]
 repo = 'dhruvasagar/vim-table-mode'
@@ -64,9 +55,6 @@ repo = 'mattn/vim-goimports'
 repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
-repo = 'skanehira/preview-markdown.vim'
-
-[[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
 
 [[plugins]]
@@ -74,29 +62,27 @@ repo = 'romgrk/barbar.nvim'
 depends = 'nvim-web-devicons'
 
 [[plugins]]
-repo = 'elzr/vim-json'
-
-[[plugins]]
-repo = 'dag/vim-fish'
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-
-[[plugins]]
 repo = 'sebdah/vim-delve'
 
 [[plugins]]
-repo = 'yuezk/vim-js'
+repo = 'lambdalisue/fern.vim'
 
 [[plugins]]
-repo = 'maxmellon/vim-jsx-pretty'
+repo = 'vim-denops/denops.vim'
 
 [[plugins]]
-repo = 'leafgarland/typescript-vim'
-
-[[plugins]] # vim-markdonwの依存プラグイン
-repo = 'godlygeek/tabular'
+repo = 'kat0h/bufpreview.vim'
 
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-depends = 'tabular'
+repo = 'nvim-treesitter/nvim-treesitter'
+hook_post_update = 'TSUpdate'
+
+[[plugins]]
+repo = 'machakann/vim-sandwich'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+

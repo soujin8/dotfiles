@@ -16,12 +16,12 @@ set shiftwidth=2
 "タブ入力を複数の空白入力に置き換える
 set expandtab
 " clipboard連携 
-" if has('mac')
+if has('mac')
   set clipboard+=unnamed
-" endif
-" if has('unix')
-"   set clipboard=unnamedplus
-" endif
+endif
+if has('unix')
+  set clipboard+=unnamedplus
+endif
 " ファイル更新反映までの時間
 set updatetime=100
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
@@ -99,6 +99,8 @@ if dein#load_state('~/.cache/dein')
 
   call dein#end()
   call dein#save_state()
+	call map(dein#check_clean(), { _, val -> delete(val, 'rf') })
+	call dein#recache_runtimepath()
 endif
 if dein#check_install()
   call dein#install()
@@ -161,6 +163,8 @@ autocmd FileType rb setlocal tabstop=2
 nnoremap Y y$
 " Leader を Space に設定
 let mapleader = "\<Space>"
+" init.vimを開く
+nnoremap <Space>. :<C-u>tabedit ~/dotfiles/nvim/init.vim<CR>
 
 " barbar.nvim
 nnoremap <silent> <C-j> :BufferPrevious<CR>
@@ -173,7 +177,7 @@ nnoremap <silent> [fzf]f :Files<CR>
 nnoremap <silent> [fzf]g :GFiles<CR>
 nnoremap <silent> [fzf]G :GFiles?<CR>
 nnoremap <silent> [fzf]b :Buffers<CR>
-" nnoremap <silent> <leader>h :History<CR>
+nnoremap <silent> [fzf]h :History<CR>
 nnoremap <silent> [fzf]r :Rg<CR>
 
 " vim-fugitive
@@ -188,9 +192,32 @@ nnoremap <silent> [git]b :Git blame<CR>
 
 " preview-markdown
 nnoremap <Leader>md :PreviewMarkdown<CR>
+" fern
+nnoremap <silent>sf :Fern .<CR>
+let g:fern#default_hidden=1
+" open-browser
+nnoremap <Leader>o :<C-u>execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')<CR>
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-search)
+vmap gx <Plug>(openbrowser-search)
+command! OpenBrowserCurrent execute "OpenBrowser" expand("%:p")
+
+"-------------------------------------------------------------------------------
+" nvim-treesitter
+"-------------------------------------------------------------------------------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {}
+  }
+}
+ensure_installed = 'all'
+EOF
 
 "-------------------------------------------------------------------------------
 " import divided file
 "-------------------------------------------------------------------------------
-runtime ~/dotfiles/nvim/*.rc.vim
+set runtimepath+=~/dotfiles/nvim/
+runtime! *.rc.vim
 

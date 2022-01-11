@@ -16,6 +16,8 @@ let g:coc_global_extensions = [
       \ 'coc-solargraph',
       \ 'coc-sh',
       \ 'coc-vetur',
+      \ 'coc-html',
+      \ 'coc-css',
       \ ]
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -183,3 +185,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" hover
+nnoremap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+" exec prettier
+command! -nargs=0 Format :call CocAction('format')
+

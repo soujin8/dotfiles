@@ -6,13 +6,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH='/bin:/sbin':"$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
 
-# for anyenv
-if [ -e "$HOME/.anyenv" ];
-then
-    export ANYENV_ROOT="$HOME/.anyenv"
-    export PATH="$ANYENV_ROOT/bin:$PATH"
-fi
-
 # for golang
 if [ -e "/usr/local/go" ];
 then
@@ -39,3 +32,7 @@ then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
+# asdf
+. $HOME/.asdf/asdf.sh
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
