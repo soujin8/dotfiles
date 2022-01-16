@@ -26,3 +26,6 @@ Temporary Items
 .apdisk
 
 .tool-versions
+# coc.nvim local config
+.vim
+node_modules
