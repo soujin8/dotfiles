@@ -86,3 +86,6 @@ repo = 'mattn/emmet-vim'
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 
+[[plugins]]
+repo = 'windwp/nvim-ts-autotag'
+
