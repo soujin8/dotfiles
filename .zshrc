@@ -61,3 +61,6 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+# https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
+setopt nonomatch
