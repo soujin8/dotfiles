@@ -28,11 +28,37 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 # ---------------------------------------------------------
-# envman
+# plugin
 # ---------------------------------------------------------
 
-# Generated for envman. Do not edit.
-# [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+# zsh theme
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+# syntax hightlight
+zinit light zdharma-continuum/fast-syntax-highlighting
+# 補完
+zinit light zsh-users/zsh-completions
+# autosuggest
+zinit light zsh-users/zsh-autosuggestions
+# open git repository
+zinit light paulirish/git-open
+
+# ---------------------------------------------------------
+# basic
+# ---------------------------------------------------------
+
+# https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
+setopt nonomatch
+
+# GitHub CLI
+eval "$(gh completion -s zsh)"
+# direnv
+eval "$(direnv hook zsh)"
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ---------------------------------------------------------
+# completions
+# ---------------------------------------------------------
 
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
@@ -51,31 +77,12 @@ zstyle ':completion:*:default' menu select=2
 # automatically change directory when dir name is typed
 setopt auto_cd
 
-# if type brew &>/dev/null; then
-#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-#   autoload -Uz compinit
-#   compinit
-# fi
-autoload -U compinit promptinit
-compinit
-promptinit
-
-# TODO
-# GitHub CLI
-# eval "$(gh completion -s zsh)"
-# direnv
-# eval "$(direnv hook zsh)"
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
-setopt nonomatch
+# ---------------------------------------------------------
+# prompt
+# ---------------------------------------------------------
 
 SCRIPT_DIR=$HOME/dotfiles
 source $SCRIPT_DIR/zsh/p10k.zsh
-
-# source $SCRIPT_DIR/zsh/config.zsh
 
 # ---------------------------------------------------------
 # alias
@@ -102,20 +109,6 @@ alias dstop='docker container stop $(dcur)'
 alias k='kubectl'
 alias n='nvim'
 alias ojt='oj t -c "ruby main.rb" -d test'
-
-# ---------------------------------------------------------
-# plugin
-# ---------------------------------------------------------
-
-# zsh theme
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-# syntax hightlight
-zinit light zdharma-continuum/fast-syntax-highlighting
-# autosuggest
-zinit light zsh-users/zsh-autosuggestions
-bindkey '^j' autosuggest-accept
-# open git repository
-zinit light paulirish/git-open
 
 # ---------------------------------------------------------
 # function
@@ -145,7 +138,4 @@ bindkey '^g' dev
 function reload() {
   exec $SHELL -l
 }
-
-
-
 
