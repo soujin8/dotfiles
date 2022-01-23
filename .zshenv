@@ -32,7 +32,8 @@ then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 # asdf
-. $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/asdf.sh
 # append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+# fpath=(${ASDF_DIR}/completions $fpath)

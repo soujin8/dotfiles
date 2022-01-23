@@ -1,6 +1,8 @@
 [user]
-	email = mochi.h8888@gmail.com
-	name = m-88888888
+	; email = mochi.h8888@gmail.com
+	; name = m-88888888
+  email = hayato.mochizuki@xincere.jp
+  name = hayato.mochizuki
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -21,7 +23,8 @@
   root = ~/dev
   user = m-88888888
 [credential]
-	helper = store --file ~/.git-credentials
+	;.ssh helper = store --file ~/.git-credentials
+  helper = osxkeychain
 [secrets]
 	providers = git secrets --aws-provider
 	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}

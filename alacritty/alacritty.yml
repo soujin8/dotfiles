@@ -8,7 +8,7 @@ font:
   italic:
     family: HackGenNerd Console
     style: Italic
-  size: 13.0
+  size: 15.0
 
 # Colors (Iceberg Dark)
 colors:
@@ -41,7 +41,7 @@ colors:
 
 # login shell
 shell:
-  program: /usr/bin/zsh
+  program: /bin/zsh
   args:
     - --login
 

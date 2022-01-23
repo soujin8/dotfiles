@@ -13,8 +13,10 @@ for f in .??*; do
     ln -snfv ${PWD}/"$f" ~/
 done
 
+ln -snfv ~/dotfiles/git/.gitconfig ~
+
 # nvim alacrittyなどディレクトリごとシンボリックリンク
-for f in nvim alacritty; do
+for f in nvim alacritty git; do
     ln -snfv ${PWD}/"$f" ~/.config
 done
 
@@ -76,6 +78,10 @@ echo ""
 #echo ""
 
 
-# TODO git clone tpm (tmux plugin)
-# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Install tpm (tmux plugin manager)
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Install dein.vim (vim plugin manager)
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein
 

@@ -1,9 +1,17 @@
+# ---------------------------------------------------------
+# Enable Powerlevel10k
+# ---------------------------------------------------------
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# ---------------------------------------------------------
+# Zinit's installer
+# ---------------------------------------------------------
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -19,19 +27,12 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
-SCRIPT_DIR=$HOME/dotfiles
-
-source $SCRIPT_DIR/zsh/plugins.zsh
-source $SCRIPT_DIR/zsh/config.zsh
-source $SCRIPT_DIR/zsh/p10k.zsh
-source $SCRIPT_DIR/zsh/alias.zsh
-source $SCRIPT_DIR/zsh/function.zsh
-# source <(kubectl completion zsh) 
+# ---------------------------------------------------------
+# envman
+# ---------------------------------------------------------
 
 # Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
@@ -50,17 +51,101 @@ zstyle ':completion:*:default' menu select=2
 # automatically change directory when dir name is typed
 setopt auto_cd
 
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+#   autoload -Uz compinit
+#   compinit
+# fi
+autoload -U compinit promptinit
+compinit
+promptinit
+
+# TODO
 # GitHub CLI
-eval "$(gh completion -s zsh)"
+# eval "$(gh completion -s zsh)"
 # direnv
-eval "$(direnv hook zsh)"
-
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-  autoload -Uz compinit
-  compinit
-fi
+# eval "$(direnv hook zsh)"
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
 setopt nonomatch
+
+SCRIPT_DIR=$HOME/dotfiles
+source $SCRIPT_DIR/zsh/p10k.zsh
+
+# source $SCRIPT_DIR/zsh/config.zsh
+
+# ---------------------------------------------------------
+# alias
+# ---------------------------------------------------------
+
+alias be='bundle exec'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
+alias g='git'
+alias gp='git push -u origin HEAD'
+alias c='clear'
+alias ll='ls -lahG'
+alias d='docker'
+alias dc='docker-compose'
+alias dcnt='docker container'
+alias dcur='docker container ls -f status=running -l -q'
+alias dexec='docker container exec -it $(dcur)'
+alias dimg='docker image'
+alias drun='docker container run —rm -d'
+alias drunit='docker container run —rm -it'
+alias dstop='docker container stop $(dcur)'
+alias k='kubectl'
+alias n='nvim'
+alias ojt='oj t -c "ruby main.rb" -d test'
+
+# ---------------------------------------------------------
+# plugin
+# ---------------------------------------------------------
+
+# zsh theme
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+# syntax hightlight
+zinit light zdharma-continuum/fast-syntax-highlighting
+# autosuggest
+zinit light zsh-users/zsh-autosuggestions
+bindkey '^j' autosuggest-accept
+# open git repository
+zinit light paulirish/git-open
+
+# ---------------------------------------------------------
+# function
+# ---------------------------------------------------------
+
+function ide() {
+  tmux split-window -v
+  tmux split-window -h
+  tmux resize-pane -D 15
+  tmux select-pane -t 1
+}
+
+function dev() {
+    moveto=$(ghq root)/$(ghq list | fzf)
+    cd $moveto
+
+    # rename session if in tmux
+    if [[ ! -z ${TMUX} ]]
+    then
+        repo_name=${moveto##*/}
+        tmux rename-session ${repo_name//./-}
+    fi
+}
+zle -N dev
+bindkey '^g' dev
+
+function reload() {
+  exec $SHELL -l
+}
+
+
+
+

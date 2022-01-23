@@ -29,3 +29,4 @@ Temporary Items
 # coc.nvim local config
 .vim
 node_modules
+Brewfile.lock.json
