@@ -43,9 +43,36 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light paulirish/git-open
 
 # ---------------------------------------------------------
+# path
+# ---------------------------------------------------------
+
+# asdfでruby2.6.5インストールするときにこれらを設定するとできるようになった
+# https://stackoverflow.com/questions/69012676/install-older-ruby-versions-on-a-m1-macbook
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
+export optflags="-Wno-error=implicit-function-declaration"
+export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
+
+# export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/node@12/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/node@12/include"
+
+# ---------------------------------------------------------
 # basic
 # ---------------------------------------------------------
 
+# 履歴保存管理
+HISTFILE=$ZDOTDIR/.zsh-history
+HISTSIZE=100000
+SAVEHIST=1000000
+
+# 他のzshと履歴を共有
+setopt inc_append_history
+setopt share_history
 # https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
 setopt nonomatch
 
@@ -139,3 +166,34 @@ function reload() {
   exec $SHELL -l
 }
 
+function f() {
+  local project dir repository session current_session
+  project=$(ghq list | fzf --prompt='Project >')
+
+  if [[ $project == "" ]]; then
+    return 1
+  elif [[ -d ~/dev/${project} ]]; then
+    dir=~/dev/${project}
+  elif [[ -d ~/.go/src/${project} ]]; then
+    dir=~/.go/src/${project}
+  fi
+
+  if [[ ! -z ${TMUX} ]]; then
+    repository=${dir##*/}
+    session=${repository//./-}
+    current_session=$(tmux list-sessions | grep 'attached' | cut -d":" -f1)
+
+    if [[ $current_session =~ ^[0-9]+$ ]]; then
+      cd $dir
+      tmux rename-session $session
+    else
+      tmux list-sessions | cut -d":" -f1 | grep -e "^$session\$" > /dev/null
+      if [[ $? != 0 ]]; then
+        tmux new-session -d -c $dir -s $session
+      fi
+      tmux switch-client -t $session
+    fi
+  else
+    cd $dir
+  fi
+}

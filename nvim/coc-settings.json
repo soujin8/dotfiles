@@ -4,5 +4,6 @@
     "port": 7658
   },
   "solargraph.diagnostics": true,
-  "solargraph.formatting": true
+  "solargraph.formatting": true,
+  "solargraph.checkGemVersion": false
 }

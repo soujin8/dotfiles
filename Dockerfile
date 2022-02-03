@@ -1,4 +1,4 @@
-FROM ruby:3.0.2
+FROM --platform=arm64 ruby:3.0.2
 
 RUN gem install solargraph
 
