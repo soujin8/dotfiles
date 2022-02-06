@@ -5,5 +5,12 @@
   },
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
-  "solargraph.checkGemVersion": false
+  "solargraph.checkGemVersion": false,
+  "languageserver": {
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["markdown"]
+    }
+  }
 }
