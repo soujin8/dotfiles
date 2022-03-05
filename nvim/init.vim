@@ -56,6 +56,13 @@ set diffopt+=vertical
 " vimで使用するフォント
 set guifont=HackGenNerd\ Console\ 14
 set encoding=UTF-8
+" カーソルライン表示させる
+set cursorline
+" モードごとの色（mode.vimと揃えている）
+hi ModesCopy guibg=#f5c359
+hi ModesDelete guibg=#c75c6a
+hi ModesInsert guibg=#78ccc5
+hi ModesVisual guibg=#008000
 
 " NOTE: If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
@@ -110,6 +117,7 @@ endif
 " Color scheme
 "-------------------------------------------------------------------------------
 colorscheme iceberg
+" colorscheme gruvbox-material
 
 "-------------------------------------------------------------------------------
 " plugin config
@@ -190,8 +198,6 @@ nnoremap <silent> [git]d :Gdiff<CR>
 nnoremap <silent> [git]l :Gclog<CR>
 nnoremap <silent> [git]b :Git blame<CR>
 
-" preview-markdown
-nnoremap <Leader>md :PreviewMarkdown<CR>
 " fern
 nnoremap <silent>sf :Fern .<CR>
 let g:fern#default_hidden=1
@@ -207,15 +213,41 @@ command! OpenBrowserCurrent execute "OpenBrowser" expand("%:p")
 "-------------------------------------------------------------------------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
   highlight = {
     enable = true,
-    disable = {}
+    disable = {},
+    custom_captures = {
+      ["attr.value"] = "TSKeyword"
+    }
   },
   autotag = {
     enable = true,
   }
 }
-ensure_installed = 'all'
+EOF
+
+"-------------------------------------------------------------------------------
+" modes.nvim
+"-------------------------------------------------------------------------------
+lua <<EOF
+require('modes').setup({
+  colors = {
+    copy = "#f5c359",
+    delete = "#c75c6a",
+    insert = "#78ccc5",
+    visual = "#008000"
+  },
+
+  -- Cursorline highlight opacity
+  line_opacity = 0.1,
+
+  -- Highlight cursor
+  set_cursor = true,
+
+  -- Highlight in active window only
+  focus_only = false
+})
 EOF
 
 "-------------------------------------------------------------------------------

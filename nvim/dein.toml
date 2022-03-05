@@ -55,6 +55,9 @@ repo = 'mattn/vim-goimports'
 repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
+repo = 'sainnhe/gruvbox-material'
+
+[[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
 
 [[plugins]]
@@ -69,9 +72,6 @@ repo = 'lambdalisue/fern.vim'
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-
-[[plugins]]
-repo = 'kat0h/bufpreview.vim'
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
@@ -89,3 +89,8 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'windwp/nvim-ts-autotag'
 
+[[plugins]]
+repo = 'mvllow/modes.nvim'
+
+[[plugins]] # color codeのpreview
+repo = 'gorodinskiy/vim-coloresque'

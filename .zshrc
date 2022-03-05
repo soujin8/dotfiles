@@ -57,22 +57,34 @@ export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
 
-# export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
-# export LDFLAGS="-L/opt/homebrew/opt/node@12/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/node@12/include"
+# typeset -U path PATH
+# path=(
+#   /opt/homebrew/bin(N-/)
+#   /opt/homebrew/sbin(N-/)
+#   /usr/bin
+#   /usr/sbin
+#   /bin
+#   /sbin
+#   /usr/local/bin(N-/)
+#   /usr/local/sbin(N-/)
+#   /Library/Apple/usr/bin
+# )
 
 # ---------------------------------------------------------
 # basic
 # ---------------------------------------------------------
 
 # 履歴保存管理
-HISTFILE=$ZDOTDIR/.zsh-history
-HISTSIZE=100000
-SAVEHIST=1000000
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 
-# 他のzshと履歴を共有
-setopt inc_append_history
-setopt share_history
+setopt share_history           # 履歴を他のシェルとリアルタイム共有する
+setopt hist_ignore_all_dups    # 同じコマンドをhistoryに残さない
+setopt hist_ignore_space       # historyに保存するときに余分なスペースを削除する
+setopt hist_reduce_blanks      # historyに保存するときに余分なスペースを削除する
+setopt hist_save_no_dups       # 重複するコマンドが保存されるとき、古い方を削除する
+setopt inc_append_history      # 実行時に履歴をファイルにに追加していく
 # https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
 setopt nonomatch
 
@@ -197,3 +209,5 @@ function f() {
     cd $dir
   fi
 }
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
