@@ -1,15 +1,14 @@
 [user]
-	; email = mochi.h8888@gmail.com
-	; name = m-88888888
-  email = hayato.mochizuki@xincere.jp
-  name = hayato.mochizuki
+	email = mochi.h8888@gmail.com
+	name = m-88888888
+[includeIf "gitdir:~/dev/github.com/xincere-inc/"]
+  path = ~/.gitconfig-jobs
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   cof = !git branch -a | fzf | xargs git checkout
 [init]
 	defaultBranch = main
-	templatedir = ~/.git-templates/git-secrets
 [commit]
 	template = ~/dotfiles/git/.commit_template
 [core]
@@ -23,7 +22,6 @@
   root = ~/dev
   user = m-88888888
 [credential]
-	;.ssh helper = store --file ~/.git-credentials
   helper = osxkeychain
 [secrets]
 	providers = git secrets --aws-provider
@@ -34,3 +32,8 @@
 	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 	patterns = private_key
 	patterns = private_key_id
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

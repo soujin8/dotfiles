@@ -77,6 +77,10 @@ repo = 'vim-denops/denops.vim'
 repo = 'nvim-treesitter/nvim-treesitter'
 hook_post_update = 'TSUpdate'
 
+# treesitterカスタマイズしたい時に使う
+[[plugins]] 
+repo = 'nvim-treesitter/playground'
+
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 
@@ -94,3 +98,21 @@ repo = 'mvllow/modes.nvim'
 
 [[plugins]] # color codeのpreview
 repo = 'gorodinskiy/vim-coloresque'
+
+[[plugins]]
+repo = 'p00f/nvim-ts-rainbow'
+
+[[plugins]]
+repo = 'JoosepAlviste/nvim-ts-context-commentstring'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
+
+[[plugins]]
+repo = 'ulwlu/elly.vim'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+[[plugins]]
+repo = 'nicwest/vim-camelsnek'
