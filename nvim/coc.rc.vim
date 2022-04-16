@@ -20,6 +20,7 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emoji',
       \ 'coc-fzf-preview',
+      \ 'coc-rust-analyzer'
       \ ]
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some

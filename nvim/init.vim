@@ -56,13 +56,6 @@ set diffopt+=vertical
 " vimで使用するフォント
 set guifont=HackGenNerd\ Console\ 14
 set encoding=UTF-8
-" カーソルライン表示させる
-set cursorline
-" モードごとの色（mode.vimと揃えている）
-hi ModesCopy guibg=#f5c359
-hi ModesDelete guibg=#c75c6a
-hi ModesInsert guibg=#78ccc5
-hi ModesVisual guibg=#008000
 
 " NOTE: If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
@@ -76,6 +69,8 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
+" Node.js の参照先
+let g:node_host_prog = '~/.asdf/installs/nodejs/16.14.2/.npm/lib/node_modules/neovim/bin/cli.js'
 
 "-------------------------------------------------------------------------------
 " Dein
@@ -238,29 +233,6 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   }
 }
-EOF
-
-"-------------------------------------------------------------------------------
-" modes.nvim
-"-------------------------------------------------------------------------------
-lua <<EOF
-require('modes').setup({
-  colors = {
-    copy = "#f5c359",
-    delete = "#c75c6a",
-    insert = "#78ccc5",
-    visual = "#008000"
-  },
-
-  -- Cursorline highlight opacity
-  line_opacity = 0.1,
-
-  -- Highlight cursor
-  set_cursor = true,
-
-  -- Highlight in active window only
-  focus_only = false
-})
 EOF
 
 "-------------------------------------------------------------------------------

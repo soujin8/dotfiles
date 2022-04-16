@@ -93,9 +93,6 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'windwp/nvim-ts-autotag'
 
-[[plugins]]
-repo = 'mvllow/modes.nvim'
-
 [[plugins]] # color codeのpreview
 repo = 'gorodinskiy/vim-coloresque'
 
@@ -116,3 +113,6 @@ repo = 'tpope/vim-rails'
 
 [[plugins]]
 repo = 'nicwest/vim-camelsnek'
+
+[[plugins]]
+repo = 'mtdl9/vim-log-highlighting'

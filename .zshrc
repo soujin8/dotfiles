@@ -210,4 +210,11 @@ function f() {
   fi
 }
 
+function sshsp() {
+  local host=$(grep -E "^Host " ~/.ssh/config | sed -e 's/Host[ ]*//g' | fzf)
+  if [ -n "$host" ]; then
+    ssh $host
+  fi
+}
+
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
