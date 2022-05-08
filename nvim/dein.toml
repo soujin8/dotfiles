@@ -6,7 +6,7 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
-rev = "release"
+rev = 'release'
 merged = 0
 
 [[plugins]]
@@ -41,10 +41,6 @@ repo = 'tpope/vim-commentary'
 [[plugins]]
 repo = 'wsdjeg/dein-ui.vim'
 
-# [[plugins]]
-# repo = 'prettier/vim-prettier'
-# build = 'npm install'
-
 [[plugins]]
 repo = 'dhruvasagar/vim-table-mode'
 
@@ -78,7 +74,7 @@ repo = 'nvim-treesitter/nvim-treesitter'
 hook_post_update = 'TSUpdate'
 
 # treesitterカスタマイズしたい時に使う
-[[plugins]] 
+[[plugins]]
 repo = 'nvim-treesitter/playground'
 
 [[plugins]]
@@ -86,9 +82,6 @@ repo = 'machakann/vim-sandwich'
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-
-[[plugins]]
-repo = 'tyru/open-browser.vim'
 
 [[plugins]]
 repo = 'windwp/nvim-ts-autotag'
@@ -116,3 +109,14 @@ repo = 'nicwest/vim-camelsnek'
 
 [[plugins]]
 repo = 'mtdl9/vim-log-highlighting'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'

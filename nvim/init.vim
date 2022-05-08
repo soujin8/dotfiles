@@ -198,19 +198,16 @@ nnoremap <silent> [git]b :Git blame<CR>
 " fern
 nnoremap <silent>sf :Fern .<CR>
 let g:fern#default_hidden=1
-" open-browser
-nnoremap <Leader>o :<C-u>execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')<CR>
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-search)
-vmap gx <Plug>(openbrowser-search)
-command! OpenBrowserCurrent execute "OpenBrowser" expand("%:p")
+
+" iamcco/markdown-preview.nvim'
+nnoremap <Leader>md :MarkdownPreview<CR>
 
 "-------------------------------------------------------------------------------
 " nvim-treesitter
 "-------------------------------------------------------------------------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  -- ensure_installed = "maintained",
   highlight = {
     enable = true,
     disable = {},

@@ -1,4 +1,4 @@
-" extensions list
+" extensions list 
 let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-git',
@@ -16,6 +16,7 @@ let g:coc_global_extensions = [
       \ 'coc-solargraph',
       \ 'coc-sh',
       \ 'coc-vetur',
+      \ '@yaegassy/coc-volar',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-emoji',
@@ -190,6 +191,18 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " hover
 nnoremap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+" prettier
+nnoremap <silent> <space>fmt <Plug>(coc-format)
 " exec prettier
-command! -nargs=0 Format :call CocAction('format')
+" command! -nargs=0 Format :call CocAction('format')
 
+let g:lightline = {
+  \'active': {
+    \'right': [
+      \['coc']
+    \]
+  \},
+  \'component_function': {
+    \'coc': 'coc#status'
+  \}
+\}
