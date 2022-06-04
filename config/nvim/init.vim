@@ -93,7 +93,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
-  let g:rc_dir = expand('~/dotfiles/nvim')
+  let g:rc_dir = expand('~/.config/nvim')
   let s:toml = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
   call dein#load_toml(s:toml,      {'lazy': 0})
@@ -317,6 +317,6 @@ EOF
 "-------------------------------------------------------------------------------
 " import divided file
 "-------------------------------------------------------------------------------
-set runtimepath+=~/dotfiles/nvim/
+set runtimepath+=./
 runtime! *.rc.vim
 

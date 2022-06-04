@@ -13,19 +13,19 @@ fi
 # Zinit's installer
 # ---------------------------------------------------------
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
+## Added by Zinit's installer
+ # if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+ #     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+ #     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+ #     command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
+ #         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+ #         print -P "%F{160}▓▒░ The clone has failed.%f%b"
+ # fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit's installer chunk
+## End of Zinit's installer chunk
 
 # ---------------------------------------------------------
 # plugin
@@ -41,40 +41,107 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 # open git repository
 zinit light paulirish/git-open
+# zeno.zsh
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
+
+zinit wait lucid null for \
+    atinit'source "$ZDOTDIR/.zshrc.lazy"' \
+    @'zdharma-continuum/null'
+
+### zeno.zsh ###
+# if defined load the configuration file from there
+# export ZENO_HOME=~/.config/zeno
+
+# if disable deno cache command when plugin loaded
+# export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
+
+# if enable fzf-tmux
+# export ZENO_ENABLE_FZF_TMUX=1
+
+# if setting fzf-tmux options
+# export ZENO_FZF_TMUX_OPTIONS="-p"
+
+# Experimental: Use UNIX Domain Socket
+# export ZENO_ENABLE_SOCK=1
+
+# if disable builtin completion
+# export ZENO_DISABLE_BUILTIN_COMPLETION=1
+
+# default
+export ZENO_GIT_CAT="cat"
+# git file preview with color
+# export ZENO_GIT_CAT="bat --color=always"
+
+# default
+export ZENO_GIT_TREE="tree"
+# git folder preview with color
+# export ZENO_GIT_TREE="exa --tree"
+
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+
+  # fallback if snippet not matched (default: self-insert)
+  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
+
+  # if you use zsh's incremental search
+  # bindkey -M isearch ' ' self-insert
+
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+
+  bindkey '^i' zeno-completion
+
+  # fallback if completion not matched
+  # (default: fzf-completion if exists; otherwise expand-or-complete)
+  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
+fi
 
 # ---------------------------------------------------------
 # path
 # ---------------------------------------------------------
 
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  /usr/bin
+  /usr/sbin
+  /bin
+  /sbin
+  /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
+  /Library/Apple/usr/bin
+  "$HOME/.local/bin"(N-/)
+  "$HOME/.cargo/bin"(N-/)
+  "$GOPATH/bin"
+)
+
+# GitHub CLI
+eval "$(gh completion -s zsh)"
+# direnv
+eval "$(direnv hook zsh)"
+# asdf
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
+fi
+
 # asdfでruby2.6.5インストールするときにこれらを設定するとできるようになった
 # https://stackoverflow.com/questions/69012676/install-older-ruby-versions-on-a-m1-macbook
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
-export optflags="-Wno-error=implicit-function-declaration"
-export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
-
-# typeset -U path PATH
-# path=(
-#   /opt/homebrew/bin(N-/)
-#   /opt/homebrew/sbin(N-/)
-#   /usr/bin
-#   /usr/sbin
-#   /bin
-#   /sbin
-#   /usr/local/bin(N-/)
-#   /usr/local/sbin(N-/)
-#   /Library/Apple/usr/bin
-# )
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+# export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
+# export optflags="-Wno-error=implicit-function-declaration"
+# export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
+# eval $(/opt/homebrew/bin/brew shellenv)
 
 # ---------------------------------------------------------
 # basic
 # ---------------------------------------------------------
 
-# 履歴保存管理
+# # 履歴保存管理
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
@@ -88,66 +155,47 @@ setopt inc_append_history      # 実行時に履歴をファイルにに追加�
 # https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
 setopt nonomatch
 
-# GitHub CLI
-eval "$(gh completion -s zsh)"
-# direnv
-eval "$(direnv hook zsh)"
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zshaddhistory() {
+    local line="${1%%$'\n'}"
+    [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
+}
 
 # ---------------------------------------------------------
 # completions
 # ---------------------------------------------------------
 
+# brew completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
+
 # initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
 # 補完候補をそのまま探す -> 小文字を大文字に変えて探す -> 大文字を小文字に変えて探す
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
+# zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
 
 ### 補完方法毎にグループ化する。
-zstyle ':completion:*' format '%B%F{blue}%d%f%b'
-zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' format '%B%F{blue}%d%f%b'
+# zstyle ':completion:*' group-name ''
 
 ### 補完侯補をメニューから選択する。
 ### select=2: 補完候補を一覧から選択する。補完候補が2つ以上なければすぐに補完する。
-zstyle ':completion:*:default' menu select=2
+# zstyle ':completion:*:default' menu select=2
 
 # automatically change directory when dir name is typed
-setopt auto_cd
+# setopt auto_cd
 
 # ---------------------------------------------------------
 # prompt
 # ---------------------------------------------------------
 
-SCRIPT_DIR=$HOME/dotfiles
-source $SCRIPT_DIR/zsh/p10k.zsh
-
-# ---------------------------------------------------------
-# alias
-# ---------------------------------------------------------
-
-alias be='bundle exec'
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gd='git diff'
-alias g='git'
-alias gp='git push -u origin HEAD'
-alias c='clear'
-alias ll='ls -lahG'
-alias d='docker'
-alias dc='docker-compose'
-alias dcnt='docker container'
-alias dcur='docker container ls -f status=running -l -q'
-alias dexec='docker container exec -it $(dcur)'
-alias dimg='docker image'
-alias drun='docker container run —rm -d'
-alias drunit='docker container run —rm -it'
-alias dstop='docker container stop $(dcur)'
-alias k='kubectl'
-alias n='nvim'
-alias ojt='oj t -c "ruby main.rb" -d test'
+source $ZDOTDIR/p10k.zsh
 
 # ---------------------------------------------------------
 # function
@@ -217,4 +265,41 @@ function sshsp() {
   fi
 }
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# Ctrl + r で履歴検索
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
+
+
+# rspec util function
+function changed_spec_files()
+{
+  git diff --name-only --diff-filter=ACMR origin/main | grep spec | grep -v -E '.*spec\/(factories|fixtures)/' | tr '\r\n' ' '
+}
+
+function rspec_git()
+{
+  files=$(changed_spec_files)
+  echo "Discovered... $files"
+  rspec $files
+}
+
+function all_spec_files()
+{
+  find -name "*_spec.rb" -not -path "./tmp/*" -and -not -path "./vendor/*" -and -not -path "./qa/*"
+}
+
+function rspec()
+{
+  files=${1:-$(all_spec_files | fzf)}
+  if [[ -f ./bin/rspec ]]; then
+    ./bin/rspec $files
+  else
+    bundle exec rspec $files
+  fi
+}
+
+

@@ -15,8 +15,8 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'Shougo/unite.vim'
 
-[[plugins]]
-repo = 'itchyny/lightline.vim'
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
@@ -126,3 +126,6 @@ repo = 'mhinz/vim-startify'
 
 [[plugins]]
 repo = 'petertriho/nvim-scrollbar'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'

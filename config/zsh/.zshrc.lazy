@@ -1,0 +1,76 @@
+### Alias ###
+alias be='bundle exec'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
+alias g='git'
+alias gp='git push -u origin HEAD'
+alias c='clear'
+alias d='docker'
+alias dc='docker-compose'
+alias dcnt='docker container'
+alias dcur='docker container ls -f status=running -l -q'
+alias dexec='docker container exec -it $(dcur)'
+alias dimg='docker image'
+alias drun='docker container run —rm -d'
+alias drunit='docker container run —rm -it'
+alias dstop='docker container stop $(dcur)'
+alias k='kubectl'
+alias n='nvim'
+alias ojt='oj t -c "ruby main.rb" -d test'
+
+# macOSでBSD系CLIツール→GNU系に置き換える
+case "$OSTYPE" in
+    darwin*)
+        (( ${+commands[gdate]} )) && alias date='gdate'
+        (( ${+commands[gls]} )) && alias ls='gls'
+        (( ${+commands[gmkdir]} )) && alias mkdir='gmkdir'
+        (( ${+commands[gcp]} )) && alias cp='gcp'
+        (( ${+commands[gmv]} )) && alias mv='gmv'
+        (( ${+commands[grm]} )) && alias rm='grm'
+        (( ${+commands[gdu]} )) && alias du='gdu'
+        (( ${+commands[ghead]} )) && alias head='ghead'
+        (( ${+commands[gtail]} )) && alias tail='gtail'
+        (( ${+commands[gsed]} )) && alias sed='gsed'
+        (( ${+commands[ggrep]} )) && alias grep='ggrep'
+        (( ${+commands[gfind]} )) && alias find='gfind'
+        (( ${+commands[gdirname]} )) && alias dirname='gdirname'
+        (( ${+commands[gxargs]} )) && alias xargs='gxargs'
+    ;;
+esac
+
+
+### exa ###
+__exa_atload() {
+    alias ls='exa --group-directories-first'
+    alias la='exa --group-directories-first -a'
+    alias ll='exa --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
+    alias tree='exa --group-directories-first -T --icons'
+}
+zinit wait lucid light-mode as'program' from'gh-r' for \
+    pick'bin/exa' \
+    atclone'cp -f completions/exa.zsh _exa' atpull'%atclone' \
+    atload'__exa_atload' \
+    @'ogham/exa'
+
+### tealdeer ###
+__tealdeer_atclone() {
+    curl -sSL 'https://raw.githubusercontent.com/dbrgn/tealdeer/main/completion/zsh_tealdeer' -o _tealdeer
+}
+__tealdeer_atload() {
+    # export TEALDEER_CONFIG_DIR="$XDG_CONFIG_HOME/tealdeer"
+    # export TEALDEER_CACHE_DIR="$XDG_CACHE_HOME/tealdeer"
+    export TEALDEER_CONFIG_DIR="$HOME/tealdeer"
+    export TEALDEER_CACHE_DIR="$HOME/tealdeer"
+}
+zinit wait lucid light-mode as'program' from'gh-r' for \
+    mv'tealdeer* -> tldr' \
+    atclone'__tealdeer_atclone' atpull'%atclone' \
+    atload'__tealdeer_atload' \
+    @'dbrgn/tealdeer'
+
+# ### direnv ###
+# (( ${+commands[direnv]} )) && eval "$(direnv hook zsh)"
+# ### GitHub CLI ###
+# (( ${+commands[gh]} )) && eval "$(direnv hook zsh)"
