@@ -28,75 +28,6 @@ autoload -Uz _zinit
 ## End of Zinit's installer chunk
 
 # ---------------------------------------------------------
-# plugin
-# ---------------------------------------------------------
-
-# zsh theme
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-# syntax hightlight
-zinit light zdharma-continuum/fast-syntax-highlighting
-# 補完
-zinit light zsh-users/zsh-completions
-# autosuggest
-zinit light zsh-users/zsh-autosuggestions
-# open git repository
-zinit light paulirish/git-open
-# zeno.zsh
-zinit ice lucid depth"1" blockf
-zinit light yuki-yano/zeno.zsh
-
-zinit wait lucid null for \
-    atinit'source "$ZDOTDIR/.zshrc.lazy"' \
-    @'zdharma-continuum/null'
-
-### zeno.zsh ###
-# if defined load the configuration file from there
-# export ZENO_HOME=~/.config/zeno
-
-# if disable deno cache command when plugin loaded
-# export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
-
-# if enable fzf-tmux
-# export ZENO_ENABLE_FZF_TMUX=1
-
-# if setting fzf-tmux options
-# export ZENO_FZF_TMUX_OPTIONS="-p"
-
-# Experimental: Use UNIX Domain Socket
-# export ZENO_ENABLE_SOCK=1
-
-# if disable builtin completion
-# export ZENO_DISABLE_BUILTIN_COMPLETION=1
-
-# default
-export ZENO_GIT_CAT="cat"
-# git file preview with color
-# export ZENO_GIT_CAT="bat --color=always"
-
-# default
-export ZENO_GIT_TREE="tree"
-# git folder preview with color
-# export ZENO_GIT_TREE="exa --tree"
-
-if [[ -n $ZENO_LOADED ]]; then
-  bindkey ' '  zeno-auto-snippet
-
-  # fallback if snippet not matched (default: self-insert)
-  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
-
-  # if you use zsh's incremental search
-  # bindkey -M isearch ' ' self-insert
-
-  bindkey '^m' zeno-auto-snippet-and-accept-line
-
-  bindkey '^i' zeno-completion
-
-  # fallback if completion not matched
-  # (default: fzf-completion if exists; otherwise expand-or-complete)
-  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
-fi
-
-# ---------------------------------------------------------
 # path
 # ---------------------------------------------------------
 
@@ -190,12 +121,6 @@ fi
 
 # automatically change directory when dir name is typed
 # setopt auto_cd
-
-# ---------------------------------------------------------
-# prompt
-# ---------------------------------------------------------
-
-source $ZDOTDIR/p10k.zsh
 
 # ---------------------------------------------------------
 # function
@@ -302,4 +227,16 @@ function rspec()
   fi
 }
 
+# ---------------------------------------------------------
+# plugin
+# ---------------------------------------------------------
+
+# zsh theme
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+source $ZDOTDIR/p10k.zsh
+
+### plugins ###
+zinit wait lucid null for \
+    atinit'source "$ZDOTDIR/.zshrc.lazy"' \
+    @'zdharma-continuum/null'
 

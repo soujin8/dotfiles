@@ -1,21 +1,6 @@
 ### Alias ###
-alias be='bundle exec'
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gd='git diff'
 alias g='git'
-alias gp='git push -u origin HEAD'
 alias c='clear'
-alias d='docker'
-alias dc='docker-compose'
-alias dcnt='docker container'
-alias dcur='docker container ls -f status=running -l -q'
-alias dexec='docker container exec -it $(dcur)'
-alias dimg='docker image'
-alias drun='docker container run —rm -d'
-alias drunit='docker container run —rm -it'
-alias dstop='docker container stop $(dcur)'
 alias k='kubectl'
 alias n='nvim'
 alias ojt='oj t -c "ruby main.rb" -d test'
@@ -39,6 +24,43 @@ case "$OSTYPE" in
         (( ${+commands[gxargs]} )) && alias xargs='gxargs'
     ;;
 esac
+
+### zsh plugins ###
+zinit wait lucid blockf light-mode for \
+    atload'async_init' @'mafredri/zsh-async' \
+    @'zsh-users/zsh-autosuggestions' \
+    @'zsh-users/zsh-completions' \
+    @'zdharma-continuum/fast-syntax-highlighting'
+
+
+### zeno.zsh ###
+export ZENO_HOME="$XDG_CONFIG_HOME/zeno"
+export ZENO_GIT_CAT="bat --color=always"
+export ZENO_GIT_TREE="exa --tree"
+
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
+# zinit wait lucid light-mode for \
+#     atload'__zeno_atload' \
+#     @'yuki-yano/zeno.zsh'
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+
+  # fallback if snippet not matched (default: self-insert)
+  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
+
+  # if you use zsh's incremental search
+  # bindkey -M isearch ' ' self-insert
+
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+
+  bindkey '^i' zeno-completion
+
+  # fallback if completion not matched
+  # (default: fzf-completion if exists; otherwise expand-or-complete)
+  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
+fi
+
 
 
 ### exa ###
@@ -70,7 +92,3 @@ zinit wait lucid light-mode as'program' from'gh-r' for \
     atload'__tealdeer_atload' \
     @'dbrgn/tealdeer'
 
-# ### direnv ###
-# (( ${+commands[direnv]} )) && eval "$(direnv hook zsh)"
-# ### GitHub CLI ###
-# (( ${+commands[gh]} )) && eval "$(direnv hook zsh)"
