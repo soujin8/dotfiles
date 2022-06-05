@@ -1,2 +1,5 @@
 .netrwhist
 git
+
+config/zsh/.zcompdump
+config/tmux/plugins
