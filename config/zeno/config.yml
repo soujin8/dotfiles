@@ -12,14 +12,26 @@ snippets:
   - name: git push -u origin HEAD
     keyword: gp
     snippet: git push -u origin HEAD
+  - name: git checkout to develop, pull and delete topic branch
+    keyword: gcd
+    snippet: g checkout develop && git pull && gh poi
 
   # bundle
   - name: bundle exec
     keyword: be
     snippet: bundle exec
   # rspec
-  - name: rspec
-    keyword: rspec
+  - name: rspec xargs
+    keyword: rspecx
+    snippet: find spec -type f | fzf | xargs bundle exec rspec
+  - name: copy-spec-file
+    keyword: csf
+    snippet: find spec -type f | fzf | pbcopy
+  - name: execute rspec with pbcopy
+    keyword: exe-spec
+    snippet: bundle exec rspec
+  - name: rspec request
+    keyword: rspec request
     snippet: find spec/requests -type f | fzf | xargs bundle exec rspec
 
 completions:

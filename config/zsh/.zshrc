@@ -91,6 +91,10 @@ zshaddhistory() {
     [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
 }
 
+# MacOSでssh-addを自動で。
+# https://zenn.dev/moya_dev/scraps/26c19e6a5b3927
+ssh-add --apple-load-keychain
+
 # ---------------------------------------------------------
 # completions
 # ---------------------------------------------------------

@@ -2,4 +2,5 @@
 git
 
 config/zsh/.zcompdump
+config/zsh/.zsh_sessions
 config/tmux/plugins
