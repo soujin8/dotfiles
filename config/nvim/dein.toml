@@ -21,14 +21,33 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 
-[[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all'
-merged = 0
+# [[plugins]]
+# repo = 'junegunn/fzf'
+# build = './install --all'
+# merged = 0
+
+# [[plugins]]
+# repo = 'yuki-yano/fzf-preview.vim'
+# rev = 'release/rpc'
+
+# [[plugins]]
+# repo = 'vim-lua/plenary.nvim'
+
+# [[plugins]]
+# repo = 'nvim-telescope/telescope.nvim'
+# depends = ['plenary.nvim']
 
 [[plugins]]
-repo = 'yuki-yano/fzf-preview.vim'
-rev = 'release/rpc'
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+depends = ['plenary.nvim']
+
+[[plugins]]
+repo = 'nvim-telescope/telescope-fzf-native.nvim'
+depends = ['telescope.nvim']
+build = 'make'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -57,6 +76,18 @@ repo = 'sebdah/vim-delve'
 
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = 'fern.vim'
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+depends = 'fern.vim'
+
+[[plugins]]
+repo = 'yuki-yano/fern-preview.vim'
+depends = 'fern.vim'
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'

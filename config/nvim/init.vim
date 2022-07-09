@@ -181,15 +181,11 @@ autocmd FileType go setlocal shiftwidth=4
 autocmd FileType rb setlocal noexpandtab
 autocmd FileType rb setlocal tabstop=2
 
-" let $FZF_DEFAULT_OPTS="--layout=reverse"
-" let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
-" let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
-
 nnoremap Y y$
 " Leader を Space に設定
 let mapleader = "\<Space>"
 " init.vimを開く
-nnoremap <Space>. :<C-u>tabedit ~/dotfiles/nvim/init.vim<CR>
+nnoremap <Space>. :<C-u>tabedit ~/.config/nvim/init.vim<CR>
 
 " barbar.nvim
 nnoremap <silent> <C-j> :BufferPrevious<CR>
@@ -197,13 +193,13 @@ nnoremap <silent> <C-k> :BufferNext<CR>
 nnoremap <silent> <C-c> :BufferClose<CR>
 
 " fzf.vim
-nmap <Leader>f [fzf]
-nnoremap <silent> [fzf]f :Files<CR>
-nnoremap <silent> [fzf]g :GFiles<CR>
-nnoremap <silent> [fzf]G :GFiles?<CR>
-nnoremap <silent> [fzf]b :Buffers<CR>
-nnoremap <silent> [fzf]h :History<CR>
-nnoremap <silent> [fzf]r :Rg<CR>
+" nmap <Leader>f [fzf]
+" nnoremap <silent> [fzf]f :Files<CR>
+" nnoremap <silent> [fzf]g :GFiles<CR>
+" nnoremap <silent> [fzf]G :GFiles?<CR>
+" nnoremap <silent> [fzf]b :Buffers<CR>
+" nnoremap <silent> [fzf]h :History<CR>
+" nnoremap <silent> [fzf]r :Rg<CR>
 
 " vim-fugitive
 nmap <Leader>g [git]
@@ -218,6 +214,19 @@ nnoremap <silent> [git]b :Git blame<CR>
 " fern
 nnoremap <silent>sf :Fern .<CR>
 let g:fern#default_hidden=1
+let g:fern#renderer = "nerdfont"
+
+function! s:fern_settings() abort
+  nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
+  nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
+  nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
+  nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
+endfunction
+
+augroup fern-settings
+  autocmd!
+  autocmd FileType fern call s:fern_settings()
+augroup END
 
 " iamcco/markdown-preview.nvim'
 nnoremap <Leader>md :MarkdownPreview<CR>
@@ -337,6 +346,36 @@ EOF
 "    },
 "})
 "EOF
+
+" telescope
+nmap <leader>f [telescope]
+xmap <leader>f [telescope]
+
+nnoremap <silent> [telescope]f :Telescope find_files<CR>
+nnoremap <silent> [telescope]p :Telescope find_files hidden=true<CR>
+nnoremap <silent> [telescope]gr <cmd>Telescope grep_string<cr>
+nnoremap <silent> [telescope]gs <cmd>Telescope git_status<cr>
+nnoremap <silent> [telescope]gp <cmd>Telescope live_grep<cr>
+nnoremap <silent> [telescope]b <cmd>Telescope buffers<cr>
+nnoremap <silent> [telescope]o <cmd>Telescope oldfiles<cr>
+nnoremap <silent> [telescope]g <cmd>Telescope git_branches<cr>
+nnoremap <silent> [telescope]h <cmd>Telescope help_tags<cr>
+
+lua <<EOF
+require('telescope').setup{
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = false, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+require('telescope').load_extension('fzf')
+EOF
+
 
 " import divided file
 set runtimepath+=./
