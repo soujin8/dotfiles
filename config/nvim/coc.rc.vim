@@ -21,7 +21,8 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emoji',
       \ 'coc-fzf-preview',
-      \ 'coc-rust-analyzer'
+      \ 'coc-rust-analyzer',
+      \ 'coc-diagnostic'
       \ ]
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -195,14 +196,3 @@ nnoremap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
 nnoremap <silent> <space>fmt <Plug>(coc-format)
 " exec prettier
 " command! -nargs=0 Format :call CocAction('format')
-
-let g:lightline = {
-  \'active': {
-    \'right': [
-      \['coc']
-    \]
-  \},
-  \'component_function': {
-    \'coc': 'coc#status'
-  \}
-\}

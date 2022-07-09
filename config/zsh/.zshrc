@@ -93,7 +93,8 @@ zshaddhistory() {
 
 # MacOSでssh-addを自動で。
 # https://zenn.dev/moya_dev/scraps/26c19e6a5b3927
-ssh-add --apple-load-keychain
+# ssh-add --apple-load-keychain
+export TERM=xterm-256color
 
 # ---------------------------------------------------------
 # completions

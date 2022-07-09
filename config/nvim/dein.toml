@@ -15,8 +15,8 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'Shougo/unite.vim'
 
-# [[plugins]]
-# repo = 'itchyny/lightline.vim'
+[[plugins]]
+repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
@@ -29,11 +29,6 @@ merged = 0
 [[plugins]]
 repo = 'yuki-yano/fzf-preview.vim'
 rev = 'release/rpc'
-
-# fzfの代わりにfzf-preview使ってみるので一旦コメントアウト
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
-# depends = 'fzf'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -49,9 +44,6 @@ repo = 'mattn/vim-goimports'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-
-[[plugins]]
-repo = 'sainnhe/gruvbox-material'
 
 [[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
@@ -74,8 +66,8 @@ repo = 'nvim-treesitter/nvim-treesitter'
 hook_post_update = 'TSUpdate'
 
 # treesitterカスタマイズしたい時に使う
-[[plugins]]
-repo = 'nvim-treesitter/playground'
+# [[plugins]]
+# repo = 'nvim-treesitter/playground'
 
 [[plugins]]
 repo = 'machakann/vim-sandwich'
@@ -96,9 +88,6 @@ repo = 'p00f/nvim-ts-rainbow'
 repo = 'JoosepAlviste/nvim-ts-context-commentstring'
 
 [[plugins]]
-repo = 'joshdick/onedark.vim'
-
-[[plugins]]
 repo = 'ulwlu/elly.vim'
 
 [[plugins]]
@@ -114,18 +103,12 @@ repo = 'mtdl9/vim-log-highlighting'
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
-repo = 'lambdalisue/gin.vim'
-
-[[plugins]]
 repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'sh -c "cd app && yarn install"'
 
-[[plugins]]
-repo = 'mhinz/vim-startify'
+# [[plugins]]
+# repo = 'petertriho/nvim-scrollbar'
 
 [[plugins]]
-repo = 'petertriho/nvim-scrollbar'
-
-[[plugins]]
-repo = 'vim-airline/vim-airline'
+repo = 'thoughtbot/vim-rspec'

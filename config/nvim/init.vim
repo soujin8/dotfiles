@@ -1,6 +1,24 @@
-"-------------------------------------------------------------------------------
+" 遅延化
+let g:did_install_default_menus = 1
+let g:did_install_syntax_menu   = 1
+let g:did_indent_on             = 1
+let g:did_load_filetypes        = 1
+let g:did_load_ftplugin         = 1
+let g:loaded_2html_plugin       = 1
+let g:loaded_gzip               = 1
+let g:loaded_man                = 1
+let g:loaded_matchit            = 1
+let g:loaded_matchparen         = 1
+let g:loaded_netrwPlugin        = 1
+let g:loaded_remote_plugins     = 1
+let g:loaded_shada_plugin       = 1
+let g:loaded_spellfile_plugin   = 1
+let g:loaded_tarPlugin          = 1
+let g:loaded_tutor_mode_plugin  = 1
+let g:loaded_zipPlugin          = 1
+let g:skip_loading_mswin        = 1
+
 " Option
-"-------------------------------------------------------------------------------
 " BSで行頭削除できる
 set backspace=indent,eol,start
 " 行数表示
@@ -56,6 +74,8 @@ set diffopt+=vertical
 " vimで使用するフォント
 set guifont=HackGenNerd\ Console\ 14
 set encoding=UTF-8
+" mode表示しない
+set noshowmode
 
 " NOTE: If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
@@ -72,10 +92,7 @@ endif
 " Node.js の参照先
 let g:node_host_prog = '~/.asdf/installs/nodejs/16.14.2/.npm/lib/node_modules/neovim/bin/cli.js'
 
-"-------------------------------------------------------------------------------
 " Dein
-"-------------------------------------------------------------------------------
-
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 if &compatible
   set nocompatible
@@ -108,44 +125,54 @@ if dein#check_install()
   call dein#install()
 endif
 
-"-------------------------------------------------------------------------------
-" Color scheme
-"-------------------------------------------------------------------------------
-colorscheme iceberg
-" colorscheme gruvbox-material
-" colorscheme onedark
-" colorscheme elly
+" lightline.vim
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
 
-"-------------------------------------------------------------------------------
-" plugin config
-"-------------------------------------------------------------------------------
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'LightlineFilename',
+      \ },
+      \ }
+
+
+" Color scheme
+colorscheme iceberg
 
 " vim-go
-let g:go_disable_autoinstall = 1
-let g:go_metalinter_autosave = 1
-let g:go_fmt_command = "goimports"
+" let g:go_disable_autoinstall = 1
+" let g:go_metalinter_autosave = 1
+" let g:go_fmt_command = "goimports"
 
 " vim-jsx-pretty
-let g:vim_jsx_pretty_colorful_config = 1
+" let g:vim_jsx_pretty_colorful_config = 1
 
 " vim-markdown
 " 折りたたみしない
 let g:vim_markdown_folding_disabled = 1
 
 " Status line
-if !exists('*fugitive#statusline')
-  set statusline=%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}[L%l/%L,C%03v]
-  set statusline+=%=
-  set statusline+=%{fugitive#statusline()}
-endif
+" if !exists('*fugitive#statusline')
+"   set statusline=%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}[L%l/%L,C%03v]
+"   set statusline+=%=
+"   set statusline+=%{fugitive#statusline()}
+" endif
 
 " vim-delve
 " ;dでその行にブレークポイントを設定
-autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
+" autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
 
-"-------------------------------------------------------------------------------
-" Tab Config each language
-"-------------------------------------------------------------------------------
 " tab config of golang
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal tabstop=4
@@ -154,17 +181,10 @@ autocmd FileType go setlocal shiftwidth=4
 autocmd FileType rb setlocal noexpandtab
 autocmd FileType rb setlocal tabstop=2
 
-"-------------------------------------------------------------------------------
-" fzf
-"-------------------------------------------------------------------------------
-
 " let $FZF_DEFAULT_OPTS="--layout=reverse"
 " let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
 " let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
-"-------------------------------------------------------------------------------
-" key bind
-"-------------------------------------------------------------------------------
 nnoremap Y y$
 " Leader を Space に設定
 let mapleader = "\<Space>"
@@ -202,9 +222,13 @@ let g:fern#default_hidden=1
 " iamcco/markdown-preview.nvim'
 nnoremap <Leader>md :MarkdownPreview<CR>
 
-"-------------------------------------------------------------------------------
+" vim-rspec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
 " nvim-treesitter
-"-------------------------------------------------------------------------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
@@ -230,93 +254,91 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-lua <<EOF
--- require("scrollbar").setup()
-require("scrollbar").setup({
-    show = true,
-    set_highlights = true,
-    folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
-    max_lines = false, -- disables if no. of lines in buffer exceeds this
-    handle = {
-        text = " ",
-        color = nil,
-        cterm = nil,
-        highlight = "CursorColumn",
-        hide_if_all_visible = true, -- Hides handle if all lines are visible
-    },
-    marks = {
-        Search = {
-            text = { "-", "=" },
-            priority = 0,
-            color = nil,
-            cterm = nil,
-            highlight = "Search",
-        },
-        Error = {
-            text = { "-", "=" },
-            priority = 1,
-            color = nil,
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextError",
-        },
-        Warn = {
-            text = { "-", "=" },
-            priority = 2,
-            color = nil,
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextWarn",
-        },
-        Info = {
-            text = { "-", "=" },
-            priority = 3,
-            color = nil,
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextInfo",
-        },
-        Hint = {
-            text = { "-", "=" },
-            priority = 4,
-            color = nil,
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextHint",
-        },
-        Misc = {
-            text = { "-", "=" },
-            priority = 5,
-            color = nil,
-            cterm = nil,
-            highlight = "Normal",
-        },
-    },
-    excluded_buftypes = {
-        "terminal",
-    },
-    excluded_filetypes = {
-        "prompt",
-        "TelescopePrompt",
-    },
-    autocmd = {
-        render = {
-            "BufWinEnter",
-            "TabEnter",
-            "TermEnter",
-            "WinEnter",
-            "CmdwinLeave",
-            "TextChanged",
-            "VimResized",
-            "WinScrolled",
-        },
-    },
-    handlers = {
-        diagnostic = true,
-        search = false, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
-    },
-})
-EOF
+"lua <<EOF
+"-- require("scrollbar").setup()
+"require("scrollbar").setup({
+"    show = true,
+"    set_highlights = true,
+"    folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
+"    max_lines = false, -- disables if no. of lines in buffer exceeds this
+"    handle = {
+"        text = " ",
+"        color = nil,
+"        cterm = nil,
+"        highlight = "CursorColumn",
+"        hide_if_all_visible = true, -- Hides handle if all lines are visible
+"    },
+"    marks = {
+"        Search = {
+"            text = { "-", "=" },
+"            priority = 0,
+"            color = nil,
+"            cterm = nil,
+"            highlight = "Search",
+"        },
+"        Error = {
+"            text = { "-", "=" },
+"            priority = 1,
+"            color = nil,
+"            cterm = nil,
+"            highlight = "DiagnosticVirtualTextError",
+"        },
+"        Warn = {
+"            text = { "-", "=" },
+"            priority = 2,
+"            color = nil,
+"            cterm = nil,
+"            highlight = "DiagnosticVirtualTextWarn",
+"        },
+"        Info = {
+"            text = { "-", "=" },
+"            priority = 3,
+"            color = nil,
+"            cterm = nil,
+"            highlight = "DiagnosticVirtualTextInfo",
+"        },
+"        Hint = {
+"            text = { "-", "=" },
+"            priority = 4,
+"            color = nil,
+"            cterm = nil,
+"            highlight = "DiagnosticVirtualTextHint",
+"        },
+"        Misc = {
+"            text = { "-", "=" },
+"            priority = 5,
+"            color = nil,
+"            cterm = nil,
+"            highlight = "Normal",
+"        },
+"    },
+"    excluded_buftypes = {
+"        "terminal",
+"    },
+"    excluded_filetypes = {
+"        "prompt",
+"        "TelescopePrompt",
+"    },
+"    autocmd = {
+"        render = {
+"            "BufWinEnter",
+"            "TabEnter",
+"            "TermEnter",
+"            "WinEnter",
+"            "CmdwinLeave",
+"            "TextChanged",
+"            "VimResized",
+"            "WinScrolled",
+"        },
+"    },
+"    handlers = {
+"        diagnostic = true,
+"        search = false, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
+"    },
+"})
+"EOF
 
-"-------------------------------------------------------------------------------
 " import divided file
-"-------------------------------------------------------------------------------
 set runtimepath+=./
 runtime! *.rc.vim
 
