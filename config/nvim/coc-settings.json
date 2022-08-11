@@ -13,9 +13,16 @@
       "filetypes": ["markdown"]
     }
   },
-	"git.addedSign.hlGroup": "CocDiffAdd",
-	"git.changedSign.hlGroup": "CocDiffChange",
-	"git.removedSign.hlGroup": "CocDiffDelete",
-	"git.topRemovedSign.hlGroup": "CocDiffDelete",
-	"git.changeRemovedSign.hlGroup": "CocDiffDelete"
+  "git.addedSign.hlGroup": "CocDiffAdd",
+  "git.changedSign.hlGroup": "CocDiffChange",
+  "git.removedSign.hlGroup": "CocDiffDelete",
+  "git.topRemovedSign.hlGroup": "CocDiffDelete",
+  "git.changeRemovedSign.hlGroup": "CocDiffDelete",
+
+  "tsserver.enable": true,
+  "eslint.enable": true,
+  "typescript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": true,
+
+  "suggest.noselect": true
 }

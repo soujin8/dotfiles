@@ -21,3 +21,5 @@ export RUST_BACKTRACE=1
 ### Go ###
 export GOPATH="$XDG_DATA_HOME/go"
 
+export ANDROID_HOME=/Users/hayato.mochizuki/Library/Android/sdk
+export PATH=/Users/hayato.mochizuki/Library/Android/sdk/platform-tools:$PATH
