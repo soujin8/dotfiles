@@ -378,6 +378,11 @@ require('telescope').setup{
 require('telescope').load_extension('fzf')
 EOF
 
+autocmd ColorScheme iceberg highlight CocFloating             ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2C3538
+autocmd ColorScheme iceberg highlight CocHoverFloating        ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
+autocmd ColorScheme iceberg highlight CocSuggestFloating      ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
+autocmd ColorScheme iceberg highlight CocSignatureFloating    ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
+autocmd ColorScheme iceberg highlight CocDiagnosticFloating   ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
 
 " import divided file
 set runtimepath+=./
