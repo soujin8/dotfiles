@@ -143,3 +143,6 @@ build = 'sh -c "cd app && yarn install"'
 
 [[plugins]]
 repo = 'thoughtbot/vim-rspec'
+
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'

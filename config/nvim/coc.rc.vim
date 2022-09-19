@@ -1,3 +1,5 @@
+" ********** coc-nvim start ********** 
+
 " extensions list 
 let g:coc_global_extensions = [
       \ 'coc-json',
@@ -22,7 +24,8 @@ let g:coc_global_extensions = [
       \ 'coc-emoji',
       \ 'coc-fzf-preview',
       \ 'coc-rust-analyzer',
-      \ 'coc-diagnostic'
+      \ 'coc-diagnostic',
+      \ 'coc-snippets',
       \ ]
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -196,3 +199,41 @@ nnoremap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
 nnoremap <silent> <space>fmt <Plug>(coc-format)
 " exec prettier
 " command! -nargs=0 Format :call CocAction('format')
+
+" ********** coc-nvim end ********** 
+
+" ********** coc-snippets start ********** 
+
+"Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" ********** coc-snippets end ********** 
