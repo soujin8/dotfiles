@@ -76,6 +76,8 @@ set guifont=HackGenNerd\ Console\ 14
 set encoding=UTF-8
 " mode表示しない
 set noshowmode
+" マウス無効
+set mouse=
 
 " NOTE: If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
