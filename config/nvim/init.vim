@@ -152,28 +152,9 @@ let g:lightline = {
 " Color scheme
 colorscheme iceberg
 
-" vim-go
-" let g:go_disable_autoinstall = 1
-" let g:go_metalinter_autosave = 1
-" let g:go_fmt_command = "goimports"
-
-" vim-jsx-pretty
-" let g:vim_jsx_pretty_colorful_config = 1
-
 " vim-markdown
 " 折りたたみしない
 let g:vim_markdown_folding_disabled = 1
-
-" Status line
-" if !exists('*fugitive#statusline')
-"   set statusline=%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}[L%l/%L,C%03v]
-"   set statusline+=%=
-"   set statusline+=%{fugitive#statusline()}
-" endif
-
-" vim-delve
-" ;dでその行にブレークポイントを設定
-" autocmd FileType go nmap <silent> ;d :DlvToggleBreakpoint<CR>
 
 " tab config of golang
 autocmd FileType go setlocal noexpandtab
@@ -205,15 +186,17 @@ nnoremap <silent> <C-c> :BufferClose<CR>
 
 " vim-fugitive
 nmap <Leader>g [git]
-nnoremap <silent> [git]a :Git add %:p<CR><CR>
-nnoremap <silent> [git]c :Git commit<CR><CR>
-nnoremap <silent> [git]s :Git<CR>
-nnoremap <silent> [git]p :Git push<CR>
+" nnoremap <silent> [git]a :Git add %:p<CR><CR>
+" nnoremap <silent> [git]c :Git commit<CR><CR>
+" nnoremap <silent> [git]s :Git<CR>
+" nnoremap <silent> [git]p :Git push<CR>
 nnoremap <silent> [git]d :Gdiff<CR>
-nnoremap <silent> [git]l :Gclog<CR>
-nnoremap <silent> [git]b :Git blame<CR>
+" nnoremap <silent> [git]l :Gclog<CR>
+" nnoremap <silent> [git]b :Git blame<CR>
 
 " fern
+nmap <Leader>d [fern]
+nnoremap <silent> [fern]f :Fern . -drawer<CR>
 nnoremap <silent>sf :Fern .<CR>
 let g:fern#default_hidden=1
 let g:fern#renderer = "nerdfont"
@@ -234,10 +217,10 @@ augroup END
 nnoremap <Leader>md :MarkdownPreview<CR>
 
 " vim-rspec
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" map <Leader>t :call RunCurrentSpecFile()<CR>
+" map <Leader>s :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
 
 " nvim-treesitter
 lua <<EOF

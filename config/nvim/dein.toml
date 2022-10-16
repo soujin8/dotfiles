@@ -146,3 +146,9 @@ repo = 'thoughtbot/vim-rspec'
 
 [[plugins]]
 repo = 'rafamadriz/friendly-snippets'
+
+[[plugins]]
+repo = 'ruanyl/vim-gh-line'
+
+[[plugins]]
+repo = 'gpanders/editorconfig.nvim'

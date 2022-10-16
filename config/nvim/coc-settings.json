@@ -1,11 +1,4 @@
 {
-  "solargraph.externalServer": {
-    "host": "localhost",
-    "port": 7658
-  },
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "solargraph.checkGemVersion": false,
   "languageserver": {
     "efm": {
       "command": "efm-langserver",
@@ -64,5 +57,8 @@
     "border": true,
     "highlight": "CocDiagnosticFloating",
     "winblend": 10
-  }
+  },
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "solargraph.autoformat": true
 }
