@@ -203,35 +203,6 @@ function select-history() {
 zle -N select-history
 bindkey '^r' select-history
 
-
-# rspec util function
-function changed_spec_files()
-{
-  git diff --name-only --diff-filter=ACMR origin/main | grep spec | grep -v -E '.*spec\/(factories|fixtures)/' | tr '\r\n' ' '
-}
-
-function rspec_git()
-{
-  files=$(changed_spec_files)
-  echo "Discovered... $files"
-  rspec $files
-}
-
-function all_spec_files()
-{
-  find -name "*_spec.rb" -not -path "./tmp/*" -and -not -path "./vendor/*" -and -not -path "./qa/*"
-}
-
-function rspec()
-{
-  files=${1:-$(all_spec_files | fzf)}
-  if [[ -f ./bin/rspec ]]; then
-    ./bin/rspec $files
-  else
-    bundle exec rspec $files
-  fi
-}
-
 # ---------------------------------------------------------
 # plugin
 # ---------------------------------------------------------
