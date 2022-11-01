@@ -1,15 +1,4 @@
 # ---------------------------------------------------------
-# Enable Powerlevel10k
-# ---------------------------------------------------------
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# ---------------------------------------------------------
 # Zinit's installer
 # ---------------------------------------------------------
 
@@ -207,12 +196,11 @@ bindkey '^r' select-history
 # plugin
 # ---------------------------------------------------------
 
-# zsh theme
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-source $ZDOTDIR/p10k.zsh
-
 ### plugins ###
 zinit wait lucid null for \
     atinit'source "$ZDOTDIR/.zshrc.lazy"' \
     @'zdharma-continuum/null'
+
+## prompt
+eval "$(starship init zsh)"
 
