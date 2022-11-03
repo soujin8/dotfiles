@@ -97,10 +97,11 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
+
 " Node.js の参照先
 let g:node_host_prog = '~/.asdf/installs/nodejs/16.14.2/.npm/lib/node_modules/neovim/bin/cli.js'
 
-" Dein
+" dein Scripts-----------------------------
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 if &compatible
   set nocompatible
@@ -121,6 +122,7 @@ if dein#load_state('~/.cache/dein')
   let g:rc_dir = expand('~/.config/nvim')
   let s:toml = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  " toml 読み込んでキャッシュする
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
@@ -129,9 +131,18 @@ if dein#load_state('~/.cache/dein')
 	call map(dein#check_clean(), { _, val -> delete(val, 'rf') })
 	call dein#recache_runtimepath()
 endif
+" 未インストールのものがあればインストールする
 if dein#check_install()
   call dein#install()
 endif
+" plugin remove check {{{
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
+" }}}
+"End dein Scripts-------------------------
 
 " lightline.vim
 " WORKDIRからの相対パスを表示する
@@ -172,6 +183,7 @@ autocmd FileType rb setlocal noexpandtab
 autocmd FileType rb setlocal tabstop=2
 
 nnoremap Y y$
+
 " Leader を Space に設定
 let mapleader = "\<Space>"
 " init.vimを開く
