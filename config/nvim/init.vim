@@ -63,6 +63,10 @@ filetype plugin indent on
 set ignorecase
 " スワップファイルを作らない
 set noswapfile
+" バックアップファイル作らない
+set nobackup
+" undoファイル作らない
+set noundofile
 " 新しいウィンドウを→に開く
 set splitright
 " True Colorを使用する
@@ -78,6 +82,8 @@ set encoding=UTF-8
 set noshowmode
 " マウス無効
 set mouse=
+" コマンドのメッセージ表示欄を2行にする
+set cmdheight=2
 
 " NOTE: If barbar's option dict isn't created yet, create it
 let bufferline = get(g:, 'bufferline', {})
@@ -128,6 +134,7 @@ if dein#check_install()
 endif
 
 " lightline.vim
+" WORKDIRからの相対パスを表示する
 function! LightlineFilename()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
   let path = expand('%:p')
