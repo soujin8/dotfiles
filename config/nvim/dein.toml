@@ -7,7 +7,6 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
-merged = 0
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -21,14 +20,8 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 
-# [[plugins]]
-# repo = 'junegunn/fzf'
-# build = './install --all'
-# merged = 0
-
-# [[plugins]]
-# repo = 'yuki-yano/fzf-preview.vim'
-# rev = 'release/rpc'
+[[plugins]]
+repo = 'junegunn/fzf'
 
 # [[plugins]]
 # repo = 'vim-lua/plenary.nvim'

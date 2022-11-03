@@ -194,21 +194,12 @@ nnoremap <silent> <C-j> :BufferPrevious<CR>
 nnoremap <silent> <C-k> :BufferNext<CR>
 nnoremap <silent> <C-c> :BufferClose<CR>
 
-" fzf.vim
-" nmap <Leader>f [fzf]
-" nnoremap <silent> [fzf]f :Files<CR>
-" nnoremap <silent> [fzf]g :GFiles<CR>
-" nnoremap <silent> [fzf]G :GFiles?<CR>
-" nnoremap <silent> [fzf]b :Buffers<CR>
-" nnoremap <silent> [fzf]h :History<CR>
-" nnoremap <silent> [fzf]r :Rg<CR>
-
 " vim-fugitive
 nmap <Leader>g [git]
-" nnoremap <silent> [git]a :Git add %:p<CR><CR>
-" nnoremap <silent> [git]c :Git commit<CR><CR>
-" nnoremap <silent> [git]s :Git<CR>
-" nnoremap <silent> [git]p :Git push<CR>
+nnoremap <silent> [git]a :Git add %:p<CR><CR>
+nnoremap <silent> [git]c :Git commit<CR><CR>
+nnoremap <silent> [git]s :Git<CR>
+nnoremap <silent> [git]p :Git push<CR>
 nnoremap <silent> [git]d :Gdiff<CR>
 " nnoremap <silent> [git]l :Gclog<CR>
 " nnoremap <silent> [git]b :Git blame<CR>
@@ -268,33 +259,57 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 " telescope
-nmap <leader>f [telescope]
-xmap <leader>f [telescope]
+" nmap <leader>f [telescope]
+" xmap <leader>f [telescope]
 
-nnoremap <silent> [telescope]f :Telescope find_files<CR>
-nnoremap <silent> [telescope]p :Telescope find_files hidden=true<CR>
-nnoremap <silent> [telescope]gr <cmd>Telescope grep_string<cr>
-nnoremap <silent> [telescope]gs <cmd>Telescope git_status<cr>
-nnoremap <silent> [telescope]gp <cmd>Telescope live_grep<cr>
-nnoremap <silent> [telescope]b <cmd>Telescope buffers<cr>
-nnoremap <silent> [telescope]o <cmd>Telescope oldfiles<cr>
-nnoremap <silent> [telescope]g <cmd>Telescope git_branches<cr>
-nnoremap <silent> [telescope]h <cmd>Telescope help_tags<cr>
+" nnoremap <silent> [telescope]f :Telescope find_files<CR>
+" nnoremap <silent> [telescope]p :Telescope find_files hidden=true<CR>
+" nnoremap <silent> [telescope]gr <cmd>Telescope grep_string<cr>
+" nnoremap <silent> [telescope]gs <cmd>Telescope git_status<cr>
+" nnoremap <silent> [telescope]gp <cmd>Telescope live_grep<cr>
+" nnoremap <silent> [telescope]b <cmd>Telescope buffers<cr>
+" nnoremap <silent> [telescope]o <cmd>Telescope oldfiles<cr>
+" nnoremap <silent> [telescope]g <cmd>Telescope git_branches<cr>
+" nnoremap <silent> [telescope]h <cmd>Telescope help_tags<cr>
 
 lua <<EOF
-require('telescope').setup{
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
-    }
-  }
-}
-require('telescope').load_extension('fzf')
+-- require('telescope').setup{
+--   extensions = {
+--     fzf = {
+--       fuzzy = true,                    -- false will only do exact matching
+--       override_generic_sorter = false, -- override the generic sorter
+--       override_file_sorter = true,     -- override the file sorter
+--       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+--                                        -- the default case_mode is "smart_case"
+--     }
+--   }
+-- }
+-- require('telescope').load_extension('fzf')
 EOF
+
+" fzf-preview.nvim
+nmap <leader>f [fzf-p]
+xmap <leader>f [fzf-p]
+
+" find file
+nnoremap <silent> [fzf-p]f     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+" nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+" nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+" nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+" nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+" nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+" nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+" nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+" nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+
+let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!"* *"' " Installed ripgrep
+let g:fzf_preview_command = 'bat --color=always --plain {-1}' " Installed bat
+let g:fzf_preview_use_dev_icons = 1
+let g:fzf_preview_dev_icons_limit = 5000
 
 autocmd ColorScheme iceberg highlight CocFloating             ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2C3538
 autocmd ColorScheme iceberg highlight CocHoverFloating        ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
