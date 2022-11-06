@@ -33,14 +33,14 @@ repo = 'junegunn/fzf'
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 
-[[plugins]]
-repo = 'nvim-telescope/telescope.nvim'
-depends = ['plenary.nvim']
+# [[plugins]]
+# repo = 'nvim-telescope/telescope.nvim'
+# depends = ['plenary.nvim']
 
-[[plugins]]
-repo = 'nvim-telescope/telescope-fzf-native.nvim'
-depends = ['telescope.nvim']
-build = 'make'
+# [[plugins]]
+# repo = 'nvim-telescope/telescope-fzf-native.nvim'
+# depends = ['telescope.nvim']
+# build = 'make'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -111,8 +111,8 @@ repo = 'p00f/nvim-ts-rainbow'
 [[plugins]]
 repo = 'JoosepAlviste/nvim-ts-context-commentstring'
 
-[[plugins]]
-repo = 'ulwlu/elly.vim'
+# [[plugins]]
+# repo = 'ulwlu/elly.vim'
 
 [[plugins]]
 repo = 'tpope/vim-rails'
