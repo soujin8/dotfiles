@@ -142,3 +142,7 @@ repo = 'ruanyl/vim-gh-line'
 
 [[plugins]]
 repo = 'gpanders/editorconfig.nvim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
