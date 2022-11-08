@@ -317,6 +317,30 @@ autocmd ColorScheme iceberg highlight CocSuggestFloating      ctermfg=NONE cterm
 autocmd ColorScheme iceberg highlight CocSignatureFloating    ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
 autocmd ColorScheme iceberg highlight CocDiagnosticFloating   ctermfg=NONE ctermbg=238                       guifg=NONE    guibg=#2A2D2F
 
+" vim-quickrun
+nnoremap <silent><leader>r :QuickRun<CR>
+let g:quickrun_config = {
+\   "_" : {
+\       "outputter" : "quickfix",
+\       "runner" : "vimproc",
+\       "runner/vimproc/updatetime" : 60,
+\   },
+\}
+" let g:quickrun_config = {
+" \   "_" : {
+" \       "hook/shabadoubi_touch_henshin/enable" : 1,
+" \       "hook/shabadoubi_touch_henshin/wait" : 20,
+" \       "outputter" : "error",
+" \       "outputter/quickfix/info" : 1,
+" \       "outputter/error/success" : "buffer",
+" \       "outputter/error/error"   : "quickfix",
+" \       "outputter/buffer/split"  : ":botright 6sp",
+" \       "outputter/buffer/close_on_empty" : 1,
+" \       "hook/close_quickfix/enable_exit" : 1,
+" \       "hook/close_buffer/enable_failure" : 1,
+" \   },
+" \}
+
 " import divided file
 set runtimepath+=./
 runtime! *.rc.vim
