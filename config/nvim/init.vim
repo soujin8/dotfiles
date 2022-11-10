@@ -341,6 +341,11 @@ let g:quickrun_config = {
 " \   },
 " \}
 
+" symbols-outlines
+lua <<EOF
+require('symbols-outline').setup()
+EOF
+
 " import divided file
 set runtimepath+=./
 runtime! *.rc.vim

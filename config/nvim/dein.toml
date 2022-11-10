@@ -146,3 +146,11 @@ repo = 'gpanders/editorconfig.nvim'
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
+
+[[plugins]]
+repo = 'osyo-manga/shabadou.vim'
+
+[[plugins]]
+# repo = 'simrat39/symbols-outline.nvim'
+repo = 'rbjorklin/symbols-outline.nvim'
+rev = "fix-outline-detection"
