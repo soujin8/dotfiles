@@ -192,6 +192,25 @@ function select-history() {
 zle -N select-history
 bindkey '^r' select-history
 
+# movファイルをgifに変換 
+# 使い方：$ mov2gif hoge.mov 800 30 # 横幅800px 30FPS
+# refer: https://blog.nasbi.jp/programming/devenv/mov2gif-easy-way/
+function mov2gif() {
+	mov=$1;
+	if [[ -z $2 ]]; then
+		width=300
+	else
+		width=$2
+	fi
+	if [[ -z $3 ]]; then
+		rate=15
+	else
+		rate=$3
+	fi
+	gif=`basename $mov`".gif"
+	ffmpeg -i $mov -vf scale=$width:-1 -pix_fmt rgb24 -r $rate -f gif - | gifsicle --optimize=3 --delay=3 > $gif
+}
+
 # ---------------------------------------------------------
 # plugin
 # ---------------------------------------------------------
