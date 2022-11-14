@@ -321,25 +321,18 @@ autocmd ColorScheme iceberg highlight CocDiagnosticFloating   ctermfg=NONE cterm
 nnoremap <silent><leader>r :QuickRun<CR>
 let g:quickrun_config = {
 \   "_" : {
-\       "outputter" : "quickfix",
+\       "outputter" : "multi:buffer:quickfix",
+\       "outputter/buffer/split" : ":botright 8px",
 \       "runner" : "vimproc",
-\       "runner/vimproc/updatetime" : 60,
+\       "runner/vimproc/updatetime" : 40,
+\       "hook/close_quickfix/enable_hook_loaded" : 1,
+\       "hook/close_quickfix/enable_success" : 1,
+\       "hook/close_buffer/enable_failure" : 1,
+\       "hook/close_buffer/enable_empty_data" : 1,
+\       "hook/inu/enable" : 1,
+\       "hook/inu/wait" : 20,
 \   },
 \}
-" let g:quickrun_config = {
-" \   "_" : {
-" \       "hook/shabadoubi_touch_henshin/enable" : 1,
-" \       "hook/shabadoubi_touch_henshin/wait" : 20,
-" \       "outputter" : "error",
-" \       "outputter/quickfix/info" : 1,
-" \       "outputter/error/success" : "buffer",
-" \       "outputter/error/error"   : "quickfix",
-" \       "outputter/buffer/split"  : ":botright 6sp",
-" \       "outputter/buffer/close_on_empty" : 1,
-" \       "hook/close_quickfix/enable_exit" : 1,
-" \       "hook/close_buffer/enable_failure" : 1,
-" \   },
-" \}
 
 " symbols-outlines
 lua <<EOF
