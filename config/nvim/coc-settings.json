@@ -47,18 +47,29 @@
   "diagnostic.hintSign": "\uf7d6",
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck",
-    "zsh": "shellcheck"
+    "zsh": "shellcheck",
+    "python": "flake8"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "sh": "shfmt",
-    "zsh": "shfmt"
+    "zsh": "shfmt",
+    "python": "black"
   },
   "diagnostic.floatConfig": {
     "border": true,
     "highlight": "CocDiagnosticFloating",
     "winblend": 10
   },
+  "diagnostic-languageserver.formatters": {
+    "black": {
+      "command": "black",
+      "args": ["--quiet", "-"]
+    }
+  },
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
-  "solargraph.autoformat": true
+  "solargraph.autoformat": true,
+
+  "jedi.enable": true,
+  "jedi.startupMessage": false
 }

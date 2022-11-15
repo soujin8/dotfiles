@@ -26,6 +26,7 @@ let g:coc_global_extensions = [
       \ 'coc-rust-analyzer',
       \ 'coc-diagnostic',
       \ 'coc-snippets',
+      \ 'coc-jedi',
       \ ]
 
 let g:coc_node_path = "$HOME/.asdf/installs/nodejs/16.15.0/bin/node"
