@@ -57,6 +57,9 @@ fi
 # export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
 # eval $(/opt/homebrew/bin/brew shellenv)
 
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+
 # ---------------------------------------------------------
 # basic
 # ---------------------------------------------------------
@@ -210,6 +213,29 @@ function mov2gif() {
 	gif=`basename $mov`".gif"
 	ffmpeg -i $mov -vf scale=$width:-1 -pix_fmt rgb24 -r $rate -f gif - | gifsicle --optimize=3 --delay=3 > $gif
 }
+
+# fzf で gcloud 切り替え
+function gcloud-activate() {
+  name="$1"
+  project="$2"
+  echo "gcloud config configurations activate \"${name}\""
+  gcloud config configurations activate "${name}"
+}
+function gx-complete() {
+  _values $(gcloud config configurations list | awk '{print $1}')
+}
+function gx() {
+  name="$1"
+  if [ -z "$name" ]; then
+    line=$(gcloud config configurations list | fzf)
+    name=$(echo "${line}" | awk '{print $1}')
+  else
+    line=$(gcloud config configurations list | grep "$name")
+  fi
+  project=$(echo "${line}" | awk '{print $4}')
+  gcloud-activate "${name}" "${project}"
+}
+compdef gx-complete gx
 
 # ---------------------------------------------------------
 # plugin
