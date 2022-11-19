@@ -154,3 +154,9 @@ repo = 'osyo-manga/shabadou.vim'
 # repo = 'simrat39/symbols-outline.nvim'
 repo = 'rbjorklin/symbols-outline.nvim'
 rev = "fix-outline-detection"
+
+[[plugins]]
+# repo = 'shaunsingh/oxocarbon.nvim'
+# rev = 'fennel'
+# fork された方だと動いた
+repo = 'B4mbus/oxocarbon-lua.nvim'
