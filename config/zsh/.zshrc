@@ -1,20 +1,61 @@
 # ---------------------------------------------------------
-# Zinit's installer
+# alias
 # ---------------------------------------------------------
 
-## Added by Zinit's installer
- # if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
- #     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
- #     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
- #     command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
- #         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
- #         print -P "%F{160}▓▒░ The clone has failed.%f%b"
- # fi
+alias g='git'
+alias c='clear'
+alias k='kubectl'
+alias n='nvim'
+alias ojt='oj t -c "ruby main.rb" -d test'
+alias lazygit='lazygit -ucd ~/dev/github.com/m-88888888/dotfiles/config/lazygit'
+# refer https://zenn.dev/ryuu/scraps/fddefc2ca60f88
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.asdf\/shims:/} brew"
+# macOSでBSD系CLIツール→GNU系に置き換える
+case "$OSTYPE" in
+    darwin*)
+        (( ${+commands[gdate]} )) && alias date='gdate'
+        # (( ${+commands[gls]} )) && alias ls='gls' # exa 使っているので不要
+        (( ${+commands[gmkdir]} )) && alias mkdir='gmkdir'
+        (( ${+commands[gcp]} )) && alias cp='gcp'
+        (( ${+commands[gmv]} )) && alias mv='gmv'
+        (( ${+commands[grm]} )) && alias rm='grm'
+        (( ${+commands[gdu]} )) && alias du='gdu'
+        (( ${+commands[ghead]} )) && alias head='ghead'
+        (( ${+commands[gtail]} )) && alias tail='gtail'
+        (( ${+commands[gsed]} )) && alias sed='gsed'
+        (( ${+commands[ggrep]} )) && alias grep='ggrep'
+        (( ${+commands[gfind]} )) && alias find='gfind'
+        (( ${+commands[gdirname]} )) && alias dirname='gdirname'
+        (( ${+commands[gxargs]} )) && alias xargs='gxargs'
+    ;;
+esac
 
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-## End of Zinit's installer chunk
+# exa
+alias ls='exa --group-directories-first'
+alias la='exa --group-directories-first -a'
+alias ll='exa --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
+alias tree='exa --group-directories-first -T --icons'
+
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+
+  # fallback if snippet not matched (default: self-insert)
+  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
+
+  # if you use zsh's incremental search
+  # bindkey -M isearch ' ' self-insert
+
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+
+  bindkey '^i' zeno-completion
+
+  # fallback if completion not matched
+  # (default: fzf-completion if exists; otherwise expand-or-complete)
+  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
+  bindkey '^r'   zeno-history-selection
+  bindkey '^x^s' zeno-insert-snippet
+  bindkey '^x^f' zeno-ghq-cd
+fi
 
 # ---------------------------------------------------------
 # path
@@ -241,11 +282,9 @@ compdef gx-complete gx
 # plugin
 # ---------------------------------------------------------
 
-### plugins ###
-zinit wait lucid null for \
-    atinit'source "$ZDOTDIR/.zshrc.lazy"' \
-    @'zdharma-continuum/null'
-
 ## prompt
 eval "$(starship init zsh)"
+
+## plugin manager
+eval "$(sheldon source)"
 

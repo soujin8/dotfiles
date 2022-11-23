@@ -24,3 +24,12 @@ export GOPATH="$XDG_DATA_HOME/go"
 export ANDROID_HOME=/Users/hayato.mochizuki/Library/Android/sdk
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
+
+# zeno.zsh
+export ZENO_HOME="$XDG_CONFIG_HOME/zeno"
+export ZENO_GIT_CAT="bat --color=always"
+export ZENO_GIT_TREE="exa --tree"
+
+# tealdeer
+export TEALDEER_CONFIG_DIR="$HOME/tealdeer"
+export TEALDEER_CACHE_DIR="$HOME/tealdeer"
