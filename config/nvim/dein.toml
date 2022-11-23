@@ -160,3 +160,7 @@ rev = "fix-outline-detection"
 # rev = 'fennel'
 # fork された方だと動いた
 repo = 'B4mbus/oxocarbon-lua.nvim'
+
+[[plugins]]
+repo = 'akinsho/toggleterm.nvim'
+rev = '*'

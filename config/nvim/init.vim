@@ -340,6 +340,24 @@ lua <<EOF
 require('symbols-outline').setup()
 EOF
 
+" toggleterm.nvim
+" refer https://zenn.dev/koga1020/articles/524e4c8c80db24
+lua <<EOF
+require('toggleterm').setup()
+local Terminal = require("toggleterm.terminal").Terminal
+local lazygit = Terminal:new({
+	cmd = "lazygit",
+	direction = "float",
+	hidden = true
+})
+
+function _lazygit_toggle()
+	lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+EOF
+
 " import divided file
 set runtimepath+=./
 runtime! *.rc.vim
