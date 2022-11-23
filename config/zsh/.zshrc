@@ -7,6 +7,8 @@ alias c='clear'
 alias k='kubectl'
 alias n='nvim'
 alias ojt='oj t -c "ruby main.rb" -d test'
+alias be='bundle exec'
+alias gcd='g checkout develop && git pull && gh poi'
 alias lazygit='lazygit -ucd ~/dev/github.com/m-88888888/dotfiles/config/lazygit'
 # refer https://zenn.dev/ryuu/scraps/fddefc2ca60f88
 alias brew="env PATH=${PATH/\/Users\/${USER}\/\.asdf\/shims:/} brew"
