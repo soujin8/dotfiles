@@ -85,7 +85,7 @@ eval "$(gh completion -s zsh)"
 # direnv
 eval "$(direnv hook zsh)"
 # asdf
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "uname -m" == "arm64" ]]; then
   . /opt/homebrew/opt/asdf/libexec/asdf.sh
 fi
 
@@ -144,7 +144,6 @@ then
   autoload -Uz compinit
   compinit
 fi
-
 
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
