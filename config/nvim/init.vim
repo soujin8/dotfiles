@@ -168,8 +168,8 @@ let g:lightline = {
 
 
 " Color scheme
-" colorscheme iceberg
-colorscheme oxocarbon-lua
+colorscheme iceberg
+" colorscheme oxocarbon-lua
 
 " vim-markdown
 " 折りたたみしない
