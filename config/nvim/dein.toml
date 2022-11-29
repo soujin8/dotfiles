@@ -131,8 +131,8 @@ repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'sh -c "cd app && yarn install"'
 
-[[plugins]]
-repo = 'thoughtbot/vim-rspec'
+# [[plugins]]
+# repo = 'thoughtbot/vim-rspec'
 
 [[plugins]]
 repo = 'rafamadriz/friendly-snippets'
@@ -155,11 +155,11 @@ repo = 'osyo-manga/shabadou.vim'
 repo = 'rbjorklin/symbols-outline.nvim'
 rev = "fix-outline-detection"
 
-[[plugins]]
+# [[plugins]]
 # repo = 'shaunsingh/oxocarbon.nvim'
 # rev = 'fennel'
 # fork された方だと動いた
-repo = 'B4mbus/oxocarbon-lua.nvim'
+# repo = 'B4mbus/oxocarbon-lua.nvim'
 
 [[plugins]]
 repo = 'akinsho/toggleterm.nvim'
