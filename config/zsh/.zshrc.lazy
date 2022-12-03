@@ -5,6 +5,9 @@ alias k='kubectl'
 alias n='nvim'
 alias ojt='oj t -c "ruby main.rb" -d test'
 
+# refer https://zenn.dev/ryuu/scraps/fddefc2ca60f88
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.asdf\/shims:/} brew"
+
 # macOSでBSD系CLIツール→GNU系に置き換える
 case "$OSTYPE" in
     darwin*)
