@@ -1,5 +1,5 @@
 [memory_usage]
 disabled = false
-threshold = -1
+threshold = 90
 symbol = " "
 style = "bold dimmed green"
