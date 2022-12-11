@@ -3,3 +3,7 @@ disabled = false
 threshold = 90
 symbol = " "
 style = "bold dimmed green"
+
+[gcloud]
+format = 'on [$symbol\($project\)]($style) '
+
