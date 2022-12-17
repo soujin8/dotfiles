@@ -3,7 +3,6 @@
 " extensions list 
 let g:coc_global_extensions = [
       \ 'coc-json',
-      \ 'coc-git',
       \ 'coc-vimlsp',
       \ 'coc-toml',
       \ 'coc-prettier',
