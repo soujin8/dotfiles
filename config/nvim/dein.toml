@@ -1,5 +1,5 @@
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
+# [[plugins]]
+# repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -164,3 +164,7 @@ rev = "fix-outline-detection"
 [[plugins]]
 repo = 'akinsho/toggleterm.nvim'
 rev = '*'
+
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+
