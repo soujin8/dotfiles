@@ -3,6 +3,7 @@
 # ---------------------------------------------------------
 
 alias g='git'
+alias gs='git status'
 alias c='clear'
 alias k='kubectl'
 alias n='nvim'
