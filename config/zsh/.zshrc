@@ -145,6 +145,9 @@ then
   compinit
 fi
 
+## pack
+. $(pack completion --shell zsh)
+
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
