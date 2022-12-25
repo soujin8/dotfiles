@@ -90,6 +90,28 @@ let bufferline = get(g:, 'bufferline', {})
 " Enable/disable close button
 let bufferline.closable = v:false
 
+" Highlight extra whitespaces
+" https://zenn.dev/kawarimidoll/articles/450a1c7754bde6
+" u00A0 ' ' no-break space
+" u2000 ' ' en quad
+" u2001 ' ' em quad
+" u2002 ' ' en space
+" u2003 ' ' em space
+" u2004 ' ' three-per em space
+" u2005 ' ' four-per em space
+" u2006 ' ' six-per em space
+" u2007 ' ' figure space
+" u2008 ' ' punctuation space
+" u2009 ' ' thin space
+" u200A ' ' hair space
+" u200B '​' zero-width space
+" u3000 '　' ideographic (zenkaku) space
+augroup extra-whitespace
+  autocmd!
+  autocmd ColorScheme * highlight default ExtraWhitespace ctermbg=darkmagenta guibg=darkmagenta
+  autocmd VimEnter,WinEnter * call matchadd('ExtraWhitespace', "[\u00A0\u2000-\u200B\u3000]")
+augroup END
+
 " フォルダアイコンを表示
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
@@ -197,10 +219,10 @@ nnoremap <silent> <C-c> :BufferClose<CR>
 
 " vim-fugitive
 nmap <Leader>g [git]
-nnoremap <silent> [git]a :Git add %:p<CR><CR>
-nnoremap <silent> [git]c :Git commit<CR><CR>
-nnoremap <silent> [git]s :Git<CR>
-nnoremap <silent> [git]p :Git push<CR>
+" nnoremap <silent> [git]a :Git add %:p<CR><CR>
+" nnoremap <silent> [git]c :Git commit<CR><CR>
+" nnoremap <silent> [git]s :Git<CR>
+" nnoremap <silent> [git]p :Git push<CR>
 nnoremap <silent> [git]d :Gdiff<CR>
 " nnoremap <silent> [git]l :Gclog<CR>
 " nnoremap <silent> [git]b :Git blame<CR>
@@ -211,6 +233,7 @@ nnoremap <silent> [fern]f :Fern . -drawer<CR>
 nnoremap <silent>sf :Fern .<CR>
 let g:fern#default_hidden=1
 let g:fern#renderer = "nerdfont"
+let g:fern#renderer#nerdfont#indent_markers = 1
 
 function! s:fern_settings() abort
   nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
@@ -237,7 +260,7 @@ nnoremap <Leader>md :MarkdownPreview<CR>
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
-  ignore_install = { "php", "phpdoc", "vim" },
+  ignore_install = { "php", "phpdoc" },
   highlight = {
     enable = true,
     disable = {},
