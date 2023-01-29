@@ -86,8 +86,6 @@ path=(
 
 # direnv
 eval "$(direnv hook zsh)"
-# asdf
-# . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # asdfでruby2.6.5インストールするときにこれらを設定するとできるようになった
 # https://stackoverflow.com/questions/69012676/install-older-ruby-versions-on-a-m1-macbook

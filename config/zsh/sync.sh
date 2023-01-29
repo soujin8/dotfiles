@@ -26,3 +26,5 @@ zshaddhistory() {
 # https://zenn.dev/moya_dev/scraps/26c19e6a5b3927
 # ssh-add --apple-load-keychain
 
+## asdf path
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
