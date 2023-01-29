@@ -21,7 +21,7 @@ github = "romkatv/zsh-defer"
 apply = ["source"]
 
 [templates]
-defer = ""
+defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
 
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
@@ -37,3 +37,12 @@ github = "zsh-users/zsh-completions"
 
 # [plugins.zeno]
 # github = "yuki-yano/zeno.zsh"
+
+[plugins.dotfiles-defers]
+local = "~/.config/zsh"
+use = ["defer.zsh"]
+
+[plugins.dotfiles-sync]
+local = "~/.config/zsh"
+use = ["sync.sh"]
+apply = ["source"]
