@@ -1,4 +1,14 @@
 # ---------------------------------------------------------
+# plugin
+# ---------------------------------------------------------
+
+## prompt
+eval "$(starship init zsh)"
+
+## plugin manager
+eval "$(sheldon source)"
+
+# ---------------------------------------------------------
 # alias
 # ---------------------------------------------------------
 
@@ -82,8 +92,6 @@ path=(
   "$GOPATH/bin"
 )
 
-# GitHub CLI
-eval "$(gh completion -s zsh)"
 # direnv
 eval "$(direnv hook zsh)"
 # asdf
@@ -101,14 +109,14 @@ eval "$(direnv hook zsh)"
 # export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
 # eval $(/opt/homebrew/bin/brew shellenv)
 
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+## fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ---------------------------------------------------------
 # basic
 # ---------------------------------------------------------
 
-# # 履歴保存管理
+# 履歴保存管理
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
@@ -121,6 +129,8 @@ setopt hist_save_no_dups       # 重複するコマンドが保存されると�
 setopt inc_append_history      # 実行時に履歴をファイルにに追加していく
 # https://qiita.com/kwgch/items/445a230b3ae9ec246fcb
 setopt nonomatch
+# automatically change directory when dir name is typed
+setopt auto_cd
 
 zshaddhistory() {
     local line="${1%%$'\n'}"
@@ -130,7 +140,6 @@ zshaddhistory() {
 # MacOSでssh-addを自動で。
 # https://zenn.dev/moya_dev/scraps/26c19e6a5b3927
 # ssh-add --apple-load-keychain
-export TERM=screen-256color
 
 # ---------------------------------------------------------
 # completions
@@ -140,30 +149,30 @@ export TERM=screen-256color
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
 fi
 
 ## pack
 . $(pack completion --shell zsh)
 
 # initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit # 保管機能の有効にして実行
 
 # 補完候補をそのまま探す -> 小文字を大文字に変えて探す -> 大文字を小文字に変えて探す
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
+# zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
 
-# 補完方法毎にグループ化する。
-zstyle ':completion:*' format '%B%F{blue}%d%f%b'
-zstyle ':completion:*' group-name ''
+# # 補完方法毎にグループ化する。
+# zstyle ':completion:*' format '%B%F{blue}%d%f%b'
+# zstyle ':completion:*' group-name ''
 
-# 補完侯補をメニューから選択する。
-# select=2: 補完候補を一覧から選択する。補完候補が2つ以上なければすぐに補完する。
-zstyle ':completion:*:default' menu select=2
+# # 補完侯補をメニューから選択する。
+# # select=2: 補完候補を一覧から選択する。補完候補が2つ以上なければすぐに補完する。
+# zstyle ':completion:*:default' menu select=2
+#
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
-# automatically change directory when dir name is typed
-setopt auto_cd
+# GitHub CLI
+eval "$(gh completion -s zsh)"
 
 # ---------------------------------------------------------
 # function
@@ -190,8 +199,8 @@ function dev() {
 zle -N dev
 bindkey '^g' dev
 
-function reload() {
-  exec $SHELL -l
+nction reload() {
+exec $SHELL -l
 }
 
 function f() {
@@ -283,13 +292,18 @@ function gx() {
 }
 compdef gx-complete gx
 
-# ---------------------------------------------------------
-# plugin
-# ---------------------------------------------------------
-
-## prompt
-eval "$(starship init zsh)"
-
-## plugin manager
-eval "$(sheldon source)"
+function zsh-startuptime() {
+  local total_msec=0
+  local msec
+  local i
+  for i in $(seq 1 10); do
+    msec=$((TIMEFMT='%mE'; time zsh -i -c exit) 2>/dev/stdout >/dev/null)
+    msec=$(echo $msec | tr -d "ms")
+    echo "${(l:2:)i}: ${msec} [ms]"
+    total_msec=$(( $total_msec + $msec ))
+  done
+  local average_msec
+  average_msec=$(( ${total_msec} / 10 ))
+  echo "\naverage: ${average_msec} [ms]"
+}
 

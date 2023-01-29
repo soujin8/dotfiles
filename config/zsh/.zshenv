@@ -33,3 +33,6 @@ export ZENO_GIT_TREE="exa --tree"
 # tealdeer
 export TEALDEER_CONFIG_DIR="$HOME/tealdeer"
 export TEALDEER_CACHE_DIR="$HOME/tealdeer"
+
+# TrueColor
+export TERM=screen-256color
