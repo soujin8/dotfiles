@@ -36,3 +36,6 @@ export TEALDEER_CACHE_DIR="$HOME/tealdeer"
 
 # TrueColor
 export TERM=screen-256color
+
+# disable auto update on Homebrew
+export HOMEBREW_NO_AUTO_UPDATE=1
