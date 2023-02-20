@@ -10,6 +10,9 @@
 #
 # See the documentation for more https://github.com/rossmacarthur/sheldon#readme
 
+# 参考
+# https://ktrysmt.github.io/blog/migrate-zinit-to-sheldon/
+
 shell = "zsh"
 
 apply = ["defer"]
