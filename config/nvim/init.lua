@@ -374,6 +374,8 @@ vim.keymap.set("n", "<Leader>md", ":PeekOpen<CR>")
 
 require('colorizer').setup()
 require("diffview").setup({})
+vim.keymap.set('n', 'df', ':DiffviewFileHistory %<CR>', {})
+vim.keymap.set('n', 'cdf', ':DiffviewClose<CR>', {})
 
 require('coc')
 
