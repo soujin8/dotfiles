@@ -1,0 +1,470 @@
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  " lightline.vim
+  " WORKDIRからの相対パスを表示する
+  function! LightlineFilename()
+    let root = fnamemodify(get(b:, 'git_dir'), ':h')
+    let path = expand('%:p')
+    if path[:len(root)-1] ==# root
+      return path[len(root)+1:]
+    endif
+    return expand('%')
+  endfunction
+
+  let g:lightline = {
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'FugitiveHead',
+        \   'filename': 'LightlineFilename',
+        \ },
+        \ }
+'''
+
+[[plugins]]
+repo = 'mtdl9/vim-log-highlighting'
+on_ft = ['log']
+
+# [[plugins]]
+# repo = 'tpozpe/vim-fugitive'
+# hook_add = '''
+#   map <Leader>g [fugitive]
+#   " nnoremap <silent> [fugitive]a :Git add %:p<CR><CR>
+#   " nnoremap <silent> [fugitive]c :Git commit<CR><CR>
+#   nnoremap <silent> [fugitive]s :Git<CR>
+#   " nnoremap <silent> [fugitive]p :Git push<CR>
+#   nnoremap <silent> [fugitive]d :Gdiff<CR>
+#   " nnoremap <silent> [fugitive]l :Gclog<CR>
+#   nnoremap <silent> [fugitive]b :Git blame<CR>
+# '''
+# on_cmd = ['Gdiff']
+
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+on_i = 1
+
+[[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+  " フォルダアイコンを表示
+  let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+  let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+  " after a re-source, fix syntax matching issues (concealing brackets):
+  if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+  endif
+'''
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+
+[[plugins]]
+repo = 'romgrk/barbar.nvim'
+depends = 'nvim-web-devicons'
+hook_add = '''
+  " NOTE: If barbar's option dict isn't created yet, create it
+  let bufferline = get(g:, 'bufferline', {})
+  " Enable/disable close button
+  let bufferline.closable = v:false
+
+  " barbar.nvim
+  nnoremap <silent> <C-j> :BufferPrevious<CR>
+  nnoremap <silent> <C-k> :BufferNext<CR>
+  nnoremap <silent> <C-c> :BufferClose<CR>
+
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_post_source = '''
+  nmap <Leader>d [fern]
+  nnoremap <silent> [fern]f :Fern . -drawer<CR>
+  nnoremap <silent>sf :Fern .<CR>
+  let g:fern#default_hidden=1
+  let g:fern#renderer = "nerdfont"
+  let g:fern#renderer#nerdfont#indent_markers = 1
+
+  function! s:fern_settings() abort
+    nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
+    nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
+    nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
+    nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
+  endfunction
+
+  augroup fern-settings
+    autocmd!
+    autocmd FileType fern call s:fern_settings()
+  augroup END
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = 'fern.vim'
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+depends = 'fern.vim'
+
+[[plugins]]
+repo = 'yuki-yano/fern-preview.vim'
+depends = 'fern.vim'
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+hook_post_update = 'TSUpdate'
+
+[[plugins]]
+repo = 'machakann/vim-sandwich'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'windwp/nvim-ts-autotag'
+
+[[plugins]] # color codeのpreview
+repo = 'gorodinskiy/vim-coloresque'
+
+[[plugins]]
+repo = 'p00f/nvim-ts-rainbow'
+
+[[plugins]]
+repo = 'JoosepAlviste/nvim-ts-context-commentstring'
+
+[[plugins]]
+repo = 'nicwest/vim-camelsnek'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+  nnoremap <silent><leader>r :QuickRun<CR>
+  let g:quickrun_config = {
+  \   "_" : {
+  \       "outputter" : "multi:buffer:quickfix",
+  \       "outputter/buffer/split" : ":botright 8px",
+  \       "runner" : "vimproc",
+  \       "runner/vimproc/updatetime" : 40,
+  \       "hook/close_quickfix/enable_hook_loaded" : 1,
+  \       "hook/close_quickfix/enable_success" : 1,
+  \       "hook/close_buffer/enable_failure" : 1,
+  \       "hook/close_buffer/enable_empty_data" : 1,
+  \       "hook/inu/enable" : 1,
+  \       "hook/inu/wait" : 20,
+  \   },
+  \}
+
+'''
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'
+hook_add = '''
+  nnoremap <Leader>md :MarkdownPreview<CR>
+'''
+
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
+
+# [[plugins]]
+# repo = 'ruanyl/vim-gh-line'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'osyo-manga/shabadou.vim'
+
+[[plugins]]
+repo = 'akinsho/toggleterm.nvim'
+rev = '*'
+
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'sindrets/diffview.nvim'
+depends = ['plenary.nvim']
+hook_add = '''
+lua << EOF
+local actions = require("diffview.actions")
+
+require("diffview").setup({
+  diff_binaries = false,    -- Show diffs for binaries
+  enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
+  git_cmd = { "git" },      -- The git executable followed by default args.
+  use_icons = true,         -- Requires nvim-web-devicons
+  show_help_hints = true,   -- Show hints for how to open the help panel
+  watch_index = true,       -- Update views and index buffers when the git index changes.
+  icons = {                 -- Only applies when use_icons is true.
+    folder_closed = "",
+    folder_open = "",
+  },
+  signs = {
+    fold_closed = "",
+    fold_open = "",
+    done = "✓",
+  },
+  view = {
+    -- Configure the layout and behavior of different types of views.
+    -- Available layouts:
+    --  'diff1_plain'
+    --    |'diff2_horizontal'
+    --    |'diff2_vertical'
+    --    |'diff3_horizontal'
+    --    |'diff3_vertical'
+    --    |'diff3_mixed'
+    --    |'diff4_mixed'
+    -- For more info, see ':h diffview-config-view.x.layout'.
+    default = {
+      -- Config for changed files, and staged files in diff views.
+      layout = "diff2_horizontal",
+      winbar_info = false,          -- See ':h diffview-config-view.x.winbar_info'
+    },
+    merge_tool = {
+      -- Config for conflicted files in diff views during a merge or rebase.
+      layout = "diff3_horizontal",
+      disable_diagnostics = true,   -- Temporarily disable diagnostics for conflict buffers while in the view.
+      winbar_info = true,           -- See ':h diffview-config-view.x.winbar_info'
+    },
+    file_history = {
+      -- Config for changed files in file history views.
+      layout = "diff2_horizontal",
+      winbar_info = false,          -- See ':h diffview-config-view.x.winbar_info'
+    },
+  },
+  file_panel = {
+    listing_style = "tree",             -- One of 'list' or 'tree'
+    tree_options = {                    -- Only applies when listing_style is 'tree'
+      flatten_dirs = true,              -- Flatten dirs that only contain one single dir
+      folder_statuses = "only_folded",  -- One of 'never', 'only_folded' or 'always'.
+    },
+    win_config = {                      -- See ':h diffview-config-win_config'
+      position = "left",
+      width = 35,
+      win_opts = {}
+    },
+  },
+  file_history_panel = {
+    log_options = {   -- See ':h diffview-config-log_options'
+      git = {
+        single_file = {
+          diff_merges = "combined",
+        },
+        multi_file = {
+          diff_merges = "first-parent",
+        },
+      },
+      hg = {
+        single_file = {},
+        multi_file = {},
+      },
+    },
+    win_config = {    -- See ':h diffview-config-win_config'
+      position = "bottom",
+      height = 16,
+      win_opts = {}
+    },
+  },
+  commit_log_panel = {
+    win_config = {   -- See ':h diffview-config-win_config'
+      win_opts = {},
+    }
+  },
+  default_args = {    -- Default args prepended to the arg-list for the listed commands
+    DiffviewOpen = {},
+    DiffviewFileHistory = {},
+  },
+  hooks = {},         -- See ':h diffview-config-hooks'
+  keymaps = {
+    disable_defaults = false, -- Disable the default keymaps
+    view = {
+      -- The `view` bindings are active in the diff buffers, only when the current
+      -- tabpage is a Diffview.
+      { "n", "<tab>",      actions.select_next_entry,          { desc = "Open the diff for the next file" } },
+      { "n", "<s-tab>",    actions.select_prev_entry,          { desc = "Open the diff for the previous file" } },
+      { "n", "gf",         actions.goto_file,                  { desc = "Open the file in a new split in the previous tabpage" } },
+      { "n", "<C-w><C-f>", actions.goto_file_split,            { desc = "Open the file in a new split" } },
+      { "n", "<C-w>gf",    actions.goto_file_tab,              { desc = "Open the file in a new tabpage" } },
+      { "n", "<leader>e",  actions.focus_files,                { desc = "Bring focus to the file panel" } },
+      { "n", "<leader>b",  actions.toggle_files,               { desc = "Toggle the file panel." } },
+      { "n", "g<C-x>",     actions.cycle_layout,               { desc = "Cycle through available layouts." } },
+      { "n", "[x",         actions.prev_conflict,              { desc = "In the merge-tool: jump to the previous conflict" } },
+      { "n", "]x",         actions.next_conflict,              { desc = "In the merge-tool: jump to the next conflict" } },
+      { "n", "<leader>co", actions.conflict_choose("ours"),    { desc = "Choose the OURS version of a conflict" } },
+      { "n", "<leader>ct", actions.conflict_choose("theirs"),  { desc = "Choose the THEIRS version of a conflict" } },
+      { "n", "<leader>cb", actions.conflict_choose("base"),    { desc = "Choose the BASE version of a conflict" } },
+      { "n", "<leader>ca", actions.conflict_choose("all"),     { desc = "Choose all the versions of a conflict" } },
+      { "n", "dx",         actions.conflict_choose("none"),    { desc = "Delete the conflict region" } },
+    },
+    diff1 = {
+      -- Mappings in single window diff layouts
+      { "n", "g?", actions.help({ "view", "diff1" }), { desc = "Open the help panel" } },
+    },
+    diff2 = {
+      -- Mappings in 2-way diff layouts
+      { "n", "g?", actions.help({ "view", "diff2" }), { desc = "Open the help panel" } },
+    },
+    diff3 = {
+      -- Mappings in 3-way diff layouts
+      { { "n", "x" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
+      { { "n", "x" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
+      { "n",          "g?",   actions.help({ "view", "diff3" }),  { desc = "Open the help panel" } },
+    },
+    diff4 = {
+      -- Mappings in 4-way diff layouts
+      { { "n", "x" }, "1do",  actions.diffget("base"),            { desc = "Obtain the diff hunk from the BASE version of the file" } },
+      { { "n", "x" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
+      { { "n", "x" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
+      { "n",          "g?",   actions.help({ "view", "diff4" }),  { desc = "Open the help panel" } },
+    },
+    file_panel = {
+      { "n", "j",             actions.next_entry,           { desc = "Bring the cursor to the next file entry" } },
+      { "n", "<down>",        actions.next_entry,           { desc = "Bring the cursor to the next file entry" } },
+      { "n", "k",             actions.prev_entry,           { desc = "Bring the cursor to the previous file entry." } },
+      { "n", "<up>",          actions.prev_entry,           { desc = "Bring the cursor to the previous file entry." } },
+      { "n", "<cr>",          actions.select_entry,         { desc = "Open the diff for the selected entry." } },
+      { "n", "o",             actions.select_entry,         { desc = "Open the diff for the selected entry." } },
+      { "n", "<2-LeftMouse>", actions.select_entry,         { desc = "Open the diff for the selected entry." } },
+      { "n", "-",             actions.toggle_stage_entry,   { desc = "Stage / unstage the selected entry." } },
+      { "n", "S",             actions.stage_all,            { desc = "Stage all entries." } },
+      { "n", "U",             actions.unstage_all,          { desc = "Unstage all entries." } },
+      { "n", "X",             actions.restore_entry,        { desc = "Restore entry to the state on the left side." } },
+      { "n", "L",             actions.open_commit_log,      { desc = "Open the commit log panel." } },
+      { "n", "<c-b>",         actions.scroll_view(-0.25),   { desc = "Scroll the view up" } },
+      { "n", "<c-f>",         actions.scroll_view(0.25),    { desc = "Scroll the view down" } },
+      { "n", "<tab>",         actions.select_next_entry,    { desc = "Open the diff for the next file" } },
+      { "n", "<s-tab>",       actions.select_prev_entry,    { desc = "Open the diff for the previous file" } },
+      { "n", "gf",            actions.goto_file,            { desc = "Open the file in a new split in the previous tabpage" } },
+      { "n", "<C-w><C-f>",    actions.goto_file_split,      { desc = "Open the file in a new split" } },
+      { "n", "<C-w>gf",       actions.goto_file_tab,        { desc = "Open the file in a new tabpage" } },
+      { "n", "i",             actions.listing_style,        { desc = "Toggle between 'list' and 'tree' views" } },
+      { "n", "f",             actions.toggle_flatten_dirs,  { desc = "Flatten empty subdirectories in tree listing style." } },
+      { "n", "R",             actions.refresh_files,        { desc = "Update stats and entries in the file list." } },
+      { "n", "<leader>e",     actions.focus_files,          { desc = "Bring focus to the file panel" } },
+      { "n", "<leader>b",     actions.toggle_files,         { desc = "Toggle the file panel" } },
+      { "n", "g<C-x>",        actions.cycle_layout,         { desc = "Cycle available layouts" } },
+      { "n", "[x",            actions.prev_conflict,        { desc = "Go to the previous conflict" } },
+      { "n", "]x",            actions.next_conflict,        { desc = "Go to the next conflict" } },
+      { "n", "g?",            actions.help("file_panel"),   { desc = "Open the help panel" } },
+    },
+    file_history_panel = {
+      { "n", "g!",            actions.options,                     { desc = "Open the option panel" } },
+      { "n", "<C-A-d>",       actions.open_in_diffview,            { desc = "Open the entry under the cursor in a diffview" } },
+      { "n", "y",             actions.copy_hash,                   { desc = "Copy the commit hash of the entry under the cursor" } },
+      { "n", "L",             actions.open_commit_log,             { desc = "Show commit details" } },
+      { "n", "zR",            actions.open_all_folds,              { desc = "Expand all folds" } },
+      { "n", "zM",            actions.close_all_folds,             { desc = "Collapse all folds" } },
+      { "n", "j",             actions.next_entry,                  { desc = "Bring the cursor to the next file entry" } },
+      { "n", "<down>",        actions.next_entry,                  { desc = "Bring the cursor to the next file entry" } },
+      { "n", "k",             actions.prev_entry,                  { desc = "Bring the cursor to the previous file entry." } },
+      { "n", "<up>",          actions.prev_entry,                  { desc = "Bring the cursor to the previous file entry." } },
+      { "n", "<cr>",          actions.select_entry,                { desc = "Open the diff for the selected entry." } },
+      { "n", "o",             actions.select_entry,                { desc = "Open the diff for the selected entry." } },
+      { "n", "<2-LeftMouse>", actions.select_entry,                { desc = "Open the diff for the selected entry." } },
+      { "n", "<c-b>",         actions.scroll_view(-0.25),          { desc = "Scroll the view up" } },
+      { "n", "<c-f>",         actions.scroll_view(0.25),           { desc = "Scroll the view down" } },
+      { "n", "<tab>",         actions.select_next_entry,           { desc = "Open the diff for the next file" } },
+      { "n", "<s-tab>",       actions.select_prev_entry,           { desc = "Open the diff for the previous file" } },
+      { "n", "gf",            actions.goto_file,                   { desc = "Open the file in a new split in the previous tabpage" } },
+      { "n", "<C-w><C-f>",    actions.goto_file_split,             { desc = "Open the file in a new split" } },
+      { "n", "<C-w>gf",       actions.goto_file_tab,               { desc = "Open the file in a new tabpage" } },
+      { "n", "<leader>e",     actions.focus_files,                 { desc = "Bring focus to the file panel" } },
+      { "n", "<leader>b",     actions.toggle_files,                { desc = "Toggle the file panel" } },
+      { "n", "g<C-x>",        actions.cycle_layout,                { desc = "Cycle available layouts" } },
+      { "n", "g?",            actions.help("file_history_panel"),  { desc = "Open the help panel" } },
+    },
+    option_panel = {
+      { "n", "<tab>", actions.select_entry,          { desc = "Change the current option" } },
+      { "n", "q",     actions.close,                 { desc = "Close the panel" } },
+      { "n", "g?",    actions.help("option_panel"),  { desc = "Open the help panel" } },
+    },
+    help_panel = {
+      { "n", "q",     actions.close,  { desc = "Close help menu" } },
+      { "n", "<esc>", actions.close,  { desc = "Close help menu" } },
+    },
+  },
+})
+EOF
+'''
+
+# [[plugins]]
+# repo = 'nvim-telescope/telescope.nvim'
+# depends = ['plenary.nvim']
+
+# [[plugins]]
+# repo = 'nvim-telescope/telescope-fzf-native.nvim'
+# depends = ['telescope.nvim']
+# build = 'make'
+# hook_add = '''
+#   nmap <leader>f [telescope]
+#   xmap <leader>f [telescope]
+
+#   nnoremap <silent> [telescope]f :Telescope find_files<CR>
+#   nnoremap <silent> [telescope]p :Telescope find_files hidden=true<CR>
+#   nnoremap <silent> [telescope]gr <cmd>Telescope grep_string<cr>
+#   nnoremap <silent> [telescope]gs <cmd>Telescope git_status<cr>
+#   nnoremap <silent> [telescope]gp <cmd>Telescope live_grep<cr>
+#   nnoremap <silent> [telescope]b <cmd>Telescope buffers<cr>
+#   nnoremap <silent> [telescope]o <cmd>Telescope oldfiles<cr>
+#   nnoremap <silent> [telescope]g <cmd>Telescope git_branches<cr>
+#   nnoremap <silent> [telescope]h <cmd>Telescope help_tags<cr>
+# '''
+
+# [[plugins]]
+# repo = 'shaunsingh/oxocarbon.nvim'
+# rev = 'fennel'
+# fork された方だと動いた
+# repo = 'B4mbus/oxocarbon-lua.nvim'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+# [[plugins]]
+# repo = 'thoughtbot/vim-rspec'
+# hook_add = '''
+#   map <Leader>t :call RunCurrentSpecFile()<CR>
+#   map <Leader>s :call RunNearestSpec()<CR>
+#   map <Leader>l :call RunLastSpec()<CR>
+#   map <Leader>a :call RunAllSpecs()<CR>
+# '''
+
+# treesitterカスタマイズしたい時に使う
+# [[plugins]]
+# repo = 'nvim-treesitter/playground'
+
+# [[plugins]]
+# repo = 'Shougo/unite.vim'
+

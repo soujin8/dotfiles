@@ -208,11 +208,6 @@ EOF
 "require('telescope').load_extension('fzf')
 "EOF
 
-" symbols-outlines
-lua <<EOF
-require('symbols-outline').setup()
-EOF
-
 " toggleterm.nvim
 " refer https://zenn.dev/koga1020/articles/524e4c8c80db24
 lua <<EOF
