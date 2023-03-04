@@ -1,5 +1,3 @@
--- vim.cmd("autocmd!")
-
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
@@ -95,7 +93,7 @@ require("lazy").setup({
   -- colorschema
   'cocopon/iceberg.vim',
   -- LSP
-  {'neoclide/coc.nvim', branch = 'release'},
+  { 'neoclide/coc.nvim',                      branch = 'release' },
   -- log highlight
   'mtdl9/vim-log-highlighting',
   'tpope/vim-commentary',
@@ -106,21 +104,22 @@ require("lazy").setup({
   -- manage tabline
   -- {'romgrk/barbar.nvim', requires = 'kyazdani42/nvim-web-devicons'},
   -- using packer.nvim
-  {'akinsho/bufferline.nvim', tag = "v3.3.0", dependencies = {'kyazdani42/nvim-web-devicons'}},
-  -- filer
-  'lambdalisue/fern.vim',
-  {'lambdalisue/fern-renderer-nerdfont.vim', dependencies = {'lambdalisue/fern.vim'}},
-  {'lambdalisue/nerdfont.vim', dependencies = 'lambdalisue/fern.vim'},
+  { 'akinsho/bufferline.nvim',                tag = "v3.3.0",                            dependencies = { 'kyazdani42/nvim-web-devicons' } },
+  -- filer plugin
+  { 'lambdalisue/fern.vim',                   cmd = 'Fern *' },
+  { 'lambdalisue/fern-renderer-nerdfont.vim', dependencies = { 'lambdalisue/fern.vim' }, cmd = 'Fern *' },
+  { 'lambdalisue/nerdfont.vim',               dependencies = 'lambdalisue/fern.vim',     cmd = 'Fern *' },
   -- ecosystem to develop with deno
   'vim-denops/denops.vim',
   -- syntaxhilight
-  {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+  { 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate',                             event = 'BufRead' },
+  -- ensure_installed = {"ruby","css","html","javascript","typescript","python","rust","go","sql","yaml","vue","tsx","terraform","scss","markdown","lua","vim","bash","json","toml"},
   -- treesitter plugin
-  'windwp/nvim-ts-autotag',
+  { 'windwp/nvim-ts-autotag',                      dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead' },
   -- A Neovim plugin for setting the commentstring option based on the cursor location in the file. The location is checked via treesitter queries.
-  'JoosepAlviste/nvim-ts-context-commentstring',
+  { 'JoosepAlviste/nvim-ts-context-commentstring', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead' },
   {
-	"windwp/nvim-autopairs",
+    "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   },
   -- color preview
@@ -131,18 +130,18 @@ require("lazy").setup({
   'nicwest/vim-camelsnek',
   'thinca/vim-quickrun',
   -- async quickrun
-  {'Shougo/vimproc.vim', run = 'make'},
+  { 'Shougo/vimproc.vim', run = 'make' },
   -- quickrun plugin
   'osyo-manga/shabadou.vim',
   -- {'iamcco/markdown-preview.nvim', run = 'sh -c "cd app && yarn install"'},
   -- markfown preview
-  { 'toppair/peek.nvim', run = 'deno task --quiet build:fast' },
+  { 'toppair/peek.nvim',  run = 'deno task --quiet build:fast' },
   'akinsho/toggleterm.nvim',
   -- git plugin
-  'lewis6991/gitsigns.nvim',
+  { 'lewis6991/gitsigns.nvim', event = 'BufNewFile, BufRead' },
   -- common utilities
   'nvim-lua/plenary.nvim',
-  {'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim'},
+  { 'sindrets/diffview.nvim',  dependencies = 'nvim-lua/plenary.nvim' },
   'tpope/vim-rails',
   -- statusline
   {
@@ -151,9 +150,17 @@ require("lazy").setup({
   },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    dependencies = { {'nvim-lua/plenary.nvim'} }
+    dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
-  {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+  {
+    'mvllow/modes.nvim',
+    tag = 'v0.2.1',
+    config = function()
+      require('modes').setup()
+    end
+  },
+  { "lukas-reineke/indent-blankline.nvim" },
 })
 -- lazy.nvim config END
 
@@ -165,8 +172,8 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -181,18 +188,18 @@ require('lualine').setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
@@ -202,7 +209,7 @@ require('lualine').setup {
   extensions = {}
 }
 
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   -- ensure_installed = "all",
   -- ensure_installed = {"ruby","css","html","javascript","typescript","python","rust","go","sql","yaml","vue","tsx","terraform","scss","markdown","lua","vim","bash","json","toml"},
   -- sync_install = false,
@@ -223,11 +230,11 @@ require'nvim-treesitter.configs'.setup {
     -- termcolors = {} -- table of colour name strings
     -- disable slow treesitter highlight for large files
     disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
+      local max_filesize = 100 * 1024 -- 100 KB
+      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+      if ok and stats and stats.size > max_filesize then
+        return true
+      end
     end,
   },
   context_commentstring = {
@@ -239,17 +246,17 @@ require'nvim-treesitter.configs'.setup {
 require('toggleterm').setup()
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({
-	cmd = "lazygit",
-	direction = "float",
-	hidden = true
+  cmd = "lazygit",
+  direction = "float",
+  hidden = true
 })
 
 function _lazygit_toggle()
-	lazygit:toggle()
+  lazygit:toggle()
 end
 
-require('gitsigns').setup{
-  signs = {
+require('gitsigns').setup {
+  signs                        = {
     add          = { text = '│' },
     change       = { text = '│' },
     delete       = { text = '_' },
@@ -257,28 +264,28 @@ require('gitsigns').setup{
     changedelete = { text = '~' },
     untracked    = { text = '┆' },
   },
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
+  signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
+  numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir                 = {
     interval = 1000,
     follow_files = true
   },
-  attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
+  attach_to_untracked          = true,
+  current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts      = {
     virt_text = true,
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
     delay = 1000,
     ignore_whitespace = false,
   },
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  max_file_length = 40000, -- Disable if file is longer than this (in lines)
-  preview_config = {
+  sign_priority                = 6,
+  update_debounce              = 100,
+  status_formatter             = nil, -- Use default
+  max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+  preview_config               = {
     -- Options passed to nvim_open_win
     border = 'single',
     style = 'minimal',
@@ -286,10 +293,10 @@ require('gitsigns').setup{
     row = 0,
     col = 1
   },
-  yadm = {
+  yadm                         = {
     enable = false
   },
-  on_attach = function(bufnr)
+  on_attach                    = function(bufnr)
     local gs = package.loaded.gitsigns
 
     local function map(mode, l, r, opts)
@@ -303,33 +310,33 @@ require('gitsigns').setup{
       if vim.wo.diff then return ']c' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
-    end, {expr=true})
+    end, { expr = true })
 
     map('n', '[c', function()
       if vim.wo.diff then return '[c' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
-    end, {expr=true})
+    end, { expr = true })
 
     -- Actions
-    map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+    map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+    map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
     map('n', '<leader>hS', gs.stage_buffer)
     map('n', '<leader>hu', gs.undo_stage_hunk)
     map('n', '<leader>hR', gs.reset_buffer)
     map('n', '<leader>hp', gs.preview_hunk)
-    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>hb', function() gs.blame_line { full = true } end)
     map('n', '<leader>tb', gs.toggle_current_line_blame)
     map('n', '<leader>hd', gs.diffthis)
     map('n', '<leader>hd', function() gs.diffthis('~') end)
     map('n', '<leader>td', gs.toggle_deleted)
 
     -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
 
-require("bufferline").setup{}
+require("bufferline").setup {}
 
 for k, v in pairs({
   --toggleterm
@@ -374,19 +381,19 @@ vim.keymap.set("n", "<Leader>md", ":PeekOpen<CR>")
 
 require('colorizer').setup()
 require("diffview").setup({})
-vim.keymap.set('n', 'df', ':DiffviewFileHistory %<CR>', {})
-vim.keymap.set('n', 'cdf', ':DiffviewClose<CR>', {})
+vim.keymap.set('n', 'fdf', ':DiffviewFileHistory %<CR>', {})
+vim.keymap.set('n', 'fcdf', ':DiffviewClose<CR>', {})
 
 require('coc')
 
-require('telescope').setup{
+require('telescope').setup {
   extensions = {
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
+      fuzzy = true, -- false will only do exact matching
       override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
     }
   }
 }
@@ -398,3 +405,19 @@ vim.keymap.set('n', '<leader>fgs', builtin.git_status, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+require('modes').setup({
+  colors = {
+    copy = '#FFEE55',
+    delete = '#DC669B',
+    insert = '#55AAEE',
+    visual = '#DD5522',
+  },
+})
+
+-- indent_blankline config
+vim.opt.list = true
+vim.opt.listchars:append "eol:↴"
+require("indent_blankline").setup {
+  show_end_of_line = true,
+}
