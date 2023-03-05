@@ -93,65 +93,68 @@ require("lazy").setup({
   -- colorschema
   'cocopon/iceberg.vim',
   -- LSP
-  { 'neoclide/coc.nvim',                      branch = 'release' },
+  { 'neoclide/coc.nvim',                           branch = 'release' },
   -- log highlight
   'mtdl9/vim-log-highlighting',
   'tpope/vim-commentary',
+  'tpope/vim-rails',
   -- util markfown table mode
   'dhruvasagar/vim-table-mode',
   -- file icons
-  'kyazdani42/nvim-web-devicons',
-  -- manage tabline
-  -- {'romgrk/barbar.nvim', requires = 'kyazdani42/nvim-web-devicons'},
+  -- 'nvim-tree/nvim-web-devicons',
   -- using packer.nvim
-  { 'akinsho/bufferline.nvim',                tag = "v3.3.0",                            dependencies = { 'kyazdani42/nvim-web-devicons' } },
+  { 'akinsho/bufferline.nvim',                     tag = "v3.3.0",                                   dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }, event = 'BufRead' },
   -- filer plugin
-  { 'lambdalisue/fern.vim',                   cmd = 'Fern *' },
-  { 'lambdalisue/fern-renderer-nerdfont.vim', dependencies = { 'lambdalisue/fern.vim' }, cmd = 'Fern *' },
-  { 'lambdalisue/nerdfont.vim',               dependencies = 'lambdalisue/fern.vim',     cmd = 'Fern *' },
+  { 'lambdalisue/fern.vim',                        cmd = 'Fern *' },
+  { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' },        cmd = 'Fern *' },
+  { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim',            cmd = 'Fern *' },
   -- ecosystem to develop with deno
-  'vim-denops/denops.vim',
+  { 'vim-denops/denops.vim',                       lazy = false },
   -- syntaxhilight
-  { 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate',                             event = 'BufRead' },
+  { 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate',                              event = 'BufRead' },
   -- treesitter plugin
   { 'windwp/nvim-ts-autotag',                      dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead' },
   -- A Neovim plugin for setting the commentstring option based on the cursor location in the file. The location is checked via treesitter queries.
   { 'JoosepAlviste/nvim-ts-context-commentstring', dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead' },
   {
     "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
+    config = function() require("nvim-autopairs").setup {} end,
+    event = 'ModeChanged'
   },
   -- color preview
-  'norcalli/nvim-colorizer.lua',
+  { 'norcalli/nvim-colorizer.lua', event = 'BufRead' },
   -- surroundings operator, textobject
-  'machakann/vim-sandwich',
+  { 'machakann/vim-sandwich',      event = 'ModeChanged' },
   -- to camelcase or snakecase etc...
   'nicwest/vim-camelsnek',
+  -- quickrun
   'thinca/vim-quickrun',
   -- async quickrun
-  { 'Shougo/vimproc.vim', run = 'make' },
+  { 'Shougo/vimproc.vim',      run = 'make' },
   -- quickrun plugin
-  'osyo-manga/shabadou.vim',
+  { 'osyo-manga/shabadou.vim', dependencies = 'thinca/vim-quickrun' },
   -- {'iamcco/markdown-preview.nvim', run = 'sh -c "cd app && yarn install"'},
   -- markfown preview
-  { 'toppair/peek.nvim',  run = 'deno task --quiet build:fast' },
+  { 'toppair/peek.nvim',       run = 'deno task --quiet build:fast' },
   'akinsho/toggleterm.nvim',
   -- git plugin
   { 'lewis6991/gitsigns.nvim', event = 'BufNewFile, BufRead' },
   -- common utilities
   'nvim-lua/plenary.nvim',
-  { 'sindrets/diffview.nvim',  dependencies = 'nvim-lua/plenary.nvim' },
-  'tpope/vim-rails',
+  { 'sindrets/diffview.nvim',  dependencies = 'nvim-lua/plenary.nvim', cmd = 'DiffviewFileHistory *' },
   -- statusline
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
   },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
   {
     'mvllow/modes.nvim',
     tag = 'v0.2.1',
@@ -159,7 +162,7 @@ require("lazy").setup({
       require('modes').setup()
     end
   },
-  { "lukas-reineke/indent-blankline.nvim" },
+  { "lukas-reineke/indent-blankline.nvim", event = 'BufRead' },
 })
 -- lazy.nvim config END
 
@@ -210,7 +213,7 @@ require('lualine').setup {
 
 require 'nvim-treesitter.configs'.setup {
   -- ensure_installed = "all",
-  ensure_installed = {"ruby","css","html","javascript","typescript","python","rust","go","sql","yaml","vue","tsx","terraform","scss","markdown","lua","vim","bash","json","toml"},
+  ensure_installed = { "ruby", "css", "html", "javascript", "typescript", "python", "rust", "go", "sql", "yaml", "vue", "tsx", "terraform", "scss", "markdown", "lua", "vim", "bash", "json", "toml" },
   -- sync_install = false,
   -- auto_install = true,
   highlight = {
