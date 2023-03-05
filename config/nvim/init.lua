@@ -113,7 +113,6 @@ require("lazy").setup({
   'vim-denops/denops.vim',
   -- syntaxhilight
   { 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate',                             event = 'BufRead' },
-  -- ensure_installed = {"ruby","css","html","javascript","typescript","python","rust","go","sql","yaml","vue","tsx","terraform","scss","markdown","lua","vim","bash","json","toml"},
   -- treesitter plugin
   { 'windwp/nvim-ts-autotag',                      dependencies = 'nvim-treesitter/nvim-treesitter', event = 'BufRead' },
   -- A Neovim plugin for setting the commentstring option based on the cursor location in the file. The location is checked via treesitter queries.
@@ -211,7 +210,7 @@ require('lualine').setup {
 
 require 'nvim-treesitter.configs'.setup {
   -- ensure_installed = "all",
-  -- ensure_installed = {"ruby","css","html","javascript","typescript","python","rust","go","sql","yaml","vue","tsx","terraform","scss","markdown","lua","vim","bash","json","toml"},
+  ensure_installed = {"ruby","css","html","javascript","typescript","python","rust","go","sql","yaml","vue","tsx","terraform","scss","markdown","lua","vim","bash","json","toml"},
   -- sync_install = false,
   -- auto_install = true,
   highlight = {
