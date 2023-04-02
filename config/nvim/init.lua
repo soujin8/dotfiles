@@ -163,6 +163,7 @@ require("lazy").setup({
     end
   },
   { "lukas-reineke/indent-blankline.nvim", event = 'BufRead' },
+  { "madox2/vim-ai",                       build = './install.sh' },
 })
 -- lazy.nvim config END
 
@@ -192,7 +193,7 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { 'filename' },
+    lualine_c = { { 'filename', path = 1 } },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
@@ -383,8 +384,9 @@ vim.keymap.set("n", "<Leader>md", ":PeekOpen<CR>")
 
 require('colorizer').setup()
 require("diffview").setup({})
+vim.keymap.set('n', 'df', ':DiffviewOpen<CR>', {})
 vim.keymap.set('n', 'fdf', ':DiffviewFileHistory %<CR>', {})
-vim.keymap.set('n', 'fcdf', ':DiffviewClose<CR>', {})
+vim.keymap.set('n', 'cdf', ':DiffviewClose<CR>', {})
 
 require('coc')
 
