@@ -164,6 +164,7 @@ require("lazy").setup({
   },
   { "lukas-reineke/indent-blankline.nvim", event = 'BufRead' },
   { "madox2/vim-ai",                       build = './install.sh' },
+  'github/copilot.vim',
 })
 -- lazy.nvim config END
 
