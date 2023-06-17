@@ -184,7 +184,7 @@ function f() {
 }
 
 function sshsp() {
-  local host=$(grep -E "^Host " ~/.ssh/config | sed -e 's/Host[ ]*//g' | fzf)
+  local host=$(grep -E "^Host " ~/.ssh/conf.d/hosts/* | sed -e 's/.*Host[ ]*//g' | fzf)
   if [ -n "$host" ]; then
     ssh $host
   fi
