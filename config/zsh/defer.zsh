@@ -12,6 +12,8 @@ alias n='nvim'
 alias ojt='oj t -c "ruby main.rb" -d test'
 alias be='bundle exec'
 alias gcd='g checkout develop && git pull && gh poi'
+alias tenki='curl http://wttr.in/Tokyo'
+alias rm='rm -i'
 
 alias lazygit='lazygit -ucd ~/dev/github.com/m-88888888/dotfiles/config/lazygit'
 # refer https://zenn.dev/ryuu/scraps/fddefc2ca60f88
