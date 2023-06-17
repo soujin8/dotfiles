@@ -105,9 +105,9 @@ require("lazy").setup({
   -- using packer.nvim
   { 'akinsho/bufferline.nvim',                     tag = "v3.3.0",                                   dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }, event = 'BufRead' },
   -- filer plugin
-  { 'lambdalisue/fern.vim',                        cmd = 'Fern *' },
-  { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' },        cmd = 'Fern *' },
-  { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim',            cmd = 'Fern *' },
+  { 'lambdalisue/fern.vim',                        },
+  { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' }},
+  { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim'},
   -- ecosystem to develop with deno
   { 'vim-denops/denops.vim',                       lazy = false },
   -- syntaxhilight
