@@ -109,20 +109,20 @@ eval "$(direnv hook zsh)"
 # ---------------------------------------------------------
 
 # brew completion
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
-  compinit
-fi
+# if type brew &>/dev/null
+# then
+#   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+#   autoload -Uz compinit
+#   compinit
+# fi
 
 ## pack
 # . $(pack completion --shell zsh)
 # GitHub CLI
 eval "$(gh completion -s zsh)"
 ## gcloud
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+# source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+# source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 # ---------------------------------------------------------
 # function
