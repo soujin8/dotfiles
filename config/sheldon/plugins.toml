@@ -41,11 +41,12 @@ github = "zsh-users/zsh-completions"
 # [plugins.zeno]
 # github = "yuki-yano/zeno.zsh"
 
-[plugins.dotfiles-defers]
-local = "~/.config/zsh"
-use = ["defer.zsh"]
+# [plugins.dotfiles-defers]
+# local = "~/.config/zsh"
+# use = ["defer.zsh"]
 
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-use = ["sync.sh"]
+# use = ["sync.sh"]
+use = ["sync.sh", "defer.zsh"]
 apply = ["source"]
