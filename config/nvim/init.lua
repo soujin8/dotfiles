@@ -105,9 +105,9 @@ require("lazy").setup({
   -- using packer.nvim
   { 'akinsho/bufferline.nvim',                     tag = "v3.3.0",                                   dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }, event = 'BufRead' },
   -- filer plugin
-  { 'lambdalisue/fern.vim',                        },
-  { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' }},
-  { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim'},
+  -- { 'lambdalisue/fern.vim',                        },
+  -- { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' }},
+  -- { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim'},
   -- ecosystem to develop with deno
   { 'vim-denops/denops.vim',                       lazy = false },
   -- syntaxhilight
@@ -163,8 +163,15 @@ require("lazy").setup({
     end
   },
   { "lukas-reineke/indent-blankline.nvim", event = 'BufRead' },
-  { "madox2/vim-ai",                       build = './install.sh' },
   'github/copilot.vim',
+  { 'TimUntersberger/neogit',              dependencies = 'nvim-lua/plenary.nvim' },
+  {
+    -- https://github.com/nvim-telescope/telescope-file-browser.nvim
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
+  { 'lambdalisue/kensaku.vim',    dependencies = 'vim-denops/denops.vim' },
+  { 'yuki-yano/fuzzy-motion.vim', dependencies = 'vim-denops/denops.vim' },
 })
 -- lazy.nvim config END
 
@@ -356,10 +363,10 @@ end
 
 
 -- fern.vim
-vim.keymap.set("n", "<Leader>df", ":Fern . -drawer<CR>")
-vim.g['fern#default_hidden'] = 1
-vim.g['fern#renderer'] = 'nerdfont'
-vim.g['fern#renderer#nerdfont#indent_markers'] = 1
+-- vim.keymap.set("n", "<Leader>df", ":Fern . -drawer<CR>")
+-- vim.g['fern#default_hidden'] = 1
+-- vim.g['fern#renderer'] = 'nerdfont'
+-- vim.g['fern#renderer#nerdfont#indent_markers'] = 1
 
 -- vim-quickrun
 vim.keymap.set("n", "<Leader>r", ":QuickRun<CR>")
@@ -391,6 +398,8 @@ vim.keymap.set('n', 'cdf', ':DiffviewClose<CR>', {})
 
 require('coc')
 
+local fb_actions = require "telescope._extensions.file_browser.actions"
+
 require('telescope').setup {
   extensions = {
     fzf = {
@@ -399,10 +408,70 @@ require('telescope').setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
+    },
+    file_browser = {
+      -- path
+      -- cwd
+      cwd_to_path = false,
+      grouped = false,
+      files = true,
+      add_dirs = true,
+      depth = 1,
+      auto_depth = false,
+      select_buffer = false,
+      hidden = { file_browser = false, folder_browser = false },
+      -- respect_gitignore
+      -- browse_files
+      -- browse_folders
+      hide_parent_dir = false,
+      collapse_dirs = false,
+      prompt_path = false,
+      quiet = false,
+      dir_icon = "",
+      dir_icon_hl = "Default",
+      display_stat = { date = true, size = true, mode = true },
+      hijack_netrw = false,
+      use_fd = true,
+      git_status = true,
+      mappings = {
+        ["i"] = {
+          ["<A-c>"] = fb_actions.create,
+          ["<S-CR>"] = fb_actions.create_from_prompt,
+          ["<A-r>"] = fb_actions.rename,
+          ["<A-m>"] = fb_actions.move,
+          ["<A-y>"] = fb_actions.copy,
+          ["<A-d>"] = fb_actions.remove,
+          ["<C-o>"] = fb_actions.open,
+          ["<C-g>"] = fb_actions.goto_parent_dir,
+          ["<C-e>"] = fb_actions.goto_home_dir,
+          ["<C-w>"] = fb_actions.goto_cwd,
+          ["<C-t>"] = fb_actions.change_cwd,
+          ["<C-f>"] = fb_actions.toggle_browser,
+          ["<C-h>"] = fb_actions.toggle_hidden,
+          ["<C-s>"] = fb_actions.toggle_all,
+          ["<bs>"] = fb_actions.backspace,
+        },
+        ["n"] = {
+          ["c"] = fb_actions.create,
+          ["r"] = fb_actions.rename,
+          ["m"] = fb_actions.move,
+          ["y"] = fb_actions.copy,
+          ["d"] = fb_actions.remove,
+          ["o"] = fb_actions.open,
+          ["g"] = fb_actions.goto_parent_dir,
+          ["e"] = fb_actions.goto_home_dir,
+          ["w"] = fb_actions.goto_cwd,
+          ["t"] = fb_actions.change_cwd,
+          ["f"] = fb_actions.toggle_browser,
+          ["h"] = fb_actions.toggle_hidden,
+          ["s"] = fb_actions.toggle_all,
+        },
+      }
     }
   }
 }
--- require('telescope').load_extension('fzf')
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('file_browser')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fp', builtin.git_files, {})
@@ -410,6 +479,13 @@ vim.keymap.set('n', '<leader>fgs', builtin.git_status, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<space>df",
+  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  { noremap = true }
+)
 
 require('modes').setup({
   colors = {
@@ -425,4 +501,24 @@ vim.opt.list = true
 vim.opt.listchars:append "eol:↴"
 require("indent_blankline").setup {
   show_end_of_line = true,
+}
+
+vim.g.fuzzy_motion_matchers = 'kensaku'
+vim.api.nvim_set_keymap(
+  "n",
+  "ff",
+  ":FuzzyMotion<CR>",
+  { noremap = true }
+)
+
+require('neogit').setup {
+  integrations = {
+    {
+      'TimUntersberger/neogit',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'sindrets/diffview.nvim'
+      }
+    }
+  },
 }
