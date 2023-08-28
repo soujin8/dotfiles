@@ -44,6 +44,8 @@ alias la='exa --group-directories-first -a'
 alias ll='exa --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
 alias tree='exa --group-directories-first -T --icons'
 
+# eval "$(rtx activate zsh)"
+
 # zeno.zsh fast-syntax と相性悪い？一旦無効化にする
 # if [[ -n $ZENO_LOADED ]]; then
 #   bindkey ' '  zeno-auto-snippet
@@ -108,6 +110,8 @@ eval "$(direnv hook zsh)"
 # completions
 # ---------------------------------------------------------
 
+autoload -Uz compinit
+compinit
 # brew completion
 # if type brew &>/dev/null
 # then

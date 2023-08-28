@@ -66,10 +66,12 @@
       "args": ["--quiet", "-"]
     }
   },
+
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "solargraph.autoformat": true,
 
   "jedi.enable": true,
-  "jedi.startupMessage": false
+  "jedi.startupMessage": false,
+  "snippets.ultisnips.pythonPrompt": false
 }

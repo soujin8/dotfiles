@@ -400,6 +400,37 @@ require('coc')
 
 local fb_actions = require "telescope._extensions.file_browser.actions"
 
+local select_one_or_multi = function(prompt_bufnr)
+  local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+  local multi = picker:get_multi_selection()
+  if not vim.tbl_isempty(multi) then
+    require('telescope.actions').close(prompt_bufnr)
+    for _, j in pairs(multi) do
+      if j.path ~= nil then
+        vim.cmd(string.format("%s %s", "edit", j.path))
+      end
+    end
+  else
+    require('telescope.actions').select_default(prompt_bufnr)
+  end
+end
+
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local mm = {
+-- my mappings
+  ["<CR>"] = function(pb)
+    local picker = action_state.get_current_picker(pb)
+    local multi = picker:get_multi_selection()
+    actions.select_default(pb) -- the normal enter behaviour
+    for _, j in pairs(multi) do
+      if j.path ~= nil then -- is it a file -> open it as well:
+        vim.cmd(string.format("%s %s", "edit", j.path))
+      end
+    end
+  end,
+}
+
 require('telescope').setup {
   extensions = {
     fzf = {
@@ -450,6 +481,8 @@ require('telescope').setup {
           ["<C-h>"] = fb_actions.toggle_hidden,
           ["<C-s>"] = fb_actions.toggle_all,
           ["<bs>"] = fb_actions.backspace,
+          ["<CR>"] = select_one_or_multi,
+          -- ["n"] = mm,
         },
         ["n"] = {
           ["c"] = fb_actions.create,
@@ -465,6 +498,7 @@ require('telescope').setup {
           ["f"] = fb_actions.toggle_browser,
           ["h"] = fb_actions.toggle_hidden,
           ["s"] = fb_actions.toggle_all,
+          -- ["n"] = mm,
         },
       }
     }
@@ -513,12 +547,21 @@ vim.api.nvim_set_keymap(
 
 require('neogit').setup {
   integrations = {
-    {
-      'TimUntersberger/neogit',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'sindrets/diffview.nvim'
-      }
-    }
+    diffview = true
+    -- {
+    -- 'TimUntersberger/neogit',
+    -- requires = {
+    --   'nvim-lua/plenary.nvim',
+    --   'sindrets/diffview.nvim'
+    -- }
+    -- }
   },
 }
+vim.keymap.set('n', '<leader>gg', ":Neogit<CR>", {})
+vim.keymap.set('n', '<leader>gd', ":DiffviewOpen<CR>", {})
+vim.keymap.set('n', '<leader>gD', ":DiffviewOpen staging<CR>", {})
+vim.keymap.set('n', '<leader>gl', ":Neogit log<CR>", {})
+vim.keymap.set('n', '<leader>gc', ":Neogit commit -v<CR>", {})
+
+-- yamlやmarkdown,gitcommitのときにもcopilotを有効にする
+vim.g.copilot_filetypes = { markdown = true, gitcommit = true, yaml = true }
