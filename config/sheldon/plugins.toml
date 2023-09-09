@@ -17,17 +17,12 @@ shell = "zsh"
 
 apply = ["defer"]
 
-[plugins]
-
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
 apply = ["source"]
 
 [templates]
 defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
-
-[plugins.compinit]
-inline = 'autoload -Uz compinit && zsh-defer compinit'
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
@@ -38,15 +33,11 @@ github = "zsh-users/zsh-syntax-highlighting"
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 
-# [plugins.zeno]
-# github = "yuki-yano/zeno.zsh"
-
-# [plugins.dotfiles-defers]
-# local = "~/.config/zsh"
-# use = ["defer.zsh"]
+[plugins.dotfiles-defers]
+local = "~/.config/zsh"
+use = ["defer.zsh"]
 
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-# use = ["sync.sh"]
-use = ["sync.sh", "defer.zsh"]
+use = ["sync.sh"]
 apply = ["source"]

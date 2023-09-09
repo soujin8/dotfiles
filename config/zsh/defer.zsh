@@ -46,28 +46,6 @@ alias tree='exa --group-directories-first -T --icons'
 
 # eval "$(rtx activate zsh)"
 
-# zeno.zsh fast-syntax と相性悪い？一旦無効化にする
-# if [[ -n $ZENO_LOADED ]]; then
-#   bindkey ' '  zeno-auto-snippet
-
-#   # fallback if snippet not matched (default: self-insert)
-#   # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
-
-#   # if you use zsh's incremental search
-#   # bindkey -M isearch ' ' self-insert
-
-#   bindkey '^m' zeno-auto-snippet-and-accept-line
-
-#   bindkey '^i' zeno-completion
-
-#   # fallback if completion not matched
-#   # (default: fzf-completion if exists; otherwise expand-or-complete)
-#   # export ZENO_COMPLETION_FALLBACK=expand-or-complete
-#   bindkey '^r'   zeno-history-selection
-#   bindkey '^x^s' zeno-insert-snippet
-#   bindkey '^x^f' zeno-ghq-cd
-# fi
-
 # ---------------------------------------------------------
 # path
 # ---------------------------------------------------------
@@ -103,30 +81,13 @@ eval "$(direnv hook zsh)"
 # export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
 # eval $(/opt/homebrew/bin/brew shellenv)
 
-## fzf.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # ---------------------------------------------------------
 # completions
 # ---------------------------------------------------------
 
-autoload -Uz compinit
-compinit
-# brew completion
-# if type brew &>/dev/null
-# then
-#   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-#   autoload -Uz compinit
-#   compinit
-# fi
-
-## pack
-# . $(pack completion --shell zsh)
-# GitHub CLI
-eval "$(gh completion -s zsh)"
 ## gcloud
-# source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-# source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 # ---------------------------------------------------------
 # function
@@ -153,8 +114,8 @@ function dev() {
 zle -N dev
 bindkey '^g' dev
 
-nction reload() {
-exec $SHELL -l
+function reload() {
+  exec $SHELL -l
 }
 
 function f() {
