@@ -3,4 +3,8 @@ git
 
 config/zsh/.zcompdump
 config/zsh/.zsh_sessions
+config/zsh/.zcompcache
+
 config/tmux/plugins
+
+config/nvim/lazy-lock.json
