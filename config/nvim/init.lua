@@ -172,6 +172,9 @@ require("lazy").setup({
   },
   { 'lambdalisue/kensaku.vim',    dependencies = 'vim-denops/denops.vim' },
   { 'yuki-yano/fuzzy-motion.vim', dependencies = 'vim-denops/denops.vim' },
+  -- https://github.com/rhysd/conflict-marker.vim
+  -- git conflict を解消するプラグイン
+  { 'rhysd/conflict-marker.vim' },
 })
 -- lazy.nvim config END
 
