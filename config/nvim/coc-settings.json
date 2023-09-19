@@ -4,13 +4,13 @@
       "command": "efm-langserver",
       "args": [],
       "filetypes": ["markdown"]
+    },
+    "rubocop": {
+      "command": "rubocop",
+      "args": ["--lsp"],
+      "filetypes": ["ruby"]
     }
   },
-  "git.addedSign.hlGroup": "CocDiffAdd",
-  "git.changedSign.hlGroup": "CocDiffChange",
-  "git.removedSign.hlGroup": "CocDiffDelete",
-  "git.topRemovedSign.hlGroup": "CocDiffDelete",
-  "git.changeRemovedSign.hlGroup": "CocDiffDelete",
 
   "tsserver.enable": true,
   "eslint.enable": true,
@@ -18,6 +18,8 @@
   "javascript.suggest.autoImports": true,
 
   "suggest.noselect": true,
+
+  "coc.preferences.formatOnSave": true,
 
   "dialog.floatHighlight": "CocFloating",
   "dialog.floatBorderHighlight": "CocFloating",
@@ -37,6 +39,7 @@
     "highlight": "CocSuggestFloating",
     "winblend": 10
   },
+
   "diagnostic.level": "hint",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": true,
@@ -73,5 +76,6 @@
 
   "jedi.enable": true,
   "jedi.startupMessage": false,
+
   "snippets.ultisnips.pythonPrompt": false
 }
