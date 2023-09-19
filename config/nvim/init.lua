@@ -422,7 +422,7 @@ end
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local mm = {
--- my mappings
+  -- my mappings
   ["<CR>"] = function(pb)
     local picker = action_state.get_current_picker(pb)
     local multi = picker:get_multi_selection()
