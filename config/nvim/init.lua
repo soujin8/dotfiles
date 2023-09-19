@@ -175,6 +175,7 @@ require("lazy").setup({
   -- https://github.com/rhysd/conflict-marker.vim
   -- git conflict を解消するプラグイン
   { 'rhysd/conflict-marker.vim' },
+  { 'ruanyl/vim-gh-line' },
 })
 -- lazy.nvim config END
 
