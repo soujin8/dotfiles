@@ -172,9 +172,7 @@ require("lazy").setup({
   },
   { 'lambdalisue/kensaku.vim',    dependencies = 'vim-denops/denops.vim' },
   { 'yuki-yano/fuzzy-motion.vim', dependencies = 'vim-denops/denops.vim' },
-  -- https://github.com/rhysd/conflict-marker.vim
-  -- git conflict を解消するプラグイン
-  { 'rhysd/conflict-marker.vim' },
+  { 'akinsho/git-conflict.nvim',  version = '*',                         config = true },
   { 'ruanyl/vim-gh-line' },
 })
 -- lazy.nvim config END
@@ -511,7 +509,7 @@ require('telescope').setup {
           ["s"] = fb_actions.toggle_all,
           -- ["n"] = mm,
         },
-      }
+      },
     }
   }
 }
