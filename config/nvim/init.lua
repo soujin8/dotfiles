@@ -138,17 +138,17 @@ require("lazy").setup({
   { 'toppair/peek.nvim',       run = 'deno task --quiet build:fast' },
   'akinsho/toggleterm.nvim',
   -- git plugin
-  { 'lewis6991/gitsigns.nvim', event = 'BufNewFile, BufRead' },
+  { 'lewis6991/gitsigns.nvim' },
   -- common utilities
   'nvim-lua/plenary.nvim',
-  { 'sindrets/diffview.nvim',  dependencies = 'nvim-lua/plenary.nvim', cmd = 'DiffviewFileHistory *' },
+  { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', cmd = 'DiffviewFileHistory *' },
   -- statusline
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
   },
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
   {
@@ -162,8 +162,8 @@ require("lazy").setup({
       require('modes').setup()
     end
   },
-  { "lukas-reineke/indent-blankline.nvim", event = 'BufRead' },
-  'github/copilot.vim',
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl",                          opts = {} },
+  { 'github/copilot.vim' },
   { 'TimUntersberger/neogit',              dependencies = 'nvim-lua/plenary.nvim' },
   {
     -- https://github.com/nvim-telescope/telescope-file-browser.nvim
@@ -174,6 +174,15 @@ require("lazy").setup({
   { 'yuki-yano/fuzzy-motion.vim', dependencies = 'vim-denops/denops.vim' },
   { 'akinsho/git-conflict.nvim',  version = '*',                         config = true },
   { 'ruanyl/vim-gh-line' },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  }
 })
 -- lazy.nvim config END
 
@@ -542,9 +551,7 @@ require('modes').setup({
 -- indent_blankline config
 vim.opt.list = true
 vim.opt.listchars:append "eol:↴"
-require("indent_blankline").setup {
-  show_end_of_line = true,
-}
+require("ibl").setup {}
 
 vim.g.fuzzy_motion_matchers = 'kensaku'
 vim.api.nvim_set_keymap(
