@@ -190,11 +190,16 @@ require("lazy").setup({
   },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
+    dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
   {
     'mvllow/modes.nvim',
@@ -212,11 +217,6 @@ require("lazy").setup({
   {
     'TimUntersberger/neogit',
     dependencies = 'nvim-lua/plenary.nvim'
-  },
-  {
-    -- https://github.com/nvim-telescope/telescope-file-browser.nvim
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
   {
     'lambdalisue/kensaku.vim',
@@ -474,128 +474,38 @@ vim.keymap.set('n', 'cdf', ':DiffviewClose<CR>', {})
 
 require('coc')
 
-local fb_actions = require "telescope._extensions.file_browser.actions"
-
-local select_one_or_multi = function(prompt_bufnr)
-  local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
-  local multi = picker:get_multi_selection()
-  if not vim.tbl_isempty(multi) then
-    require('telescope.actions').close(prompt_bufnr)
-    for _, j in pairs(multi) do
-      if j.path ~= nil then
-        vim.cmd(string.format("%s %s", "edit", j.path))
-      end
-    end
-  else
-    require('telescope.actions').select_default(prompt_bufnr)
-  end
-end
-
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
-local mm = {
-  -- my mappings
-  ["<CR>"] = function(pb)
-    local picker = action_state.get_current_picker(pb)
-    local multi = picker:get_multi_selection()
-    actions.select_default(pb) -- the normal enter behaviour
-    for _, j in pairs(multi) do
-      if j.path ~= nil then -- is it a file -> open it as well:
-        vim.cmd(string.format("%s %s", "edit", j.path))
-      end
-    end
-  end,
-}
-
+-- telescope.nvim
+-------------------------------------------------------------------------------
 require('telescope').setup {
-  extensions = {
-    fzf = {
-      fuzzy = true, -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true, -- override the file sorter
-      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-      -- the default case_mode is "smart_case"
+  defaults = {
+    mappings = {
+      i = {
+        ['<C-p>'] = require('telescope.actions.layout').toggle_preview
+      }
     },
-    file_browser = {
-      -- path
-      -- cwd
-      cwd_to_path = false,
-      grouped = false,
-      files = true,
-      add_dirs = true,
-      depth = 1,
-      auto_depth = false,
-      select_buffer = false,
-      hidden = { file_browser = false, folder_browser = false },
-      -- respect_gitignore
-      -- browse_files
-      -- browse_folders
-      hide_parent_dir = false,
-      collapse_dirs = false,
-      prompt_path = false,
-      quiet = false,
-      dir_icon = "",
-      dir_icon_hl = "Default",
-      display_stat = { date = true, size = true, mode = true },
-      hijack_netrw = false,
-      use_fd = true,
-      git_status = true,
-      mappings = {
-        ["i"] = {
-          ["<A-c>"] = fb_actions.create,
-          ["<S-CR>"] = fb_actions.create_from_prompt,
-          ["<A-r>"] = fb_actions.rename,
-          ["<A-m>"] = fb_actions.move,
-          ["<A-y>"] = fb_actions.copy,
-          ["<A-d>"] = fb_actions.remove,
-          ["<C-o>"] = fb_actions.open,
-          ["<C-g>"] = fb_actions.goto_parent_dir,
-          ["<C-e>"] = fb_actions.goto_home_dir,
-          ["<C-w>"] = fb_actions.goto_cwd,
-          ["<C-t>"] = fb_actions.change_cwd,
-          ["<C-f>"] = fb_actions.toggle_browser,
-          ["<C-h>"] = fb_actions.toggle_hidden,
-          ["<C-s>"] = fb_actions.toggle_all,
-          ["<bs>"] = fb_actions.backspace,
-          ["<CR>"] = select_one_or_multi,
-          -- ["n"] = mm,
-        },
-        ["n"] = {
-          ["c"] = fb_actions.create,
-          ["r"] = fb_actions.rename,
-          ["m"] = fb_actions.move,
-          ["y"] = fb_actions.copy,
-          ["d"] = fb_actions.remove,
-          ["o"] = fb_actions.open,
-          ["g"] = fb_actions.goto_parent_dir,
-          ["e"] = fb_actions.goto_home_dir,
-          ["w"] = fb_actions.goto_cwd,
-          ["t"] = fb_actions.change_cwd,
-          ["f"] = fb_actions.toggle_browser,
-          ["h"] = fb_actions.toggle_hidden,
-          ["s"] = fb_actions.toggle_all,
-          -- ["n"] = mm,
-        },
-      },
+    preview = {
+      hide_on_startup = true -- hide previewer when picker starts
     }
   }
 }
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('file_browser')
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fp', builtin.git_files, {})
-vim.keymap.set('n', '<leader>fgs', builtin.git_status, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<space>df",
-  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-  { noremap = true }
-)
+-- when a count N is given to a telescope mapping called through the following
+-- function, the search is started in the Nth parent directory
+local function telescope_cwd(picker, args)
+  builtin[picker](vim.tbl_extend("error", args or {}, { cwd = ("../"):rep(vim.v.count) .. "." }))
+end
+
+local map, opts = vim.keymap.set, { noremap = true, silent = true }
+map("n", "<leader>ff", function() telescope_cwd('find_files', { hidden = true }) end, opts)
+map("n", "<leader>gr", function() telescope_cwd('live_grep') end, opts)
+map("n", "<leader>ds", builtin.lsp_document_symbols, opts)
+map("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, opts)
+map('n', '<leader>fb', builtin.buffers, opts)
+map("n", "<leader>ts", "<cmd>Telescope<cr>", opts)
+map("n", "<leader>df", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", opts)
 
 require('modes').setup({
   colors = {
