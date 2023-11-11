@@ -1,22 +1,14 @@
-[memory_usage]
-disabled = false
-threshold = 90
-symbol = " "
-style = "bold dimmed green"
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$cmd_duration\
+$line_break\
+$character\
+"""
 
-[gcloud]
-format = 'on [$symbol\($project\)]($style) '
-
-[git_status]
-format = '([$all_status$ahead_behind]($style) )'
-conflicted = ''
-ahead = ''
-behind = ''
-diverged = ''
-up_to_date = '✓'
-untracked = ''
-stashed = ''
-modified = '🔥'
-staged = ''
-renamed = ''
-deleted = ''
+[cmd_duration]
+min_time = 5000 # ms

@@ -9,20 +9,15 @@ alias gs='git status'
 alias c='clear'
 alias k='kubectl'
 alias n='nvim'
-alias ojt='oj t -c "ruby main.rb" -d test'
 alias be='bundle exec'
-alias gcd='g checkout develop && git pull && gh poi'
-alias tenki='curl http://wttr.in/Tokyo'
 alias rm='rm -i'
 
 alias lazygit='lazygit -ucd ~/dev/github.com/m-88888888/dotfiles/config/lazygit'
-# refer https://zenn.dev/ryuu/scraps/fddefc2ca60f88
-alias brew="env PATH=${PATH/\/Users\/${USER}\/\.asdf\/shims:/} brew"
 # macOSでBSD系CLIツール→GNU系に置き換える
 case "$OSTYPE" in
     darwin*)
         (( ${+commands[gdate]} )) && alias date='gdate'
-        # (( ${+commands[gls]} )) && alias ls='gls' # exa 使っているので不要
+        # (( ${+commands[gls]} )) && alias ls='gls' # eza 使っているので不要
         (( ${+commands[gmkdir]} )) && alias mkdir='gmkdir'
         (( ${+commands[gcp]} )) && alias cp='gcp'
         (( ${+commands[gmv]} )) && alias mv='gmv'
@@ -38,13 +33,11 @@ case "$OSTYPE" in
     ;;
 esac
 
-# exa
-alias ls='exa --group-directories-first'
-alias la='exa --group-directories-first -a'
-alias ll='exa --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
-alias tree='exa --group-directories-first -T --icons'
-
-# eval "$(rtx activate zsh)"
+# eza
+alias ls='eza --group-directories-first'
+alias la='eza --group-directories-first -a'
+alias ll='eza --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
+alias tree='eza --group-directories-first -T --icons'
 
 # ---------------------------------------------------------
 # path
@@ -64,10 +57,20 @@ path=(
   "$HOME/.local/bin"(N-/)
   "$HOME/.cargo/bin"(N-/)
   "$GOPATH/bin"
+  "$HOME/.cargo/env"
 )
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# eval "$(rtx activate zsh)"
+
+# setup  rust
+# source $HOME/.cargo/env
+
+## asdf path
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
 
 # asdfでruby2.6.5インストールするときにこれらを設定するとできるようになった
 # https://stackoverflow.com/questions/69012676/install-older-ruby-versions-on-a-m1-macbook
@@ -183,7 +186,6 @@ function mov2gif() {
 	gif=`basename $mov`".gif"
 	ffmpeg -i $mov -vf scale=$width:-1 -pix_fmt rgb24 -r $rate -f gif - | gifsicle --optimize=3 --delay=3 > $gif
 }
-
 # fzf で gcloud 切り替え
 function gcloud-activate() {
   name="$1"
