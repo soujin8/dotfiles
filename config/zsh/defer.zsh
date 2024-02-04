@@ -12,7 +12,6 @@ alias n='nvim'
 alias be='bundle exec'
 alias rm='rm -i'
 
-alias lazygit='lazygit -ucd ~/dev/github.com/m-88888888/dotfiles/config/lazygit'
 # macOSでBSD系CLIツール→GNU系に置き換える
 case "$OSTYPE" in
     darwin*)
@@ -57,32 +56,10 @@ path=(
   "$HOME/.local/bin"(N-/)
   "$HOME/.cargo/bin"(N-/)
   "$GOPATH/bin"
-  "$HOME/.cargo/env"
 )
 
 # direnv
 eval "$(direnv hook zsh)"
-
-# eval "$(rtx activate zsh)"
-
-# setup  rust
-# source $HOME/.cargo/env
-
-## asdf path
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-
-# asdfでruby2.6.5インストールするときにこれらを設定するとできるようになった
-# https://stackoverflow.com/questions/69012676/install-older-ruby-versions-on-a-m1-macbook
-# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-# export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
-# export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
-# export optflags="-Wno-error=implicit-function-declaration"
-# export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
-# export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
-# eval $(/opt/homebrew/bin/brew shellenv)
 
 # ---------------------------------------------------------
 # completions

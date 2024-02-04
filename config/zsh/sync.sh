@@ -1,6 +1,10 @@
 ## prompt
 eval "$(starship init zsh)"
 
+eval "$(rtx activate zsh)"
+
+source $HOME/.cargo/env
+
 # 履歴保存管理
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=1000000
