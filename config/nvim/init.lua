@@ -167,6 +167,15 @@ require("lazy").setup({
     'osyo-manga/shabadou.vim',
     dependencies = 'thinca/vim-quickrun'
   },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
   -- {'iamcco/markdown-preview.nvim', run = 'sh -c "cd app && yarn install"'},
   -- markfown preview
   {
@@ -220,6 +229,10 @@ require("lazy").setup({
   },
   {
     'lambdalisue/kensaku.vim',
+    dependencies = 'vim-denops/denops.vim'
+  },
+  {
+    'lambdalisue/gin.vim',
     dependencies = 'vim-denops/denops.vim'
   },
   {
@@ -461,10 +474,8 @@ vim.keymap.set("n", "<Leader>r", ":QuickRun<CR>")
 --   },
 -- }
 
--- peek.nvim. markdown preview
-vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-vim.keymap.set("n", "<Leader>md", ":PeekOpen<CR>")
+-- markdown preview
+vim.keymap.set("n", "<Leader>md", ":MarkdownPreview<CR>")
 
 require('colorizer').setup()
 require("diffview").setup({})
@@ -480,7 +491,7 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-p>'] = require('telescope.actions.layout').toggle_preview
+        ['<C-l>'] = require('telescope.actions.layout').toggle_preview
       }
     },
     preview = {

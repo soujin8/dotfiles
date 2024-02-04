@@ -6,9 +6,11 @@
       "filetypes": ["markdown"]
     },
     "rubocop": {
-      "command": "rubocop",
-      "args": ["--lsp"],
-      "filetypes": ["ruby"]
+      "command": "bundle",
+      "args": ["exec", "rubocop", "--lsp"],
+      "filetypes": ["ruby"],
+      "rootPatterns": [".git", "Gemfile"],
+      "requireRootPattern": true
     }
   },
 
@@ -73,9 +75,12 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "solargraph.autoformat": true,
+  "solargraph.shell": "/opt/homebrew/bin/zsh",
 
   "jedi.enable": true,
   "jedi.startupMessage": false,
 
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+
+  "Lua.diagnostics.globals": ["vim"]
 }
