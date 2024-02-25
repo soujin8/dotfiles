@@ -5,6 +5,8 @@ eval "$(rtx activate zsh)"
 
 source $HOME/.cargo/env
 
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
 # 履歴保存管理
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=1000000

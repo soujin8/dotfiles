@@ -58,6 +58,8 @@ path=(
   "$GOPATH/bin"
 )
 
+# echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
+
 # direnv
 eval "$(direnv hook zsh)"
 
