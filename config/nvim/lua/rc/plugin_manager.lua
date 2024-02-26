@@ -11,15 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
+
 -- require("lazy").setup({
 --   'tpope/vim-rails',
---   -- using packer.nvim
---   -- filer plugin
+
 --   -- { 'lambdalisue/fern.vim',                        },
 --   -- { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' }},
 --   -- { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim'},
 
---   -- to camelcase or snakecase etc...
 --   -- quickrun
 --   'thinca/vim-quickrun',
 --   -- async quickrun
@@ -32,14 +31,7 @@ require("lazy").setup("plugins")
 --     'osyo-manga/shabadou.vim',
 --     dependencies = 'thinca/vim-quickrun'
 --   },
---   {
---     'lambdalisue/kensaku.vim',
---     dependencies = 'vim-denops/denops.vim'
---   },
---   {
---     'yuki-yano/fuzzy-motion.vim',
---     dependencies = 'vim-denops/denops.vim'
---   },
+
 --   {
 --     "folke/trouble.nvim",
 --     dependencies = { "nvim-tree/nvim-web-devicons" },

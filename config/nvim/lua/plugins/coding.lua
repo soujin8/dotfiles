@@ -22,5 +22,18 @@ return {
   { 'github/copilot.vim', config = function()
     -- ---- yamlやmarkdown,gitcommitのときにもcopilotを有効にする
     vim.g.copilot_filetypes = { markdown = true, gitcommit = true, yaml = true }
-  end },
+  end
+  },
+  {
+    'yuki-yano/fuzzy-motion.vim',
+    dependencies = 'vim-denops/denops.vim',
+    config = function()
+      vim.g.fuzzy_motion_matchers = 'kensaku'
+      vim.api.nvim_set_keymap("n", "ff", ":FuzzyMotion<CR>", { noremap = true })
+    end
+  },
+  {
+    'lambdalisue/kensaku.vim',
+    dependencies = 'vim-denops/denops.vim'
+  },
 }

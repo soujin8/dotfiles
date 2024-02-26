@@ -22,6 +22,7 @@ return {
       main = "ibl",
       opts = {},
       config = function()
+        require("ibl").setup {}
         vim.opt.list = true
         vim.opt.listchars:append "eol:↴"
       end
