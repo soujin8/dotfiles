@@ -12,26 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
--- require("lazy").setup({
---   'tpope/vim-rails',
-
---   -- { 'lambdalisue/fern.vim',                        },
---   -- { 'lambdalisue/fern-renderer-nerdfont.vim',      dependencies = { 'lambdalisue/fern.vim' }},
---   -- { 'lambdalisue/nerdfont.vim',                    dependencies = 'lambdalisue/fern.vim'},
-
---   -- quickrun
---   'thinca/vim-quickrun',
---   -- async quickrun
---   {
---     'Shougo/vimproc.vim',
---     run = 'make'
---   },
---   -- quickrun plugin
---   {
---     'osyo-manga/shabadou.vim',
---     dependencies = 'thinca/vim-quickrun'
---   },
-
 --   {
 --     "folke/trouble.nvim",
 --     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -41,4 +21,3 @@ require("lazy").setup("plugins")
 --       -- refer to the configuration section below
 --     }
 --   }
--- })
