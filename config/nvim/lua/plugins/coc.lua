@@ -1,5 +1,6 @@
-return {
-  {
+local coc_config = {}
+if vim.env.LSP == 'coc' then
+  coc_config = {
     {
       'neoclide/coc.nvim',
       branch = 'release',
@@ -221,4 +222,7 @@ return {
       end
     },
   }
+end
+return {
+  coc_config
 }
