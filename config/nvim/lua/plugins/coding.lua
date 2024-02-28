@@ -36,4 +36,42 @@ return {
     'lambdalisue/kensaku.vim',
     dependencies = 'vim-denops/denops.vim'
   },
+  {
+    'mvllow/modes.nvim',
+    tag = 'v0.2.1',
+    config = function()
+      require('modes').setup({
+        colors = {
+          copy = '#FFEE55',
+          delete = '#DC669B',
+          insert = '#55AAEE',
+          visual = '#DD5522',
+        },
+      })
+    end
+  },
+  -- surroundings operator, textobject
+  {
+    'machakann/vim-sandwich',
+    event = 'ModeChanged'
+  },
+  -- indent line
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+    config = function()
+      require("ibl").setup {}
+      vim.opt.list = true
+      vim.opt.listchars:append "eol:↴"
+    end
+  },
+  -- color preview
+  {
+    'norcalli/nvim-colorizer.lua',
+    event = 'BufRead',
+    config = function()
+      require('colorizer').setup()
+    end
+  },
 }
