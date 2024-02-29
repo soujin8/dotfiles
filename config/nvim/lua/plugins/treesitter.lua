@@ -3,6 +3,14 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = 'BufRead',
+    dependencies = {
+      { 'JoosepAlviste/nvim-ts-context-commentstring' },
+      { 'nvim-treesitter/nvim-treesitter-context' },
+      { 'nvim-treesitter/nvim-treesitter-textobjects' },
+      { 'windwp/nvim-ts-autotag' },
+      { 'JoosepAlviste/nvim-ts-context-commentstring' },
+      { 'RRethy/nvim-treesitter-endwise' },
+    },
     config = function()
       require('nvim-treesitter.configs').setup({
         -- ensure_installed = "all",
@@ -37,18 +45,5 @@ return {
         },
       })
     end,
-  },
-
-  {
-    'windwp/nvim-ts-autotag',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead'
-  },
-
-  {
-    -- A Neovim plugin for setting the commentstring option based on the cursor location in the file. The location is checked via treesitter queries.
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead'
   },
 }

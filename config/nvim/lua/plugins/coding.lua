@@ -74,8 +74,4 @@ return {
       require('colorizer').setup()
     end
   },
-  -- auto tag
-  "windwp/nvim-ts-autotag",
-  -- auto end
-  "RRethy/nvim-treesitter-endwise",
 }
