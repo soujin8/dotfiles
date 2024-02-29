@@ -32,9 +32,6 @@ return {
             end
           end,
         },
-        context_commentstring = {
-          enable = true
-        },
         endwise = {
           enable = true,
         },
