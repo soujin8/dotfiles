@@ -19,10 +19,12 @@ return {
       vim.keymap.set("n", "<Leader>md", ":MarkdownPreview<CR>")
     end
   },
-  { 'github/copilot.vim', config = function()
-    -- ---- yamlやmarkdown,gitcommitのときにもcopilotを有効にする
-    vim.g.copilot_filetypes = { markdown = true, gitcommit = true, yaml = true }
-  end
+  {
+    'github/copilot.vim',
+    config = function()
+      -- yamlやmarkdown,gitcommitのときにもcopilotを有効にする
+      vim.g.copilot_filetypes = { markdown = true, gitcommit = true, yaml = true }
+    end
   },
   {
     'yuki-yano/fuzzy-motion.vim',
