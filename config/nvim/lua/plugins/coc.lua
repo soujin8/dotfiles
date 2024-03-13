@@ -18,7 +18,6 @@ if vim.env.LSP == 'coc' then
           'coc-markdownlint',
           'coc-json',
           'coc-go',
-          'coc-solargraph',
           'coc-sh',
           'coc-html',
           'coc-css',
@@ -26,7 +25,6 @@ if vim.env.LSP == 'coc' then
           'coc-rust-analyzer',
           'coc-diagnostic',
           'coc-snippets',
-          'coc-jedi',
           'coc-lua',
           '@yaegassy/coc-tailwindcss3'
         }
