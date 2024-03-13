@@ -52,18 +52,32 @@ if vim.env.LSP == 'nvim' then
           end,
         })
 
+        -- local bufopts = function(desc)
+        --   return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+        -- end
+
         -- vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
         -- vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
         -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
         -- vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
         -- vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-        -- vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-        -- vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+        vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
         -- vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>')
         -- vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
         -- vim.keymap.set('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>')
         -- vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
         -- vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+        vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
+        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+        vim.keymap.set({ 'n' }, 'gd', vim.lsp.buf.type_definition)
+        vim.keymap.set("n", "rn", "<cmd>Lspsaga rename<CR>")
+        vim.keymap.set("n", "ca", "<cmd>Lspsaga code_action<CR>")
+        vim.keymap.set("n", "<Leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>")
+        vim.keymap.set("n", "<Leader>fmt", function()
+          vim.lsp.buf.format({ async = true })
+        end)
       end,
     },
 
@@ -80,7 +94,6 @@ if vim.env.LSP == 'nvim' then
               vim.fn["vsnip#anonymous"](args.body)
             end,
           },
-
           window = {
             completion = cmp.config.window.bordered({
               border = 'single'
@@ -89,7 +102,6 @@ if vim.env.LSP == 'nvim' then
               border = 'single'
             }),
           },
-
           sources = cmp.config.sources({
             { name = 'nvim_lsp' },
             { name = 'vsnip' },
@@ -98,7 +110,6 @@ if vim.env.LSP == 'nvim' then
           }, {
             { name = 'buffer', keyword_length = 2 },
           }),
-
           formatting = {
             format = lspkind.cmp_format({
               mode = 'text',
@@ -107,7 +118,6 @@ if vim.env.LSP == 'nvim' then
               ellipsis_char = '...',
             })
           },
-
           mapping = cmp.mapping.preset.insert({
             ["<C-p>"] = cmp.mapping.select_prev_item(),
             ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -115,7 +125,6 @@ if vim.env.LSP == 'nvim' then
             ['<C-e>'] = cmp.mapping.abort(),
             ["<CR>"] = cmp.mapping.confirm { select = true },
           }),
-
           experimental = {
             ghost_text = true,
           },
@@ -153,53 +162,28 @@ if vim.env.LSP == 'nvim' then
     { 'hrsh7th/cmp-nvim-lsp-signature-help',  event = 'InsertEnter' },
     { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'InsertEnter' },
     { 'hrsh7th/cmp-calc',                     event = 'InsertEnter' },
-    { 'hrsh7th/vim-vsnip',            event = 'InsertEnter' },
-    { 'hrsh7th/vim-vsnip-integ',      event = 'InsertEnter' },
-    { 'onsails/lspkind.nvim',         event = 'InsertEnter' },
-    { 'rafamadriz/friendly-snippets', event = 'InsertEnter' },
+    { 'hrsh7th/vim-vsnip',                    event = 'InsertEnter' },
+    { 'hrsh7th/vim-vsnip-integ',              event = 'InsertEnter' },
+    { 'onsails/lspkind.nvim',                 event = 'InsertEnter' },
+    { 'rafamadriz/friendly-snippets',         event = 'InsertEnter' },
     {
       "j-hui/fidget.nvim",
       config = function()
         require('fidget').setup()
       end
     },
+
+    -- Improves the Neovim built-in LSP experience.
     {
-      'lewis6991/hover.nvim',
+      'nvimdev/lspsaga.nvim',
       config = function()
-          require("hover").setup {
-              init = function()
-                  -- Require providers
-                  require("hover.providers.lsp")
-                  -- require('hover.providers.gh')
-                  -- require('hover.providers.gh_user')
-                  -- require('hover.providers.jira')
-                  -- require('hover.providers.man')
-                  -- require('hover.providers.dictionary')
-              end,
-              preview_opts = {
-                  border = 'single'
-              },
-              -- Whether the contents of a currently open hover window should be moved
-              -- to a :h preview-window when pressing the hover keymap.
-              preview_window = false,
-              title = true,
-              mouse_providers = {
-                  'LSP'
-              },
-              mouse_delay = 1000
-          }
-
-          -- Setup keymaps
-          vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
-          vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
-          vim.keymap.set("n", "<C-p>", function() require("hover").hover_switch("previous") end, {desc = "hover.nvim (previous source)"})
-          vim.keymap.set("n", "<C-n>", function() require("hover").hover_switch("next") end, {desc = "hover.nvim (next source)"})
-
-          -- Mouse support
-          vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
-          vim.o.mousemoveevent = true
-      end
-    },
+        require('lspsaga').setup({})
+      end,
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-tree/nvim-web-devicons'
+      }
+    }
 
   }
 end
