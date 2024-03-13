@@ -5,12 +5,28 @@
       "args": [],
       "filetypes": ["markdown"]
     },
-    "rubocop": {
-      "command": "bundle",
-      "args": ["exec", "rubocop", "--lsp"],
-      "filetypes": ["ruby"],
-      "rootPatterns": [".git", "Gemfile"],
-      "requireRootPattern": true
+    "ruby-lsp": {
+      "command": "ruby-lsp",
+      "initializationOptions": {
+        "experimentalFeaturesEnabled": false,
+        "enabledFeatures": [
+          "codeActions",
+          "diagnostics",
+          "documentHighlights",
+          "documentLink",
+          "documentSymbols",
+          "foldingRanges",
+          "formatting",
+          "hover",
+          "inlayHint",
+          "onTypeFormatting",
+          "selectionRanges",
+          "semanticHighlighting",
+          "completion"
+        ],
+        "formatter": "auto"
+      },
+      "filetypes": ["ruby"]
     }
   },
 
@@ -71,11 +87,6 @@
       "args": ["--quiet", "-"]
     }
   },
-
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "solargraph.autoformat": true,
-  "solargraph.shell": "/opt/homebrew/bin/zsh",
 
   "jedi.enable": true,
   "jedi.startupMessage": false,
