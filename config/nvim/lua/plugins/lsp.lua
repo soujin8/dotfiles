@@ -183,7 +183,36 @@ if vim.env.LSP == 'nvim' then
         'nvim-treesitter/nvim-treesitter',
         'nvim-tree/nvim-web-devicons'
       }
-    }
+    },
+
+    -- linter
+    {
+      'mfussenegger/nvim-lint',
+      config = function()
+require('lint').linters_by_ft = {
+  lua = {'luacheck'}
+}
+      end
+    },
+    -- formatter
+    {
+  'stevearc/conform.nvim',
+  opts = {},
+  config = function()
+    require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    javascript = { "prettier" },
+  },
+format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
+  end
+}
 
   }
 end
