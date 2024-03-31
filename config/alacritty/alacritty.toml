@@ -45,6 +45,11 @@ style = "Italic"
 family = "PlemolJP Console NF"
 style = "Regular"
 
+# alacrittyでoptionをaltとして使うための設定
+# https://github.com/alacritty/alacritty/issues/7637
+[window]
+option_as_alt = "Both"
+
 [shell]
 args = ["--login"]
 program = "/opt/homebrew/bin/zsh"
