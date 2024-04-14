@@ -76,4 +76,5 @@ return {
       require('colorizer').setup()
     end
   },
+  { 'slim-template/vim-slim' },
 }
