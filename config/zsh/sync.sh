@@ -3,7 +3,8 @@ eval "$(starship init zsh)"
 
 eval "$(mise activate zsh)"
 
-source $HOME/.cargo/env
+# source $HOME/.cargo/env
+source $HOME/.local/share/cargo/env
 
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
