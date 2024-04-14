@@ -1,7 +1,7 @@
 ## prompt
 eval "$(starship init zsh)"
 
-eval "$(rtx activate zsh)"
+eval "$(mise activate zsh)"
 
 source $HOME/.cargo/env
 
