@@ -24,7 +24,6 @@ if vim.env.LSP == 'coc' then
           'coc-emoji',
           'coc-rust-analyzer',
           'coc-diagnostic',
-          'coc-snippets',
           'coc-lua',
           '@yaegassy/coc-tailwindcss3'
         }
