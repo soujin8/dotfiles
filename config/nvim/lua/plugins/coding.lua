@@ -76,6 +76,7 @@ return {
       require('colorizer').setup()
     end
   },
+  -- coding for Ruby on Rails application
   { 'slim-template/vim-slim' },
   { 'tpope/vim-rails' },
 }
