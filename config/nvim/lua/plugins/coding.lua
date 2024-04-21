@@ -79,4 +79,11 @@ return {
   -- coding for Ruby on Rails application
   { 'slim-template/vim-slim' },
   { 'tpope/vim-rails' },
+  -- generate code documentation
+  {
+    "danymat/neogen",
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    version = "*"
+  }
 }
