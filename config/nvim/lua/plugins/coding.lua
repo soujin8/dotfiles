@@ -82,5 +82,11 @@ return {
     config = true,
     -- Uncomment next line if you want to follow only stable versions
     version = "*"
-  }
+  },
+  -- preview of quickfix window buffer
+  {
+    -- ctrl + q でtoggle-previewに入って、fzfzのアクションを行えるようになる
+    -- ctrl-fとctrl-bでpreviewのウィンドウを移動できる
+    'kevinhwang91/nvim-bqf'
+  },
 }
