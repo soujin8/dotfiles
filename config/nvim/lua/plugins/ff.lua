@@ -1,7 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.4',
+    tag = '0.1.6',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('telescope').setup {
@@ -28,7 +28,8 @@ return {
       end
 
       local map, opts = vim.keymap.set, { noremap = true, silent = true }
-      map("n", "<leader>ff", function() telescope_cwd('find_files', { hidden = true }) end, opts)
+      -- map("n", "<leader>ff", function() telescope_cwd('find_files', { hidden = true }) end, opts)
+      map("n", "<leader>ff", function() telescope_cwd('git_files', { hidden = true }) end, opts)
       map("n", "<leader>gr", function() telescope_cwd('live_grep') end, opts)
       map("n", "<leader>ds", builtin.lsp_document_symbols, opts)
       map("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, opts)
