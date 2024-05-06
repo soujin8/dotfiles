@@ -10,9 +10,11 @@ return {
   {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end,
-    event = 'ModeChanged'
+    event = 'ModeChanged',
   },
-  { 'nicwest/vim-camelsnek' },
+  {
+    'nicwest/vim-camelsnek',
+  },
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -42,7 +44,7 @@ return {
   },
   {
     'lambdalisue/kensaku.vim',
-    dependencies = 'vim-denops/denops.vim'
+    dependencies = 'vim-denops/denops.vim',
   },
   {
     'mvllow/modes.nvim',
@@ -94,5 +96,15 @@ return {
     -- ctrl + q でtoggle-previewに入って、fzfzのアクションを行えるようになる
     -- ctrl-fとctrl-bでpreviewのウィンドウを移動できる
     'kevinhwang91/nvim-bqf'
+  },
+  -- splitting/joining lines
+  -- コードの意味を変えずに複数行を一行に、一行を複数行に変換する
+  {
+    'Wansmer/treesj',
+    keys = { '<space>m', '<space>j', '<space>s' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesj').setup({ --[[ your config ]] })
+    end,
   },
 }
