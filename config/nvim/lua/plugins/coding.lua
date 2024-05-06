@@ -1,6 +1,12 @@
 return {
   { 'mtdl9/vim-log-highlighting' },
-  { 'tpope/vim-commentary' },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- add any options here
+    },
+    lazy = false,
+  },
   {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end,
