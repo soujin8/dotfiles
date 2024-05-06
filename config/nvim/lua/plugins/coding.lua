@@ -59,13 +59,10 @@ return {
   },
   -- indent line
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {},
+    "shellRaining/hlchunk.nvim",
+    event = { "UIEnter" },
     config = function()
-      require("ibl").setup {}
-      vim.opt.list = true
-      vim.opt.listchars:append "eol:↴"
+      require("hlchunk").setup({})
     end
   },
   -- color preview
