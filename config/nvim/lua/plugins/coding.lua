@@ -34,6 +34,14 @@ return {
       vim.g.copilot_filetypes = { markdown = true, gitcommit = true, yaml = true }
     end
   },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   -- cmd = "Copilot",
+  --   -- event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({})
+  --   end,
+  -- },
   {
     'yuki-yano/fuzzy-motion.vim',
     dependencies = 'vim-denops/denops.vim',
