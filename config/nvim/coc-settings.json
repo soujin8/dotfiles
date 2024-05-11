@@ -88,10 +88,8 @@
     }
   },
 
-  "jedi.enable": true,
-  "jedi.startupMessage": false,
-
-  "snippets.ultisnips.pythonPrompt": false,
-
-  "Lua.diagnostics.globals": ["vim"]
+  "Lua.diagnostics.globals": [
+    "vim"
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }
