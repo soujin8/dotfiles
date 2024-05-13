@@ -15,3 +15,5 @@ mkdir -p "$XDG_CONFIG_HOME"
 ln -sfv "$REPO_DIR/config/"* "$XDG_CONFIG_HOME"
 ln -sfv "$XDG_CONFIG_HOME/zsh/.zshenv" "$HOME/.zshenv"
 ln -sfv "$XDG_CONFIG_HOME/tmux/tmux.conf" "$HOME/.tmux.conf"
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
