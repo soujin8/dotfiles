@@ -3,8 +3,11 @@ eval "$(starship init zsh)"
 
 eval "$(mise activate zsh)"
 
-# source $HOME/.cargo/env
-source $HOME/.local/share/cargo/env
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  source $HOME/.local/share/cargo/env
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  source $HOME/.cargo/env
+fi
 
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
