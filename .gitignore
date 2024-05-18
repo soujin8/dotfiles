@@ -8,3 +8,5 @@ config/zsh/.zsh_history
 config/tmux/plugins
 
 config/nvim/lazy-lock.json
+
+*__pycache__
