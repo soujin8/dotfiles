@@ -33,10 +33,12 @@ case "$OSTYPE" in
 esac
 
 # eza
-alias ls='eza --group-directories-first'
-alias la='eza --group-directories-first -a'
-alias ll='eza --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
-alias tree='eza --group-directories-first -T --icons'
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --group-directories-first'
+  alias la='eza --group-directories-first -a'
+  alias ll='eza --group-directories-first -al --header --color-scale --git --icons --time-style=long-iso'
+  alias tree='eza --group-directories-first -T --icons'
+fi
 
 # ---------------------------------------------------------
 # path
