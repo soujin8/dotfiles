@@ -2,9 +2,8 @@
 Description=xremap service
 
 [Service]
-# restart periodically
 Restart=always
-ExecStart=/usr/bin/xremap /home/hachi/.config/xremap/systemd/xremap.service
+ExecStart=/usr/bin/xremap /home/hachi/.config/xremap/config.yml
 User=root
 Group=root
 
