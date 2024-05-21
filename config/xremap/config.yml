@@ -35,7 +35,7 @@ keymap:
       # M-w: [C-c, { set_mark: false }]
       # C-y: [C-v, { set_mark: false }]
       # Delete
-      # C-d: [delete, { set_mark: false }]
+      C-d: [delete, { set_mark: false }]
       # M-d: [C-delete, { set_mark: false }]
       # Kill line
       # C-k: [Shift-end, C-x, { set_mark: false }]
