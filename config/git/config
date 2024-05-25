@@ -1,7 +1,7 @@
 [user]
-  email = 
-  name = 
-[includeIf "gitdir:~/dev/github.com/m-88888888/"]
+  email = mochi.h8888@gmail.com
+  name = soujin8
+[includeIf "gitdir:~/dev/github.com/soujin8/"]
   path = ~/.config/git/.gitconfig_private
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -23,7 +23,7 @@
 [ghq]
   vcs = git
   root = ~/dev
-  user = m-88888888
+  user = soujin8
 [credential]
   helper = osxkeychain
 [secrets]
