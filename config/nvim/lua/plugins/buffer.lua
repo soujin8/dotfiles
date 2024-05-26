@@ -2,7 +2,7 @@ return {
   {
     {
       'akinsho/bufferline.nvim',
-      tag = "v3.3.0",
+      branch = 'main',
       dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
       event = 'BufRead',
       config = function()
