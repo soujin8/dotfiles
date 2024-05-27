@@ -40,6 +40,9 @@ if command -v eza >/dev/null 2>&1; then
   alias tree='eza --group-directories-first -T --icons'
 fi
 
+# z for directory jump
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
 # ---------------------------------------------------------
 # path
 # ---------------------------------------------------------
