@@ -59,7 +59,7 @@ if vim.fn.has('mac') == 1 then
   vim.opt.clipboard = "unnamed"
 end
 if vim.fn.has('unix') == 1 then
-  vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard:append { 'unnamedplus' }
 end
 vim.g.signcolumn = true
 
