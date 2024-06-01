@@ -2,7 +2,6 @@ return {
   {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
-    cmd = 'DiffviewFileHistory *',
     config = function()
       vim.keymap.set('n', 'df', ':DiffviewOpen<CR>', {})
       vim.keymap.set('n', 'fdf', ':DiffviewFileHistory %<CR>', {})
@@ -20,8 +19,6 @@ return {
       }
 
       vim.keymap.set('n', '<leader>gg', ":Neogit<CR>", {})
-      vim.keymap.set('n', '<leader>gd', ":DiffviewOpen<CR>", {})
-      vim.keymap.set('n', '<leader>gD', ":DiffviewOpen staging<CR>", {})
       vim.keymap.set('n', '<leader>gl', ":Neogit log<CR>", {})
       vim.keymap.set('n', '<leader>gc', ":Neogit commit -v<CR>", {})
     end
