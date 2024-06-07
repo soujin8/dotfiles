@@ -109,7 +109,7 @@ return {
   -- コードの意味を変えずに複数行を一行に、一行を複数行に変換する
   {
     'Wansmer/treesj',
-    keys = { '<space>m', '<space>j', '<space>s' },
+    keys = { '<leader>m', '<leader>j', '<leader>s' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('treesj').setup({ --[[ your config ]] })
