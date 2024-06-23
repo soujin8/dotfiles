@@ -89,8 +89,7 @@
     }
   },
 
-  "Lua.diagnostics.globals": [
-    "vim"
-  ],
-  "snippets.ultisnips.pythonPrompt": false
+  "Lua.diagnostics.globals": ["vim"],
+  "snippets.ultisnips.pythonPrompt": false,
+  "pretty-ts-errors.mode": 2
 }

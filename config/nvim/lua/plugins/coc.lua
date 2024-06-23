@@ -25,7 +25,8 @@ if vim.env.LSP == 'coc' then
           'coc-rust-analyzer',
           'coc-diagnostic',
           'coc-lua',
-          '@yaegassy/coc-tailwindcss3'
+          '@yaegassy/coc-tailwindcss3',
+          'coc-pretty-ts-errors'
         }
 
         -- Some servers have issues with backup files, see #649
