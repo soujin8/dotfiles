@@ -290,6 +290,7 @@ exec_always --no-startup-id fix_xcursor
 
 # Japanese IME
 exec --no-startup-id fcitx5
+exec --no-startup-id xremap ~/dev/github.com/soujin8/dotfiles/config/xremap/config.yml
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
