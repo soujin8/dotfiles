@@ -292,6 +292,9 @@ exec_always --no-startup-id fix_xcursor
 exec --no-startup-id fcitx5
 exec --no-startup-id xremap ~/dev/github.com/soujin8/dotfiles/config/xremap/config.yml
 
+# スクリーンショット
+bindsym $mod+F4 exec "flameshot gui"
+
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
 # https://i3wm.org/docs/userguide.html#xresources
