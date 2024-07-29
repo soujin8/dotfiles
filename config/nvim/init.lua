@@ -1,8 +1,8 @@
 vim.loader.enable()
 
 if vim.env.LSP == nil then
-  -- vim.env.LSP = 'nvim'
-  vim.env.LSP = 'coc'
+  vim.env.LSP = 'nvim'
+  -- vim.env.LSP = 'coc'
 end
 
 require('rc.keymaps')
