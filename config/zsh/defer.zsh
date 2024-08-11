@@ -207,3 +207,13 @@ function zsh-startuptime() {
   average_msec=$(( ${total_msec} / 10 ))
   echo "\naverage: ${average_msec} [ms]"
 }
+
+function delta_diff() {
+  echo "Enter first input (end with Ctrl-D):"
+  input1=$(cat)
+  echo "Enter second input (end with Ctrl-D):"
+  input2=$(cat)
+
+  # プロセス置換を使用してdiffを取り、deltaで表示
+  delta <(echo "$input1") <(echo "$input2")
+}
