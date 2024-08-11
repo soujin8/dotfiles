@@ -11,67 +11,8 @@ if vim.env.LSP == "nvim" then
     },
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
-
-    { "L3MON4D3/LuaSnip" },
-
     -- 補完エンジン
-    {
-      "hrsh7th/nvim-cmp",
-      opts = function(_, opts)
-        -- refer: https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/completion/copilot-lua-cmp/init.lua
-        local cmp, copilot = require "cmp", require "copilot.suggestion"
-        local snip_status_ok, luasnip = pcall(require, "luasnip")
-        if not snip_status_ok then return end
-        local function has_words_before()
-          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-          return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-        end
-        if not opts.mapping then opts.mapping = {} end
-        opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-          if copilot.is_visible() then
-            copilot.accept()
-          elseif cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" })
-
-        opts.mapping["<C-x>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.next() end
-        end)
-
-        opts.mapping["<C-z>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.prev() end
-        end)
-
-        opts.mapping["<C-right>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.accept_word() end
-        end)
-
-        opts.mapping["<C-l>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.accept_word() end
-        end)
-
-        opts.mapping["<C-down>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.accept_line() end
-        end)
-
-        opts.mapping["<C-j>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.accept_line() end
-        end)
-
-        opts.mapping["<C-c>"] = cmp.mapping(function()
-          if copilot.is_visible() then copilot.dismiss() end
-        end)
-
-        return opts
-      end,
-    },
+    { "hrsh7th/nvim-cmp" },
     -- LSPを補完ソースにする
     { "hrsh7th/cmp-nvim-lsp" },
     -- bufferを補完ソースにする
@@ -84,12 +25,13 @@ if vim.env.LSP == "nvim" then
     { "hrsh7th/cmp-vsnip", },
     -- nvim-cmpと連携してアイコン表示
     { "onsails/lspkind.nvim", },
+    -- snippetの補完ソース
     { "saadparwaiz1/cmp_luasnip" },
+    -- snippet集
+    { "rafamadriz/friendly-snippets" },
     {
       "zbirenbaum/copilot-cmp",
-      config = function()
-        require("copilot_cmp").setup()
-      end
+      config = true
     },
     -- Improves the Neovim built-in LSP experience.
     {
@@ -115,10 +57,121 @@ if vim.env.LSP == "nvim" then
     -- LSPの起動状況や状態をいい感じに通知してくれる
     {
       "j-hui/fidget.nvim",
+      config = true
+    },
+    -- linter
+    {
+      -- https://www.josean.com/posts/neovim-linting-and-formatting
+      "mfussenegger/nvim-lint",
+      event = {
+        "BufReadPre",
+        "BufNewFile",
+      },
       config = function()
-        require("fidget").setup()
+        local lint = require("lint")
+
+        lint.linters_by_ft = {
+          javascript = { "eslint_d" },
+          typescript = { "eslint_d" },
+          javascriptreact = { "eslint_d" },
+          typescriptreact = { "eslint_d" },
+          svelte = { "eslint_d" },
+          sh = { "shellcheck" },
+          css = { "stylelint" },
+          scss = { "stylelint" },
+          sass = { "stylelint" },
+        }
+
+        local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+        vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+          group = lint_augroup,
+          callback = function()
+            lint.try_lint()
+            lint.try_lint("codespell")
+          end,
+        })
+
+        vim.keymap.set("n", "<leader>l", function()
+          lint.try_lint()
+          lint.try_lint("codespell")
+        end, { desc = "Trigger linting for current file" })
       end,
     },
+    -- formatter
+    {
+      "stevearc/conform.nvim",
+      event = { "BufReadPre", "BufNewFile" },
+      config = function()
+        local conform = require("conform")
+
+        conform.setup({
+          formatters_by_ft = {
+            javascript = { "prettier" },
+            typescript = { "prettier" },
+            javascriptreact = { "prettier" },
+            typescriptreact = { "prettier" },
+            svelte = { "prettier" },
+            css = { "prettier" },
+            html = { "prettier" },
+            json = { "prettier" },
+            yaml = { "prettier" },
+            markdown = { "prettier" },
+            graphql = { "prettier" },
+          },
+          format_on_save = {
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 500,
+          },
+        })
+
+        vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+          conform.format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 500,
+          })
+        end, { desc = "Format file or range (in visual mode)" })
+      end,
+    },
+    {
+      "folke/trouble.nvim",
+      opts = {}, -- for default options, refer to the configuration section for custom setup.
+      cmd = "Trouble",
+      keys = {
+        {
+          "<leader>xx",
+          "<cmd>Trouble diagnostics toggle<cr>",
+          desc = "Diagnostics (Trouble)",
+        },
+        {
+          "<leader>xX",
+          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+          desc = "Buffer Diagnostics (Trouble)",
+        },
+        {
+          "<leader>cs",
+          "<cmd>Trouble symbols toggle focus=false<cr>",
+          desc = "Symbols (Trouble)",
+        },
+        {
+          "<leader>cl",
+          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+          desc = "LSP Definitions / references / ... (Trouble)",
+        },
+        {
+          "<leader>xL",
+          "<cmd>Trouble loclist toggle<cr>",
+          desc = "Location List (Trouble)",
+        },
+        {
+          "<leader>xQ",
+          "<cmd>Trouble qflist toggle<cr>",
+          desc = "Quickfix List (Trouble)",
+        },
+      },
+    }
   }
 end
 

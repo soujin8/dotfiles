@@ -3,7 +3,15 @@ local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-mason.setup()
+mason.setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
+  },
+})
 mason_lspconfig.setup({
   ensure_installed = {
     "lua_ls",
@@ -12,6 +20,9 @@ mason_lspconfig.setup({
     "rust_analyzer",
     "tsserver",
     "tailwindcss",
+    "eslint",
+    -- "shellcheck",
+    -- "stylelint",
   },
   automatic_installation = true,
 })
@@ -32,7 +43,7 @@ set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 set("n", "<C-m>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 set("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-set("n", "<leader>fmt", function()
+set("n", "<leader>f", function()
   vim.lsp.buf.format({ async = true })
 end, opts)
 
@@ -51,7 +62,6 @@ local lspkind = require("lspkind")
 cmp.setup({
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
@@ -67,7 +77,6 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "vsnip" },
-    { name = "luasnip" },
     { name = "copilot", group_index = 2 },
     { name = "buffer" },
     { name = "path" },
