@@ -27,23 +27,13 @@ return {
       vim.keymap.set("n", "<Leader>md", ":MarkdownPreview<CR>")
     end
   },
-  -- {
-  --   'github/copilot.vim',
-  --   config = function()
-  --     -- yamlやmarkdown,gitcommitのときにもcopilotを有効にする
-  --     vim.g.copilot_filetypes = { markdown = true, gitcommit = true, yaml = true }
-  --   end
-  -- },
   {
     "zbirenbaum/copilot.lua",
     config = function()
-      -- require("copilot").setup()
       require("copilot").setup({
         suggestion = {
           enabled = false,
-          -- auto_trigger = true,
         },
-        -- panel = { enabled = false },
       })
     end,
   },
