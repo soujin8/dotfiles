@@ -18,7 +18,7 @@ return {
       }
 
       require('telescope').load_extension('fzf')
-      require('telescope').load_extension('file_browser')
+      -- require('telescope').load_extension('file_browser')
       local builtin = require('telescope.builtin')
 
       -- when a count N is given to a telescope mapping called through the following
@@ -35,7 +35,7 @@ return {
       map("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, opts)
       map('n', '<leader>fb', builtin.buffers, opts)
       map("n", "<leader>ts", "<cmd>Telescope<cr>", opts)
-      map("n", "<leader>df", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", opts)
+      -- map("n", "<leader>df", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", opts)
     end
   },
   {
@@ -44,8 +44,8 @@ return {
     build =
     'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  },
+  -- {
+  --   "nvim-telescope/telescope-file-browser.nvim",
+  --   dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  -- },
 }
