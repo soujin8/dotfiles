@@ -18,6 +18,6 @@ return {
       end,
     }
 
-    vim.keymap.set('n', 'fd', '<cmd>NvimTreeOpen<CR>', { buffer = true })
+    vim.keymap.set('n', 'fd', '<cmd>NvimTreeOpen<CR>', { noremap = true, silent = true })
   end
 }
