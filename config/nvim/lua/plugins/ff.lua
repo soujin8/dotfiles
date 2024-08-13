@@ -34,6 +34,7 @@ return {
       map("n", "<leader>ds", builtin.lsp_document_symbols, opts)
       map("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, opts)
       map('n', '<leader>fb', builtin.buffers, opts)
+      map("n", "<leader>fo", builtin.oldfiles, opts)
       map("n", "<leader>ts", "<cmd>Telescope<cr>", opts)
       -- map("n", "<leader>df", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", opts)
     end
