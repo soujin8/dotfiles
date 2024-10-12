@@ -31,7 +31,8 @@ if vim.env.LSP == "nvim" then
     { "rafamadriz/friendly-snippets" },
     {
       "zbirenbaum/copilot-cmp",
-      config = true
+      config = true,
+      event = "InsertEnter",
     },
     -- Improves the Neovim built-in LSP experience.
     {
@@ -115,12 +116,12 @@ if vim.env.LSP == "nvim" then
             css = { "prettier" },
             html = { "prettier" },
             json = { "prettier" },
-            yaml = { "prettier" },
+            -- yaml = { "prettier" },
             markdown = { "prettier" },
             graphql = { "prettier" },
           },
           format_on_save = {
-            lsp_fallback = true,
+            lsp_fallback = false,
             async = false,
             timeout_ms = 500,
           },

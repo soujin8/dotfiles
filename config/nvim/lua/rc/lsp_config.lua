@@ -78,10 +78,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "vsnip" },
-        { name = "copilot", group_index = 2 },
-        { name = "buffer" },
+        { name = "nvim_lsp", max_item_count = 15, keyword_length = 2 },
+        { name = "vsnip", max_item_count = 15, keyword_length = 2 },
+        { name = "copilot", max_item_count = 15, keyword_length = 2 },
+        { name = "nvim_lsp_signature_help" },
+        { name = "buffer", max_item_count = 15, keyword_length = 2 },
         { name = "path" },
       }),
       formatting = {
