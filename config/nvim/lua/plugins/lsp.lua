@@ -89,13 +89,13 @@ if vim.env.LSP == "nvim" then
           group = lint_augroup,
           callback = function()
             lint.try_lint()
-            lint.try_lint("codespell")
+            -- lint.try_lint("codespell")
           end,
         })
 
         vim.keymap.set("n", "<leader>l", function()
           lint.try_lint()
-          lint.try_lint("codespell")
+          -- lint.try_lint("codespell")
         end, { desc = "Trigger linting for current file" })
       end,
     },
