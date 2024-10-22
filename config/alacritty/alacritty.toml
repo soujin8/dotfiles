@@ -34,22 +34,26 @@ TERM = "xterm-256color"
 size = 16.0
 
 [font.bold]
-family = "PlemolJP Console NF"
+family = "Cica"
 style = "Bold"
 
+[font.bold_italic]
+family = "Cica"
+style = "Bold Italic"
+
 [font.italic]
-family = "PlemolJP Console NF"
+family = "Cica-BoldItalic"
 style = "Italic"
 
 [font.normal]
-family = "PlemolJP Console NF"
+family = "Cica"
 style = "Regular"
 
 # alacrittyでoptionをaltとして使うための設定
 # https://github.com/alacritty/alacritty/issues/7637
-[window]
-option_as_alt = "Both"
+#[window]
+#option_as_alt = "Both"
 
 [shell]
 args = ["--login"]
-program = "/opt/homebrew/bin/zsh"
+program = "/usr/bin/zsh"
