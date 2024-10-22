@@ -34,19 +34,19 @@ TERM = "xterm-256color"
 size = 16.0
 
 [font.bold]
-family = "Cica"
+family = "HackgenConsole"
 style = "Bold"
 
 [font.bold_italic]
-family = "Cica"
+family = "HackgenConsole"
 style = "Bold Italic"
 
 [font.italic]
-family = "Cica-BoldItalic"
+family = "HackgenConsole"
 style = "Italic"
 
 [font.normal]
-family = "Cica"
+family = "HackgenConsole"
 style = "Regular"
 
 # alacrittyでoptionをaltとして使うための設定
