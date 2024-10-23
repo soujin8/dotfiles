@@ -18,7 +18,7 @@ mason_lspconfig.setup({
     "ruby_lsp",
     "rubocop",
     "rust_analyzer",
-    "tsserver",
+    "ts_ls",
     "tailwindcss",
     "eslint",
     -- "shellcheck",
