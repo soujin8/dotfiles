@@ -290,8 +290,6 @@ exec_always --no-startup-id fix_xcursor
 
 # Japanese IME
 exec --no-startup-id fcitx5
-#
-# exec --no-startup-id xremap ~/dev/github.com/soujin8/dotfiles/config/xremap/config.yml
 
 # background image
 exec --no-startup-id "feh --bg-scale $HOME/Pictures/logo.jpg"
