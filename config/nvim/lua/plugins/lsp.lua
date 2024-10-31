@@ -72,11 +72,11 @@ if vim.env.LSP == "nvim" then
         local lint = require("lint")
 
         lint.linters_by_ft = {
-          javascript = { "eslint_d" },
-          typescript = { "eslint_d" },
-          javascriptreact = { "eslint_d" },
-          typescriptreact = { "eslint_d" },
-          svelte = { "eslint_d" },
+          javascript = { "eslint" },
+          typescript = { "eslint" },
+          javascriptreact = { "eslint" },
+          typescriptreact = { "eslint" },
+          svelte = { "eslint" },
           sh = { "shellcheck" },
           css = { "stylelint" },
           scss = { "stylelint" },
@@ -119,6 +119,9 @@ if vim.env.LSP == "nvim" then
             -- yaml = { "prettier" },
             markdown = { "prettier" },
             graphql = { "prettier" },
+            -- sql = { "sql-formatter" },
+            sql = { "sql_formatter" },
+            ruby = { "rubocop" }
           },
           format_on_save = {
             lsp_fallback = false,
