@@ -3,9 +3,10 @@ return {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function()
-      vim.keymap.set('n', 'df', ':DiffviewOpen<CR>', {})
-      vim.keymap.set('n', 'fdf', ':DiffviewFileHistory %<CR>', {})
-      vim.keymap.set('n', 'cdf', ':DiffviewClose<CR>', {})
+      vim.keymap.set('n', '<leader>df', ':DiffviewOpen HEAD~1<CR>', {desc = "1つ前とのdiff"})
+      vim.keymap.set('n', '<leader>dfh', ':DiffviewFileHistory %<CR>', {desc = "ファイルの変更履歴"})
+      vim.keymap.set('n', '<leader>cd', ':DiffviewClose<CR>', {})
+      vim.keymap.set('n', '<leader>dc', ':Diffview<CR>', {})
     end
   },
   {
@@ -98,20 +99,13 @@ return {
         -- Actions
         map('n', '<leader>hs', gs.stage_hunk)
         map('n', '<leader>hr', gs.reset_hunk)
-        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
         map('n', '<leader>hS', gs.stage_buffer)
         map('n', '<leader>hu', gs.undo_stage_hunk)
         map('n', '<leader>hR', gs.reset_buffer)
         map('n', '<leader>hp', gs.preview_hunk)
         map('n', '<leader>hb', function() gs.blame_line { full = true } end)
         map('n', '<leader>tb', gs.toggle_current_line_blame)
-        map('n', '<leader>hd', gs.diffthis)
-        map('n', '<leader>hD', function() gs.diffthis('~') end)
         map('n', '<leader>td', gs.toggle_deleted)
-
-        -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       end
     },
   },
