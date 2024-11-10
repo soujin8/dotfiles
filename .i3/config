@@ -324,10 +324,18 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
+#############################
+### settings for status bar(bumblebee-status): ###
+#############################
 
-# polybar(status bar)
-exec_always --no-startup-id /$HOME/.config/polybar/launch.sh
+bar {
+    font pango:HackgenConsole Bold 13
+    position top
+    status_command /usr/bin/bumblebee-status \
+        -m cpu memory pasink pasource bluetooth2 battery datetime \
+        -p datetime.format="%m/%d %H:%M" \
+        -t iceberg-powerline
+}
 
 
 # Theme colors
