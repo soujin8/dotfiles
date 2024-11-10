@@ -324,10 +324,11 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
-#############################
+##################################################
 ### settings for status bar(bumblebee-status): ###
-#############################
+##################################################
 
+# https://bumblebee-status.readthedocs.io/en/latest/index.html
 bar {
     font pango:HackgenConsole Bold 13
     position top
