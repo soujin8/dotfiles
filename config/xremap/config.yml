@@ -3,6 +3,10 @@ modmap:
   - name: Global
     remap:
       CapsLock: Ctrl_L
+      KEY_102ND: KEY_GRAVE
+      Alt_R: Ctrl_R
+      # Alt_L: Super_L
+      # Super_L: Alt_L
 
 keymap:
   - name: Emacs
