@@ -288,8 +288,7 @@ exec_always --no-startup-id fix_xcursor
 exec --no-startup-id fcitx5
 
 # background image
-exec --no-startup-id "feh --bg-scale ~/Pictures/logo.jpg"
-# exec --no-startup-id "feh --bg-scale ~/Wallpaper.png"
+exec_always --no-startup-id "feh --bg-scale ~/Pictures/home.jpeg"
 
 # スクリーンショット
 bindsym $mod+F4 exec "flameshot gui"
