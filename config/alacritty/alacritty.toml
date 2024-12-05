@@ -49,11 +49,12 @@ style = "Italic"
 family = "HackgenConsole"
 style = "Regular"
 
+[terminal]
 # alacrittyでoptionをaltとして使うための設定
 # https://github.com/alacritty/alacritty/issues/7637
 #[window]
 #option_as_alt = "Both"
 
-[shell]
+[terminal.shell]
 args = ["--login"]
 program = "/usr/bin/zsh"
