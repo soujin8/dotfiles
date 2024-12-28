@@ -2,12 +2,8 @@
 Description=xremap service
 
 [Service]
-; User=root
-; Group=root
-ExecStart=/usr/bin/xremap /home/hachi/.config/xremap/config.yml
-ExecStop=/usr/bin/killall xremap
-Type=simple
 Restart=always
+ExecStart=/usr/bin/xremap ~/.config/xremap/config.yml
 
 [Install]
 WantedBy=default.target
