@@ -3,7 +3,7 @@ Description=xremap service
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/xremap ~/.config/xremap/config.yml
+ExecStart=/usr/bin/xremap %h/.config/xremap/config.yml
 
 [Install]
 WantedBy=default.target
