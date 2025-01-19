@@ -31,22 +31,22 @@ LC_CTYPE = "ja_JP.UTF-8"
 TERM = "xterm-256color"
 
 [font]
-size = 16.0
+size = 14.0
 
 [font.bold]
-family = "HackgenConsole"
+family = "Hackgen35 Console NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "HackgenConsole"
+family = "Hackgen35 Console NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "HackgenConsole"
+family = "Hackgen35 Console NF"
 style = "Italic"
 
 [font.normal]
-family = "HackgenConsole"
+family = "Hackgen35 Console NF"
 style = "Regular"
 
 [terminal]
