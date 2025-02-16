@@ -16,7 +16,7 @@
 	pager = delta
 	quotepath = false
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [fetch]
   prune = true
 [ghq]
@@ -42,7 +42,7 @@
 [url "https://github.com/"]
 	insteadOf = git://github.com/
 [pull]
-    ff = only
+  ff = only
 [merge]
 	conflictstyle = diff3
 [diff]
