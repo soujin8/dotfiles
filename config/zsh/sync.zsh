@@ -218,3 +218,81 @@ function delta_diff() {
   # プロセス置換を使用してdiffを取り、deltaで表示
   delta <(echo "$input1") <(echo "$input2")
 }
+
+##
+# @brief 指定ディレクトリをdotfilesディレクトリへ移動し、元の場所にシンボリックリンクを作成する関数
+# @param target 移動対象のディレクトリ（必須）
+# @return 0 正常終了、1 異常終了
+#
+# Example usage:
+# mv_to_dotfiles ~/.config/nvim
+mv_to_dotfiles() {
+  # 引数の数を確認
+  if [[ $# -ne 1 ]]; then
+    echo "Usage: mv_to_dotfiles <target_directory>"
+    return 1
+  fi
+
+  local target="$1"
+  local dotfiles_dir="$HOME/dev/github.com/soujin8/dotfiles/config"
+
+  # 対象が存在するか確認
+  if [[ ! -e "$target" ]]; then
+    echo "Error: '$target' does not exist."
+    return 1
+  fi
+
+  # 対象がディレクトリであるか確認
+  if [[ ! -d "$target" ]]; then
+    echo "Error: '$target' is not a directory."
+    return 1
+  fi
+
+  # 対象がすでにシンボリックリンクの場合、ユーザーに確認
+  if [[ -L "$target" ]]; then
+    echo "Warning: '$target' is already a symbolic link. Continue? (y/N)"
+    read -q answer
+    echo
+    if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
+      echo "Operation cancelled."
+      return 1
+    fi
+  fi
+
+  # 絶対パスを取得
+  local abs_target
+  abs_target=$(realpath "$target") || { echo "Error: failed to resolve absolute path for '$target'."; return 1; }
+
+  # dotfilesディレクトリが存在しない場合はError
+  if [[ ! -d "$dotfiles_dir" ]]; then
+    echo "Error: failed to create dotfiles directory at '$dotfiles_dir'.";
+    return 1
+  fi
+
+  # 移動先パスを決定（basenameのみ利用）
+  local base_name
+  base_name=$(basename "$abs_target")
+  local new_location="$dotfiles_dir/$base_name"
+
+  # dotfiles内に同名のファイルが存在しないか確認
+  if [[ -e "$new_location" ]]; then
+    echo "Error: '$new_location' already exists in dotfiles."
+    return 1
+  fi
+
+  # 指定ディレクトリをdotfilesへ移動
+  if ! mv "$abs_target" "$new_location"; then
+    echo "Error: failed to move '$abs_target' to '$new_location'."
+    return 1
+  fi
+
+  # 元の場所にシンボリックリンクを作成
+  if ! ln -s "$new_location" "$abs_target"; then
+    echo "Error: failed to create symlink at '$abs_target'."
+    # 必要に応じて元に戻す処理を検討する
+    return 1
+  fi
+
+  echo "Successfully moved '$abs_target' to '$new_location' and created symlink."
+  return 0
+}
