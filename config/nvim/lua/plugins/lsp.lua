@@ -72,15 +72,16 @@ if vim.env.LSP == "nvim" then
         local lint = require("lint")
 
         lint.linters_by_ft = {
+          ruby = { "rubocop" },
           javascript = { "eslint" },
           typescript = { "eslint" },
           javascriptreact = { "eslint" },
           typescriptreact = { "eslint" },
           svelte = { "eslint" },
-          sh = { "shellcheck" },
-          css = { "stylelint" },
-          scss = { "stylelint" },
-          sass = { "stylelint" },
+          -- sh = { "shellcheck" },
+          -- css = { "stylelint" },
+          -- scss = { "stylelint" },
+          -- sass = { "stylelint" },
         }
 
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -121,7 +122,7 @@ if vim.env.LSP == "nvim" then
             graphql = { "prettier" },
             -- sql = { "sql-formatter" },
             sql = { "sql_formatter" },
-            ruby = { "rubocop" }
+            ruby = { "rubocop" },
           },
           format_on_save = {
             lsp_fallback = false,

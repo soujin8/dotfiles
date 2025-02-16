@@ -49,7 +49,7 @@ return {
       local select = require("CopilotChat.select")
 
       require("CopilotChat").setup({
-        debug = true,
+        -- debug = true,
         model = 'o3-mini',
 
         window = {
