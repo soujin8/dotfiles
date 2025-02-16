@@ -226,7 +226,7 @@ function delta_diff() {
 #
 # Example usage:
 # mv_to_dotfiles ~/.config/nvim
-mv_to_dotfiles() {
+function mv_to_dotfiles() {
   # 引数の数を確認
   if [[ $# -ne 1 ]]; then
     echo "Usage: mv_to_dotfiles <target_directory>"
