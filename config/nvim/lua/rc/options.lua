@@ -17,7 +17,7 @@ vim.opt.shiftwidth = 2
 -- タブ入力を複数の空白入力に置き換える
 vim.opt.expandtab = true
 -- フォント
-vim.opt.guifont = 'PlemolJP Console NF'
+vim.opt.guifont = 'HackGen35 Console NF'
 -- ファイル更新反映までの時間
 vim.opt.updatetime = 500
 -- 改行時に入力された行の末尾に合わせて次の行のインデントを増減する

@@ -50,6 +50,7 @@ return {
 
       require("CopilotChat").setup({
         debug = true,
+        model = 'o3-mini',
 
         window = {
           layout = "float",

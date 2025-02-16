@@ -15,6 +15,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export RUST_BACKTRACE=1
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export PATH="$HOME/.cargo/bin:$PATH"
+. "$HOME/.cargo/env"
 
 ### Go ###
 export GOPATH="$XDG_DATA_HOME/go"
@@ -33,3 +35,6 @@ export TERM=screen-256color
 
 # disable auto update on Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
+
+# deno
+. ~/.deno/env

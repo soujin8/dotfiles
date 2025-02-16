@@ -39,5 +39,5 @@ use = ["defer.zsh"]
 
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-use = ["sync.sh"]
+use = ["sync.zsh"]
 apply = ["source"]
