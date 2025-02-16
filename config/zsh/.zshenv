@@ -3,32 +3,21 @@ export LANG=ja_JP.UTF-8
 export LANGUAGE=jp
 
 ### XDG ###
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
 
 ### zsh ###
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
 ### Rust ###
 export RUST_BACKTRACE=1
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export PATH="$HOME/.cargo/bin:$PATH"
-. "$HOME/.cargo/env"
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+export CARGO_HOME=$XDG_DATA_HOME/cargo
 
 ### Go ###
-export GOPATH="$XDG_DATA_HOME/go"
-
-# Android
-export ANDROID_HOME=/Users/hayato.mochizuki/Library/Android/sdk
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-export PATH=$ANDROID_HOME/tools:$PATH
-
-# tealdeer
-export TEALDEER_CONFIG_DIR="$HOME/tealdeer"
-export TEALDEER_CACHE_DIR="$HOME/tealdeer"
+export GOPATH=$XDG_DATA_HOME/go
 
 # TrueColor
 export TERM=screen-256color
@@ -36,5 +25,34 @@ export TERM=screen-256color
 # disable auto update on Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-# deno
-. ~/.deno/env
+# PATH
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  /usr/bin
+  /usr/sbin
+  /bin
+  /sbin
+  /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
+  /Library/Apple/usr/bin(N-/)
+  $HOME/.local/bin(N-/)
+  $HOME/.cargo/bin(N-/)
+  $GOPATH/bin(N-/)
+  /opt/homebrew/opt/mysql-client/bin(N-/)
+)
+
+# load envfile
+envfiles=(
+  $HOME/.local/share/cargo/env(N)
+  $HOME/.cargo/env(N)
+  $HOME/.deno/env(N)
+)
+
+for envfile in $envfiles; do
+  [[ -r $envfile ]] && source $envfile
+done
+
+# direnv
+eval "$(direnv hook zsh)"
