@@ -20,7 +20,8 @@ export CARGO_HOME=$XDG_DATA_HOME/cargo
 export GOPATH=$XDG_DATA_HOME/go
 
 # TrueColor
-export TERM=screen-256color
+# export TERM=screen-256color
+# export TERM=xterm-256color
 
 # disable auto update on Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
