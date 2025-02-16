@@ -1,0 +1,24 @@
+# Read `man 5 sway` for a complete reference.
+
+# Default global config
+include $HOME/.config/sway/global_config
+
+include /etc/sway/outputs/*.conf
+include /etc/sway/inputs/*.conf
+
+# include modes
+include $HOME/.config/sway/modes/*.conf
+
+# Additional configs
+include /etc/sway/config.d/*.conf
+
+# User config
+include $HOME/.config/sway/config.d/*.conf
+
+# Include nwg-displays config's (if exists)
+include ~/.config/sway/outputs
+include ~/.config/sway/workspaces
+
+# User variables
+include $HOME/.config/sway/variables.d/*.conf
+

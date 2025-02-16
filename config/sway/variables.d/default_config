@@ -1,0 +1,129 @@
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# flock wrapper for running only one process
+set $flock /usr/share/sway/scripts/flock.sh
+
+# Your preferred terminal emulator
+set $term foot
+set $term_cwd $term -D "$(/usr/share/sway/scripts/swaycwd.sh 2>/dev/null || echo $HOME)"
+set $term_float footclient -a floating_shell
+
+# rofi theme
+set $rofi_theme "* {lightbg: $background-color; background: $background-color; lightfg: $accent-color; foreground: $text-color; border-color: $accent-color;} window {border: 2;}"
+
+# Your preferred application launcher
+# set $menu rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} {cmd}" -show-icons -font "$gui-font"
+set $menu fuzzel --font "$gui-font" --background $background-color --selection-color $accent-color --border-color $accent-color --text-color $text-color --selection-text-color $text-color --terminal $term
+
+# Add --to-code to bindsym, support for non-latin layouts
+set $bindsym bindsym --to-code
+
+# Volume notification
+set $volume_bar /usr/share/sway/scripts/volume-notify.sh
+
+# Brightness notification
+set $brightness_bar /usr/share/sway/scripts/brightness-notify.sh
+
+# brightness control
+set $brightness /usr/share/sway/scripts/brightness.sh
+set $brightness_up $brightness up && $brightness_bar
+set $brightness_down $brightness down && $brightness_bar
+
+# Volume control
+set $volume_down pulsemixer --change-volume -5 && $volume_bar
+set $volume_up pulsemixer --change-volume +5 && $volume_bar
+set $volume_mute pulsemixer --toggle-mute && $volume_bar
+
+# bluetooth menu
+set $bluetooth $flock $term_float bluetuith
+
+# Pulseaudo command
+set $pulseaudio $term_float pulsemixer
+
+# calendar application
+set $calendar $term_float calcurse
+
+# help overlay
+set $help_menu '[ -x "$(command -v nwg-wrapper)" ] && [ -f $HOME/.config/nwg-wrapper/help.sh ] && /usr/share/sway/scripts/help.sh'
+
+# help overlay command
+set $help /usr/share/sway/scripts/help.sh --toggle
+
+# workspace names
+set $ws1 number 1
+set $ws2 number 2
+set $ws3 number 3
+set $ws4 number 4
+set $ws5 number 5
+set $ws6 number 6
+set $ws7 number 7
+set $ws8 number 8
+set $ws9 number 9
+set $ws10 number 10
+
+# screenshot
+set $grimshot /usr/bin/grimshot
+set $pipe_output $grimshot save output -
+set $pipe_selection $grimshot save window -
+set $pipe_active $grimshot save active -
+set $notify_paste bash -c '[[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard"'
+set $swappy swappy -f -
+
+set $screenshot_screen $pipe_output | $swappy && $notify_paste
+set $screenshot_selection $pipe_selection | $swappy && $notify_paste
+set $screenshot_active $pipe_active | $swappy && $notify_paste
+
+# PolicyKit agent
+set $polkit_agent /usr/bin/mate-polkit
+
+# Night color
+set $wlsunset '[ -x "$(command -v wlsunset)" ] && /usr/share/sway/scripts/sunset.sh "on"'
+
+# Autotiling script
+set $autotiling '[ -x "$(command -v autotiling)" ] && autotiling -w 1 3 5 7 9'
+
+# switch between top-level containers (windows) in a workspace
+set $switch_toplevel '[ -f /usr/share/sway/scripts/switch-top-level.py ] && /usr/share/sway/scripts/switch-top-level.py'
+
+# Automatic workspace names
+set $autoname_workspaces '[ -f /usr/share/sway/scripts/autoname-workspaces.py ] && /usr/share/sway/scripts/autoname-workspaces.py'
+
+# restart kanshi https://github.com/emersion/kanshi/issues/43#issuecomment-531679213
+set $kanshi '[ -x "$(command -v kanshi)" ] && pkill kanshi; exec kanshi'
+
+# Start PCmanFM as a daemon
+set $pcmanfm_daemon '[ -x "$(command -v pcmanfm)" ] && pcmanfm -d'
+
+# Clipboard manager
+set $cliphist_store '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch cliphist store'
+set $cliphist_watch '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch pkill -RTMIN+9 waybar'
+
+# Start nwg-drawer as a daemon
+set $nwg_drawer_daemon '[ -x "$(command -v nwg-drawer)" ] && nwg-drawer -r -term "$term"'
+
+# Start playerctl as daemon
+set $watch_playerctl '[ -x "$(command -v playerctl)" ] && pkill playerctl; playerctl -a metadata --format \'{{status}} {{title}}\' --follow | while read line; do pkill -RTMIN+5 waybar; done'
+
+# Update Rofi theme based on $rofi_theme colors
+set $update_rofi_theme mkdir -p $HOME/.config/rofi/ && echo $rofi_theme > $HOME/.config/rofi/config.rasi
+
+# Start Calcurse calendar as a daemon
+set $calendar_daemon 'calcurse --daemon'
+
+# Notifications from Swappy
+set $swappy_notify '[ -x "$(command -v swappy)" ] && /usr/share/sway/scripts/screenshot-notify.sh'
+
+# Toggle shortcuts inhibition mode for the current focused window
+set $toggle_shorcuts_inhibitor 'swaymsg "seat - shortcuts_inhibitor toggle"'
+
+
+bindsym $mod+Shift+c reload
