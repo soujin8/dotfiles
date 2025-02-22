@@ -21,16 +21,26 @@ return {
     'nicwest/vim-camelsnek',
   },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && yarn install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     ft = { "markdown" },
+    keys = {
+      { "<Leader>sm", ":RenderMarkdown toggle<CR>" },
+    },
+    opts = {},
     config = function()
-      vim.keymap.set("n", "<Leader>md", ":MarkdownPreview<CR>")
-    end
+      require("render-markdown").setup {
+        heading = {
+          width = "block",
+          left_pad = 0,
+          right_pad = 4,
+          icons = {},
+        },
+        code = {
+          width = "block",
+        },
+      }
+    end,
   },
   {
     "zbirenbaum/copilot.lua",
@@ -173,7 +183,21 @@ return {
   {
     -- ctrl + q でtoggle-previewに入って、fzfzのアクションを行えるようになる
     -- ctrl-fとctrl-bでpreviewのウィンドウを移動できる
-    'kevinhwang91/nvim-bqf'
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+    config = function()
+      require('bqf').setup {
+        auto_enable = true,
+        func_map = {
+          vsplit = '',
+        },
+      }
+    end,
+  },
+  {
+    'stevearc/quicker.nvim',
+    event = "FileType qf",
+    opts = {},
   },
   -- splitting/joining lines
   -- コードの意味を変えずに複数行を一行に、一行を複数行に変換する

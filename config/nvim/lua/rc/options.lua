@@ -62,6 +62,8 @@ if vim.fn.has('unix') == 1 then
   vim.opt.clipboard = "unnamedplus"
 end
 vim.g.signcolumn = true
+-- 手動折りたたみ
+vim.opt.foldmethod = 'manual'
 
 -- 補完表示時のEnterで改行をしない
 vim.api.nvim_set_keymap("i", "<CR>", "pumvisible() ? '<C-y>' : '<CR>'", { expr = true, noremap = true })
