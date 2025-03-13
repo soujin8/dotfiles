@@ -3,7 +3,21 @@ modmap:
     remap:
       CapsLock: Ctrl_L
 
+# keypress_delay_ms: 20
+
 keymap:
+  - name: Mac Like SUPER
+    application:
+      not: [Alacritty, Firefox, Google-Chrome]
+    remap:
+      SUPER-c: CONTROL-c
+      SUPER-x: CONTROL-x
+      SUPER-v: CONTROL-v
+      SUPER-s: CONTROL-s
+      SUPER-f: CONTROL-f
+      SUPER-z: CONTROL-z
+      SUPER-SHIFT-z: CONTROL-SHIFT-z
+
   - name: Emacs
     application:
       not: [Alacritty]
