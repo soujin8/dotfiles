@@ -15,9 +15,9 @@ mason.setup({
 mason_lspconfig.setup({
   ensure_installed = {
     "lua_ls",
-    "ruby_lsp",
-    -- "rubocop@1.70.0",
-    "rubocop",
+    -- "ruby_lsp",
+    "rubocop@1.72.2",
+    -- "rubocop",
     "rust_analyzer",
     "ts_ls",
     "tailwindcss",
