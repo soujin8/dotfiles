@@ -60,7 +60,8 @@ return {
 
       require("CopilotChat").setup({
         -- debug = true,
-        model = 'o3-mini',
+        -- model = 'o3-mini',
+        model = 'claude-3.7-sonnet-thought',
 
         window = {
           layout = "float",
