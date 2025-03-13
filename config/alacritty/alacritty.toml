@@ -31,7 +31,7 @@ LC_CTYPE = "ja_JP.UTF-8"
 TERM = "xterm-256color"
 
 [font]
-size = 14.0
+size = 12.0
 
 [font.bold]
 family = "Hackgen35 Console NF"
