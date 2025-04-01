@@ -9,3 +9,7 @@ shell 依存関係
     |- sync.zsh
        |- starship
 ```
+
+```
+curl -L raw.githubusercontent.com/soujin8/dotfiles/refs/heads/master/install.sh | bash
+```
