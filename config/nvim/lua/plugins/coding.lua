@@ -210,4 +210,12 @@ return {
       require('treesj').setup({ --[[ your config ]] })
     end,
   },
+  -- コメントアノテーション自動生成
+  {
+    "danymat/neogen",
+    config = true,
+    keys = {
+      { '<leader>d', ':Neogen<CR>' }
+    },
+  }
 }
