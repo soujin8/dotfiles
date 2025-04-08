@@ -1,39 +1,15 @@
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local node_servers = require("cli.node_servers")
 
-mason.setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
-mason_lspconfig.setup({
-  ensure_installed = {
-    "lua_ls",
-    -- "ruby_lsp",
-    "rubocop@1.72.2",
-    -- "rubocop",
-    "rust_analyzer",
-    "ts_ls",
-    "tailwindcss",
-    "eslint",
-    -- "shellcheck",
-    -- "stylelint",
-  },
-  automatic_installation = true,
-})
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    lspconfig[server_name].setup({
-      capabilities = capabilities
-    })
-  end,
-}
+-- node_servers を有効化
+node_servers.config({ dir = node_servers.dir })
+
+-- Existing LSP configurations
+lspconfig.lua_ls.setup {}
+lspconfig.rubocop.setup {}
+lspconfig.ts_ls.setup {}
+lspconfig.eslint.setup {}
+lspconfig.stylelint_lsp.setup {}
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Attach key mappings for LSP functionalities",

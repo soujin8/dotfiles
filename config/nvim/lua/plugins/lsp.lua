@@ -2,15 +2,7 @@ local config = {}
 
 if vim.env.LSP == "nvim" then
   config = {
-    {
-      "neovim/nvim-lspconfig",
-      dependencies = {
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
-      },
-    },
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
+    { "neovim/nvim-lspconfig" },
     -- 補完エンジン
     { "hrsh7th/nvim-cmp" },
     -- LSPを補完ソースにする
@@ -79,9 +71,9 @@ if vim.env.LSP == "nvim" then
           typescriptreact = { "eslint" },
           svelte = { "eslint" },
           -- sh = { "shellcheck" },
-          -- css = { "stylelint" },
-          -- scss = { "stylelint" },
-          -- sass = { "stylelint" },
+          css = { "stylelint" },
+          scss = { "stylelint" },
+          sass = { "stylelint" },
         }
 
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -120,9 +112,9 @@ if vim.env.LSP == "nvim" then
             -- yaml = { "prettier" },
             markdown = { "prettier" },
             graphql = { "prettier" },
-            -- sql = { "sql-formatter" },
             sql = { "sql_formatter" },
             ruby = { "rubocop" },
+            scss = { "stylelint_lsp" },
           },
           format_on_save = {
             lsp_fallback = false,
