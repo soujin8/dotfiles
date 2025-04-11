@@ -1,7 +1,11 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-fzf-native.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
+    },
     config = function()
       require('telescope').setup {
         defaults = {
@@ -13,9 +17,9 @@ return {
           preview = {
             hide_on_startup = true -- hide previewer when picker starts
           }
-        }
+        },
       }
-
+      require("telescope").load_extension("ui-select")
       require('telescope').load_extension('fzf')
 
       local builtin = require('telescope.builtin')
@@ -37,9 +41,6 @@ return {
       map("n", "<leader>ts", "<cmd>Telescope<cr>", opts)
     end
   },
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    dependencies = { "nvim-lua/plenary.nvim" },
-    build ='cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
-  },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  { 'nvim-telescope/telescope-ui-select.nvim' },
 }

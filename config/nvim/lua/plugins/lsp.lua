@@ -115,6 +115,7 @@ if vim.env.LSP == "nvim" then
             sql = { "sql_formatter" },
             ruby = { "rubocop" },
             scss = { "stylelint_lsp" },
+            lua = { "lua_ls" },
           },
           format_on_save = {
             lsp_fallback = false,
@@ -123,7 +124,7 @@ if vim.env.LSP == "nvim" then
           },
         })
 
-        vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+        vim.keymap.set({ "n", "v" }, "<leader>f", function()
           conform.format({
             lsp_fallback = true,
             async = false,

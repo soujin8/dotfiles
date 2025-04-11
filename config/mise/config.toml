@@ -1,4 +1,5 @@
 [tools]
+bun = "latest"
 deno = "latest"
 ghq = "latest"
 node = "latest"

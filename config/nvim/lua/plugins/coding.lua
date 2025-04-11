@@ -53,74 +53,56 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = 'nvim-telescope/telescope.nvim',
+    dependencies = {
+      { 'nvim-telescope/telescope.nvim' },
+      { "github/copilot.vim" },
+      { "nvim-lua/plenary.nvim",        branch = "master" },
+    },
     build = "make tiktoken",
+    -- keys = {},
+    opts = {
+      debug = true,
+      -- model = 'gpt-4o',
+      model = 'gpt-4o:github_models',
+      prompts = {
+        Explain = {
+          prompt = "選択されたコードの説明を段落をつけて書いてください。",
+          system_prompt = 'COPILOT_EXPLAIN',
+        },
+        Review = {
+          prompt = "選択されたコードをレビューしてください。",
+          system_prompt = 'COPILOT_REVIEW ',
+        },
+        Commit = {
+          prompt =
+          'Write commit message for the change with commitizen convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.',
+          system_prompt = 'git:staged',
+        },
+        Fix = {
+          prompt = "/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き直してください。",
+        },
+        Optimize = {
+          prompt = "/COPILOT_REFACTOR 選択されたコードを最適化してパフォーマンスと可読性を向上させてください。",
+        },
+        Docs = {
+          prompt = "/COPILOT_DOCS 選択されたコードに対してドキュメンテーションコメントを追加してください。",
+        },
+        Tests = {
+          prompt = "/COPILOT_TESTS 選択されたコードの詳細な単体テスト関数を書いてください。",
+        },
+        FixDiagnostic = {
+          prompt = "ファイル内の次のような診断上の問題を解決してください:",
+        },
+      },
+      sticky = {
+        '@models Using Mistral-small',
+        '#files',
+      }
+    },
     config = function()
-      local select = require("CopilotChat.select")
-
-      require("CopilotChat").setup({
-        -- debug = true,
-        -- model = 'o3-mini',
-        model = 'claude-3.7-sonnet-thought',
-
-        window = {
-          layout = "float",
-          relative = "editor",
-        },
-        prompts = {
-          Explain = {
-            prompt = "/COPILOT_EXPLAIN 選択されたコードの説明を段落をつけて書いてください。",
-          },
-          Review = {
-            prompt = "/COPILOT_REVIEW 選択されたコードをレビューしてください。",
-            callback = function(response, source) end,
-          },
-          Fix = {
-            prompt = "/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き直してください。",
-          },
-          Optimize = {
-            prompt = "/COPILOT_REFACTOR 選択されたコードを最適化してパフォーマンスと可読性を向上させてください。",
-          },
-          Docs = {
-            prompt = "/COPILOT_DOCS 選択されたコードに対してドキュメンテーションコメントを追加してください。",
-          },
-          Tests = {
-            prompt = "/COPILOT_TESTS 選択されたコードの詳細な単体テスト関数を書いてください。",
-          },
-          FixDiagnostic = {
-            prompt = "ファイル内の次のような診断上の問題を解決してください:",
-            selection = select.diagnostics,
-          },
-        },
-      })
-
-      function CopilotChatBuffer()
-        local input = vim.fn.input("Quick Chat: ")
-        if input ~= "" then
-          require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-        end
-      end
-
-      vim.api.nvim_set_keymap("n", "<leader>9", "<cmd>lua CopilotChatBuffer()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("v", "<leader>9", "<cmd>lua CopilotChatBuffer()<cr>", { noremap = true, silent = true })
-
-      function ShowCopilotChatActionPrompt()
-        local actions = require("CopilotChat.actions")
-        require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-      end
-
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>0",
-        "<cmd>lua ShowCopilotChatActionPrompt()<cr>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "<leader>0",
-        "<cmd>lua ShowCopilotChatActionPrompt()<cr>",
-        { noremap = true, silent = true }
-      )
+      require("CopilotChat").setup {}
+        vim.api.nvim_set_keymap("n", "<leader>0", ":CopilotChatPrompts <CR>", { noremap = true, silent = true })
+        vim.api.nvim_set_keymap("n", "<leader>9", ":CopilotChatToggle <CR>", { noremap = true, silent = true })
     end
   },
   {
