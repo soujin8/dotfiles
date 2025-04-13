@@ -65,6 +65,8 @@ defaults write com.apple.AppleMultitouchTrackpad Dragging -bool "true"
 defaults write com.apple.AppleMultitouchTrackpad.trackpad DragLock -bool "true"
 defaults write com.apple.AppleMultitouchTrackpad.trackpad Dragging -bool "true"
 
+# https://zenn.dev/mozumasu/articles/mozumasu-window-costomization#aerospace%E4%BD%BF%E7%94%A8%E6%99%82%E3%81%ABmission-control%E3%81%AE%E7%94%BB%E9%9D%A2%E3%81%8C%E5%B0%8F%E3%81%95%E3%81%8F%E3%81%AA%E3%82%8B%E5%95%8F%E9%A1%8C
+defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
 
 # Security
 ## ファイアウォールon
