@@ -10,3 +10,5 @@ config/tmux/plugins
 config/nvim/lazy-lock.json
 
 *__pycache__
+
+*vendor
