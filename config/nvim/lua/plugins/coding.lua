@@ -59,50 +59,43 @@ return {
       { "nvim-lua/plenary.nvim",        branch = "master" },
     },
     build = "make tiktoken",
-    -- keys = {},
-    opts = {
-      debug = true,
-      -- model = 'gpt-4o',
-      model = 'gpt-4o:github_models',
-      prompts = {
-        Explain = {
-          prompt = "選択されたコードの説明を段落をつけて書いてください。",
-          system_prompt = 'COPILOT_EXPLAIN',
-        },
-        Review = {
-          prompt = "選択されたコードをレビューしてください。",
-          system_prompt = 'COPILOT_REVIEW ',
-        },
-        Commit = {
-          prompt =
-          'Write commit message for the change with commitizen convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.',
-          system_prompt = 'git:staged',
-        },
-        Fix = {
-          prompt = "/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き直してください。",
-        },
-        Optimize = {
-          prompt = "/COPILOT_REFACTOR 選択されたコードを最適化してパフォーマンスと可読性を向上させてください。",
-        },
-        Docs = {
-          prompt = "/COPILOT_DOCS 選択されたコードに対してドキュメンテーションコメントを追加してください。",
-        },
-        Tests = {
-          prompt = "/COPILOT_TESTS 選択されたコードの詳細な単体テスト関数を書いてください。",
-        },
-        FixDiagnostic = {
-          prompt = "ファイル内の次のような診断上の問題を解決してください:",
-        },
-      },
-      sticky = {
-        '@models Using Mistral-small',
-        '#files',
-      }
-    },
     config = function()
-      require("CopilotChat").setup {}
-        vim.api.nvim_set_keymap("n", "<leader>0", ":CopilotChatPrompts <CR>", { noremap = true, silent = true })
-        vim.api.nvim_set_keymap("n", "<leader>9", ":CopilotChatToggle <CR>", { noremap = true, silent = true })
+      require("CopilotChat").setup {
+        debug = true,
+        proxy = nil,
+        allow_insecure = false,
+        model = 'claude-3.7-sonnet',
+        temperature = 0.1,
+        prompts = {
+          Explain = {
+            prompt = '/COPILOT_EXPLAIN 選択したコードの説明を段落をつけて書いてください。',
+          },
+          Fix = {
+            prompt = '/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き換えてください。',
+          },
+          Optimize = {
+            prompt = '/COPILOT_OPTIMIZE 選択したコードを最適化し、パフォーマンスと可読性を向上させてください。',
+          },
+          Docs = {
+            prompt = '/COPILOT_DOCS 選択したコードのドキュメントを書いてください。ドキュメントをコメントとして追加した元のコードを含むコードブロックで回答してください。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：JavaScriptのJSDoc、Pythonのdocstringsなど）',
+          },
+          Tests = {
+            prompt = '/COPILOT_TESTS 選択したコードの詳細な単体テスト関数を書いてください。',
+          },
+          FixDiagnostic = {
+            prompt = '/COPILOT_FIXDIAGNOSTIC ファイル内の次のような診断上の問題を解決してください：',
+          },
+          Commit = {
+            prompt = '/COPILOT_COMMIT この変更をコミットしてください。',
+          },
+          CommitStaged = {
+            prompt = '/COPILOT_COMMITSTAGED ステージングされた変更をコミットしてください。',
+          },
+        },
+      }
+      vim.api.nvim_set_keymap("n", "<leader>0", ":CopilotChatPrompts <CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("v", "<leader>0", ":CopilotChatPrompts <CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>9", ":CopilotChatToggle <CR>", { noremap = true, silent = true })
     end
   },
   {
@@ -154,7 +147,9 @@ return {
   },
   -- coding for Ruby on Rails application
   { 'slim-template/vim-slim' },
-  { 'tpope/vim-rails' },
+  {
+    'tpope/vim-rails',
+  },
   -- generate code documentation
   {
     "danymat/neogen",

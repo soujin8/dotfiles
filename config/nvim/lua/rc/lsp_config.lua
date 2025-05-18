@@ -6,10 +6,22 @@ node_servers.config({ dir = node_servers.dir })
 
 -- Existing LSP configurations
 lspconfig.lua_ls.setup {}
-lspconfig.rubocop.setup {}
+lspconfig.rubocop.setup {
+  -- cmd = { "bundle", "exec", "rubocop" },
+  -- root_markers = {
+  --   "/home/h-mochizuki/dev/github.com/soujin8/dotfiles/config/nvim/lua/cli/ruby_servers/Gemfile"
+  -- }
+}
+lspconfig.ruby_lsp.setup {
+  -- cmd = { "bundle", "exec", "ruby-lsp" },
+  -- root_markers = {
+  --   "/home/h-mochizuki/dev/github.com/soujin8/dotfiles/config/nvim/lua/cli/ruby_servers/Gemfile"
+  -- }
+}
 lspconfig.ts_ls.setup {}
 lspconfig.eslint.setup {}
 lspconfig.stylelint_lsp.setup {}
+-- lspconfig.denols.setup{}
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Attach key mappings for LSP functionalities",
