@@ -28,3 +28,6 @@ Temporary Items
 node_modules
 Brewfile.lock.json
 .envrc
+
+# claude
+**/.claude/settings.local.json
