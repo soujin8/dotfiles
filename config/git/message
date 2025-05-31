@@ -8,6 +8,8 @@
 # refactor  refactoring
 # test      when adding missing tests
 # chore     maintain
+# build     build system
+# ci        CircleCI, GitHub Actions
 
 # [optional body]
 
