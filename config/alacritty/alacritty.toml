@@ -31,30 +31,32 @@ LC_CTYPE = "ja_JP.UTF-8"
 TERM = "xterm-256color"
 
 [font]
-size = 12.0
+size = 16.0
 
 [font.bold]
-family = "Hackgen35 Console NF"
+family = "PlemolJP Console NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "Hackgen35 Console NF"
+family = "PlemolJP Console NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "Hackgen35 Console NF"
+family = "PlemolJP Console NF"
 style = "Italic"
 
 [font.normal]
-family = "Hackgen35 Console NF"
+family = "PlemolJP Console NF"
 style = "Regular"
 
 [terminal]
 # alacrittyでoptionをaltとして使うための設定
 # https://github.com/alacritty/alacritty/issues/7637
-#[window]
-#option_as_alt = "Both"
+[window]
+option_as_alt = "Both"
 
 [terminal.shell]
 args = ["--login"]
-program = "/usr/bin/zsh"
+# TODO macos/linuxで切り替えたい
+# program = "/usr/bin/zsh"
+program = "/opt/homebrew/bin/zsh"
