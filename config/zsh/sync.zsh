@@ -78,13 +78,6 @@ fi
 # function
 # ---------------------------------------------------------
 
-function ide() {
-  tmux split-window -v
-  tmux split-window -h
-  tmux resize-pane -D 15
-  tmux select-pane -t 1
-}
-
 function dev() {
     moveto=$(ghq root)/$(ghq list | fzf)
     cd $moveto
@@ -136,7 +129,7 @@ function f() {
 }
 
 function sshsp() {
-  local host=$(grep -E "^Host " ~/.ssh/conf.d/hosts/* | sed -e 's/.*Host[ ]*//g' | fzf)
+  local host=$(grep -E "^Host " ~/.ssh/config | sed -e 's/.*Host[ ]*//g' | fzf)
   if [ -n "$host" ]; then
     ssh $host
   fi
