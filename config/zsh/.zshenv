@@ -42,6 +42,9 @@ path=(
   $HOME/.cargo/bin(N-/)
   $GOPATH/bin(N-/)
   /opt/homebrew/opt/mysql-client/bin(N-/)
+  /snap/bin(N-/)
+  /opt/nvim-linux-x86_64/bin(N-/)
+  $HOME/.local/share/aquaproj-aqua/bin(N-/)
 )
 
 # load envfile
