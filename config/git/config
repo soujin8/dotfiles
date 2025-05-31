@@ -1,4 +1,5 @@
 [user]
+  path = ~/.git_user_profile
 [includeIf "gitdir:~/dev/github.com/soujin8/"]
   path = ~/.config/git/.gitconfig_private
 [alias]
