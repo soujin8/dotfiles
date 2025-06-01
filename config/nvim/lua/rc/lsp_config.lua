@@ -6,21 +6,12 @@ node_servers.config({ dir = node_servers.dir })
 
 -- Existing LSP configurations
 lspconfig.lua_ls.setup {}
-lspconfig.rubocop.setup {
-  -- cmd = { "bundle", "exec", "rubocop" },
-  -- root_markers = {
-  --   "/home/h-mochizuki/dev/github.com/soujin8/dotfiles/config/nvim/lua/cli/ruby_servers/Gemfile"
-  -- }
-}
-lspconfig.ruby_lsp.setup {
-  -- cmd = { "bundle", "exec", "ruby-lsp" },
-  -- root_markers = {
-  --   "/home/h-mochizuki/dev/github.com/soujin8/dotfiles/config/nvim/lua/cli/ruby_servers/Gemfile"
-  -- }
-}
+lspconfig.rubocop.setup {}
+lspconfig.ruby_lsp.setup {}
 lspconfig.ts_ls.setup {}
 lspconfig.eslint.setup {}
 lspconfig.stylelint_lsp.setup {}
+lspconfig.astro_ls.setup {}
 -- lspconfig.denols.setup{}
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -67,11 +58,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp", max_item_count = 15, keyword_length = 2 },
-        { name = "vsnip", max_item_count = 15, keyword_length = 2 },
-        { name = "copilot", max_item_count = 15, keyword_length = 2 },
+        { name = "nvim_lsp",               max_item_count = 15, keyword_length = 2 },
+        { name = "vsnip",                  max_item_count = 15, keyword_length = 2 },
+        { name = "copilot",                max_item_count = 15, keyword_length = 2 },
         { name = "nvim_lsp_signature_help" },
-        { name = "buffer", max_item_count = 15, keyword_length = 2 },
+        { name = "buffer",                 max_item_count = 15, keyword_length = 2 },
         { name = "path" },
       }),
       formatting = {
