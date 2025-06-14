@@ -2,5 +2,6 @@
 bun = "latest"
 deno = "latest"
 ghq = "latest"
+go = "latest"
 node = "latest"
 ruby = "latest"

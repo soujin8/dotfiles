@@ -12,3 +12,8 @@ config/nvim/lazy-lock.json
 *__pycache__
 
 *vendor
+
+config/claude/projects
+config/claude/statsig
+config/claude/todos
+config/claude/.credentials.json
