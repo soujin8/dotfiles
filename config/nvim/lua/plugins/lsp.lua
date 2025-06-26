@@ -11,14 +11,10 @@ if vim.env.LSP == "nvim" then
     { "hrsh7th/cmp-buffer" },
     -- pathを補完ソースにする
     { "hrsh7th/cmp-path", },
-    -- スニペットエンジン
-    { "hrsh7th/vim-vsnip", },
-    -- vim-vsnipの補完ソース
-    { "hrsh7th/cmp-vsnip", },
+    -- LuaSnipの補完ソース
+    { "saadparwaiz1/cmp_luasnip" },
     -- nvim-cmpと連携してアイコン表示
     { "onsails/lspkind.nvim", },
-    -- snippetの補完ソース
-    { "saadparwaiz1/cmp_luasnip" },
     -- snippet集
     { "rafamadriz/friendly-snippets" },
     {

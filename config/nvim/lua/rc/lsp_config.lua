@@ -41,11 +41,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local cmp = require("cmp")
     local lspkind = require("lspkind")
+    local luasnip = require("luasnip")
 
     cmp.setup({
       snippet = {
         expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert({
@@ -59,7 +60,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp",               max_item_count = 15, keyword_length = 2 },
-        { name = "vsnip",                  max_item_count = 15, keyword_length = 2 },
+        { name = "luasnip",                max_item_count = 15, keyword_length = 2 },
         { name = "copilot",                max_item_count = 15, keyword_length = 2 },
         { name = "nvim_lsp_signature_help" },
         { name = "buffer",                 max_item_count = 15, keyword_length = 2 },
