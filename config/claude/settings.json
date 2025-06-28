@@ -69,5 +69,6 @@
       "Bash(docker-compose:*)"
     ],
     "deny": []
-  }
+  },
+  "model": "opus"
 }
