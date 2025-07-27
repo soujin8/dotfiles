@@ -26,6 +26,8 @@ export GOPATH=$XDG_DATA_HOME/go
 # disable auto update on Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 
+export EDITOR="nvim"
+
 # PATH
 typeset -U path PATH
 path=(
