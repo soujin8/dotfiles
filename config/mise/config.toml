@@ -1,8 +1,0 @@
-[tools]
-bun = "latest"
-deno = "latest"
-ghq = "latest"
-go = "latest"
-java = "latest"
-node = "latest"
-ruby = "latest"
