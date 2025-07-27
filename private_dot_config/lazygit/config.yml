@@ -1,0 +1,17 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+gui:
+  sidePanelWidth: 0.5
+  language: "en"
+  showIcons: true
+  theme:
+    selectedLineBgColor:
+      - underline
+    selectedRangeBgColor:
+      - underline
+refresher:
+  refreshInterval: 3
+os:
+  edit: "nvim"

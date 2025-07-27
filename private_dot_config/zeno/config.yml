@@ -1,0 +1,49 @@
+snippets:
+  # git
+  - name: git status
+    keyword: gs
+    snippet: git status
+  - name: git commit message
+    keyword: gc
+    snippet: git commit -m '{{commit_message}}'
+  - name: git diff
+    keyword: gd
+    snippet: git diff
+  - name: git push -u origin HEAD
+    keyword: gp
+    snippet: git push -u origin HEAD
+  - name: git checkout to develop, pull and delete topic branch
+    keyword: gcd
+    snippet: g checkout develop && git pull && gh poi
+
+  # bundle
+  - name: bundle exec
+    keyword: be
+    snippet: bundle exec
+  # rspec
+  - name: rspec xargs
+    keyword: rspecx
+    snippet: find spec -type f | fzf | xargs bundle exec rspec
+  - name: copy-spec-file
+    keyword: csf
+    snippet: find spec -type f | fzf | pbcopy
+  - name: execute rspec with pbcopy
+    keyword: exe-spec
+    snippet: bundle exec rspec
+  - name: rspec request
+    keyword: rspec request
+    snippet: find spec/requests -type f | fzf | xargs bundle exec rspec
+  # rake
+  - name: rake task
+    keyword: raketask
+    snippet: bin/rake -T | fzf | xargs bundle exec
+
+completions:
+  - name: kill
+    patterns:
+      - "^kill( -9)? $"
+    sourceCommand: "ps -ef | sed 1d"
+    options:
+      --multi: true
+      --prompt: "'Kill Process> '"
+    callback: "awk '{print $2}'"

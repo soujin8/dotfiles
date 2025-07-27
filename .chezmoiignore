@@ -1,0 +1,27 @@
+# chezmoi
+.config/chezmoi
+
+# Claude Code
+.claude/local
+.claude/projects
+.claude/statsig
+.claude/todos
+**/.credentials.json
+
+# zsh
+config/zsh/.zcompdump
+config/zsh/.zsh_sessions
+config/zsh/.zcompcache
+config/zsh/.zsh_history
+
+# tmux
+config/tmux/plugins
+
+# nvim
+config/nvim/lazy-lock.json
+
+# ranger
+*__pycache__
+
+**/vendor
+**/node_modules

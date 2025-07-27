@@ -1,0 +1,18 @@
+{
+  "name": "node_servers",
+  "module": "index.ts",
+  "dependencies": {
+    "@astrojs/language-server": "^2.15.4",
+    "@tailwindcss/language-server": "^0.14.14",
+    "biome": "^0.3.3",
+    "emmet-ls": "^0.4.2",
+    "sql-language-server": "^1.7.1",
+    "stylelint": "^16.18.0",
+    "stylelint-lsp": "^2.0.1",
+    "typescript": "^5.8.3",
+    "typescript-language-server": "^4.3.4",
+    "vscode-langservers-extracted": "^4.10.0",
+    "yaml-language-server": "^1.17.0"
+  },
+  "type": "module"
+}

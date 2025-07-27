@@ -13,7 +13,9 @@ config/nvim/lazy-lock.json
 
 *vendor
 
-config/claude/projects
-config/claude/statsig
-config/claude/todos
-config/claude/.credentials.json
+dot_claude/projects
+dot_claude/statsig
+dot_claude/todos
+dot_claude/.credentials.json
+
+private_dot_config/tmux/plugins
