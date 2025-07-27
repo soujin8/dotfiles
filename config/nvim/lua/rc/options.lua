@@ -55,12 +55,7 @@ vim.opt.mouse = ""
 -- コマンドのメッセージ表示欄を2行にする
 vim.opt.cmdheight = 2
 -- クリップボード
-if vim.fn.has('mac') == 1 then
-  vim.opt.clipboard = "unnamed"
-end
-if vim.fn.has('unix') == 1 then
-  vim.opt.clipboard = "unnamedplus"
-end
+vim.opt.clipboard = "unnamed,unnamedplus"
 vim.g.signcolumn = true
 -- 手動折りたたみ
 vim.opt.foldmethod = 'manual'
