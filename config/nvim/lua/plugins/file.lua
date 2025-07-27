@@ -3,6 +3,9 @@ return {
   dependencies = { 'kyazdani42/nvim-web-devicons' },
   config = function()
     require("nvim-tree").setup {
+      view = {
+        width = 50,  -- デフォルトは30
+      },
       on_attach = function(bufnr)
         local api = require "nvim-tree.api"
 

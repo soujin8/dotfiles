@@ -7,7 +7,7 @@ node_servers.config({ dir = node_servers.dir })
 -- Existing LSP configurations
 lspconfig.lua_ls.setup {}
 lspconfig.rubocop.setup {}
-lspconfig.ruby_lsp.setup {}
+-- lspconfig.ruby_lsp.setup {}
 lspconfig.ts_ls.setup {}
 lspconfig.eslint.setup {}
 lspconfig.stylelint_lsp.setup {}
