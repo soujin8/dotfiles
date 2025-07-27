@@ -33,3 +33,6 @@ install.sh
 installs.txt
 pkg_list.txt
 README.md
+
+# tmux
+config/tmux/plugins
