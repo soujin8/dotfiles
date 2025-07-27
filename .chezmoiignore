@@ -25,3 +25,11 @@ config/nvim/lazy-lock.json
 
 **/vendor
 **/node_modules
+
+efm-langserver
+macos
+scripts
+install.sh
+installs.txt
+pkg_list.txt
+README.md
