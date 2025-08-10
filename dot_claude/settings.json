@@ -5,7 +5,12 @@
     "BASH_MAX_TIMEOUT_MS": "600000",
     "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true",
     "CLAUDE_LANGUAGE": "ja",
-    "SHELL": "/usr/bin/zsh"
+    "SHELL": "/usr/bin/zsh",
+    "USE_BUILTIN_RIPGREP": 1
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bun x ccusage statusline"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
