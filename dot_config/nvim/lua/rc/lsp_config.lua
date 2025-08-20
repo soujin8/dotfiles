@@ -1,23 +1,31 @@
-local lspconfig = require("lspconfig")
 local node_servers = require("cli.node_servers")
+-- local ruby_servers = require("cli.ruby_servers")
 
 -- node_servers を有効化
 node_servers.config({ dir = node_servers.dir })
+-- ruby_servers.config({ dir = ruby_servers.dir })
 
--- Existing LSP configurations
-lspconfig.lua_ls.setup {}
-lspconfig.rubocop.setup {}
--- lspconfig.ruby_lsp.setup {}
-lspconfig.ts_ls.setup {}
-lspconfig.eslint.setup {}
-lspconfig.stylelint_lsp.setup {}
-lspconfig.astro_ls.setup {}
-lspconfig.kotlin_language_server.setup {
-  cmd = {
-    '/home/h-mochizuki/Documents/kotlin-lsp/kotlin-lsp.sh', '--stdio'
-  }
-}
--- lspconfig.denols.setup{}
+vim.lsp.config('*', {
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
+
+vim.lsp.enable('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }, -- vimをグローバル変数として認識
+      },
+      workspace = {
+        checkThirdParty = false, -- サードパーティのライブラリをチェックしない
+      },
+    },
+  },
+})
+vim.lsp.enable('rubocop')
+vim.lsp.enable('ruby_lsp')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('stylelint_lsp')
+vim.lsp.enable('astro_ls')
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Attach key mappings for LSP functionalities",
