@@ -2,7 +2,9 @@
 if [ -f /opt/homebrew/bin/brew ]; then
   export PATH=/opt/homebrew/bin:$PATH
 fi
-eval "$(sheldon source)"
+if command -v sheldon &> /dev/null; then
+  eval "$(sheldon source)"
+fi
 # zprof
 
 . "$HOME/.local/share/../bin/env"

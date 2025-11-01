@@ -1,13 +1,19 @@
 #!/bin/bash
 
+{{- if eq .chezmoi.os "darwin" -}}
+
 set -e
 
-echo "==> Checking Homebrew installation..."
+echo "========================================="
+echo "Installing Homebrew and packages"
+echo "========================================="
 
 # Homebrewのインストール
+echo "==> Checking Homebrew installation..."
+
 if ! type brew &> /dev/null ; then
   # brewコマンドが見つからない場合
-  if [[ -f "/opt/homebrew/bin/brew" ]] || [[ -f "/usr/local/bin/brew" ]]; then
+  if [[ -f "/opt/homebrew/bin/brew" ]]; then
     # Homebrewはインストール済みだがPATHが通っていない
     echo "Homebrew is installed but not in PATH. Configuring PATH..."
   else
@@ -15,25 +21,31 @@ if ! type brew &> /dev/null ; then
     echo "Homebrew not found. Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-
-  # PATHを通す
-  if [[ -f "/opt/homebrew/bin/brew" ]]; then
-    export PATH=/opt/homebrew/bin:$PATH
-    echo "✓ Homebrew PATH configured (Apple Silicon)."
-  fi
 else
   echo "Homebrew is already installed."
 fi
 
+# PATHを通す
+if [ -f "$HOME/.zshrc" ]; then
+  source "$HOME/.zshrc"
+fi
+
 # Brewfileからパッケージをインストール
+echo ""
 echo "==> Installing packages from Brewfile..."
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BREWFILE="${SCRIPT_DIR}/Brewfile"
+BREWFILE="{{ .chezmoi.sourceDir }}/macos/Brewfile"
 
 if [[ -f "${BREWFILE}" ]]; then
   brew bundle install --file="${BREWFILE}"
   echo "✓ Package installation complete."
 else
-  echo "Warning: Brewfile not found at ${BREWFILE}"
+  echo "Error: Brewfile not found at ${BREWFILE}"
   exit 1
 fi
+
+echo ""
+echo "========================================="
+echo "✓ Homebrew setup completed!"
+echo "========================================="
+
+{{ end -}}

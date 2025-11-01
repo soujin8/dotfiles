@@ -1,0 +1,27 @@
+#!/bin/bash
+
+{{- if eq .chezmoi.os "darwin" -}}
+
+set -e
+
+echo "========================================="
+echo "Running mise install"
+echo "========================================="
+
+# miseのインストール実行
+echo "==> Running mise install..."
+if command -v mise >/dev/null 2>&1; then
+    mise install
+    echo "✓ mise install completed."
+else
+    echo "⚠️  Warning: mise is not installed or not in PATH."
+    echo "   Please install mise first: https://mise.jdx.dev/"
+    exit 1
+fi
+
+echo ""
+echo "========================================="
+echo "✓ mise setup completed!"
+echo "========================================="
+
+{{ end -}}
