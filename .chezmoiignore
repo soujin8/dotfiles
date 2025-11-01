@@ -36,3 +36,6 @@ README.md
 
 # tmux
 config/tmux/plugins
+
+# karabiner
+config/karabiner/automatic_backups
