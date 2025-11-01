@@ -6,114 +6,79 @@
     "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true",
     "CLAUDE_LANGUAGE": "ja",
     "SHELL": "/usr/bin/zsh",
-    "USE_BUILTIN_RIPGREP": 1
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bun x ccusage statusline"
+    "USE_BUILTIN_RIPGREP": "1",
+    "CLAUDE_CODE_AUTO_CONNECT_IDE": "false",
+    "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "true",
+    "CLAUDE_CODE_IDE_SKIP_VALID_CHECK": "true",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "false",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "true",
+    "DISABLE_ERROR_REPORTING": "true",
+    "DISABLE_TELEMETRY": "true",
+    "DISABLE_AUTOUPDATER": "true",
+    "DISABLE_MICROCOMPACT": "true",
+    "DISABLE_INTERLEAVED_THINKING": "true"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": [
-      "Bash(*)",
-      "Edit(**)",
-      "Glob(**)",
-      "GlobTool(**)",
-      "Grep(**)",
-      "GrepTool(**)",
-      "LS(**)",
-      "MultiEdit(**)",
-      "Read(**)",
-      "TodoRead()",
-      "TodoWrite(**)",
-      "WebFetch(domain:*)",
-      "WebSearch(**)",
-      "Write(**)"
-    ],
-    "deny": [
-      "Bash(* | bash)",
-      "Bash(* | sh)",
-      "Bash(:(){ :|:& };:)",
-      "Bash(> /dev/sda*)",
-      "Bash(apt-get install*)",
-      "Bash(brew install*)",
-      "Bash(bundle install*)",
-      "Bash(chmod -R 777*)",
-      "Bash(chmod 777*)",
-      "Bash(chown -R*)",
-      "Bash(dd*)",
-      "Bash(format*)",
-      "Bash(gem install*)",
-      "Bash(gh api --method DELETE*)",
-      "Bash(gh auth logout*)",
-      "Bash(gh auth refresh*)",
-      "Bash(gh gist create*)",
-      "Bash(gh gist delete*)",
-      "Bash(gh gpg-key add*)",
-      "Bash(gh gpg-key delete*)",
-      "Bash(gh release create*)",
-      "Bash(gh release delete*)",
-      "Bash(gh release upload*)",
-      "Bash(gh repo archive*)",
-      "Bash(gh repo clone*)",
-      "Bash(gh repo create*)",
-      "Bash(gh repo delete*)",
-      "Bash(gh repo deploy-key*)",
-      "Bash(gh repo edit*)",
-      "Bash(gh repo fork*)",
-      "Bash(gh repo rename*)",
-      "Bash(gh repo sync*)",
-      "Bash(gh repo unarchive*)",
-      "Bash(gh secret delete*)",
-      "Bash(gh secret set*)",
-      "Bash(gh ssh-key add*)",
-      "Bash(gh ssh-key delete*)",
-      "Bash(gh workflow disable*)",
-      "Bash(gh workflow enable*)",
-      "Bash(gh workflow run:*)",
-      "Bash(git checkout*)",
-      "Bash(git config*)",
-      "Bash(git rebase*)",
-      "Bash(git reset --hard*)",
-      "Bash(git restore*)",
-      "Bash(mkfs*)",
-      "Bash(npm install -g*)",
-      "Bash(pip install*)",
-      "Bash(rm -rf ../*)",
-      "Bash(rm -rf /)",
-      "Bash(rm -rf /*)",
-      "Bash(rm -rf ~/*)",
-      "Bash(sudo*)",
-      "Bash(yum install*)"
-    ]
+    "allow": [],
+    "deny": []
   },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/scripts/deny-check.sh"
-          },
-          {
-            "type": "command",
-            "command": "~/.claude/scripts/check-ai-commit.sh"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/scripts/auto-comment.sh"
-          }
-        ]
-      }
-    ]
+  "enabledPlugins": {
+    "code-documentation@claude-code-workflows": true,
+    "git-pr-workflows@claude-code-workflows": false,
+    "backend-development@claude-code-workflows": true,
+    "frontend-mobile-development@claude-code-workflows": false,
+    "full-stack-orchestration@claude-code-workflows": false,
+    "unit-testing@claude-code-workflows": true,
+    "tdd-workflows@claude-code-workflows": false,
+    "code-review-ai@claude-code-workflows": true,
+    "code-refactoring@claude-code-workflows": true,
+    "dependency-management@claude-code-workflows": false,
+    "error-debugging@claude-code-workflows": false,
+    "team-collaboration@claude-code-workflows": false,
+    "llm-application-dev@claude-code-workflows": false,
+    "agent-orchestration@claude-code-workflows": false,
+    "context-management@claude-code-workflows": false,
+    "machine-learning-ops@claude-code-workflows": false,
+    "data-engineering@claude-code-workflows": false,
+    "incident-response@claude-code-workflows": false,
+    "error-diagnostics@claude-code-workflows": false,
+    "distributed-debugging@claude-code-workflows": false,
+    "observability-monitoring@claude-code-workflows": true,
+    "deployment-strategies@claude-code-workflows": false,
+    "deployment-validation@claude-code-workflows": false,
+    "kubernetes-operations@claude-code-workflows": false,
+    "cloud-infrastructure@claude-code-workflows": true,
+    "seo-content-creation@claude-code-workflows": false,
+    "seo-technical-optimization@claude-code-workflows": false,
+    "seo-analysis-monitoring@claude-code-workflows": false,
+    "documentation-generation@claude-code-workflows": false,
+    "multi-platform-apps@claude-code-workflows": false,
+    "business-analytics@claude-code-workflows": false,
+    "hr-legal-compliance@claude-code-workflows": false,
+    "customer-sales-automation@claude-code-workflows": false,
+    "content-marketing@claude-code-workflows": false,
+    "blockchain-web3@claude-code-workflows": false,
+    "quantitative-trading@claude-code-workflows": false,
+    "payment-processing@claude-code-workflows": false,
+    "game-development@claude-code-workflows": false,
+    "accessibility-compliance@claude-code-workflows": false,
+    "python-development@claude-code-workflows": true,
+    "javascript-typescript@claude-code-workflows": true,
+    "systems-programming@claude-code-workflows": false,
+    "jvm-languages@claude-code-workflows": false,
+    "web-scripting@claude-code-workflows": false,
+    "functional-programming@claude-code-workflows": false,
+    "arm-cortex-microcontrollers@claude-code-workflows": false,
+    "shell-scripting@claude-code-workflows": true,
+    "developer-essentials@claude-code-workflows": false,
+    "debugging-toolkit@claude-code-workflows": false,
+    "cicd-automation@claude-code-workflows": false,
+    "application-performance@claude-code-workflows": true,
+    "database-cloud-optimization@claude-code-workflows": false,
+    "api-scaffolding@claude-code-workflows": false,
+    "api-testing-observability@claude-code-workflows": false,
+    "database-design@claude-code-workflows": true
   },
-  "model": "sonnet"
+  "alwaysThinkingEnabled": false
 }

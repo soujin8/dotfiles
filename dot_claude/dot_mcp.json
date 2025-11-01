@@ -1,8 +1,28 @@
 {
   "mcpServers": {
-    "Context7": {
+    "context7": {
+      "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": ["-y", "@upstash/context7-mcp"],
+      "env": {}
+    },
+    "figma-mcp": {
+      "type": "sse",
+      "url": "http://127.0.0.1:3845/sse"
+    },
+    "codex": {
+      "type": "stdio",
+      "command": "codex",
+      "args": ["mcp-server"],
+      "env": {
+        "PATH": "/home/h-mochizuki/.local/share/mise/installs/node/23.10.0/bin"
+      }
+    },
+    "ESLint": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@eslint/mcp@latest"],
+      "env": {}
     }
   }
 }

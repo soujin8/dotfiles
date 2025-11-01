@@ -4,3 +4,5 @@ if [ -f /opt/homebrew/bin/brew ]; then
 fi
 eval "$(sheldon source)"
 # zprof
+
+. "$HOME/.local/share/../bin/env"

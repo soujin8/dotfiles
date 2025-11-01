@@ -3,8 +3,8 @@ return {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function()
-      vim.keymap.set('n', '<leader>df', ':DiffviewOpen HEAD~1<CR>', {desc = "1つ前とのdiff"})
-      vim.keymap.set('n', '<leader>dfh', ':DiffviewFileHistory %<CR>', {desc = "ファイルの変更履歴"})
+      vim.keymap.set('n', '<leader>df', ':DiffviewOpen HEAD~1<CR>', { desc = "1つ前とのdiff" })
+      vim.keymap.set('n', '<leader>dfh', ':DiffviewFileHistory %<CR>', { desc = "ファイルの変更履歴" })
       vim.keymap.set('n', '<leader>cd', ':DiffviewClose<CR>', {})
       vim.keymap.set('n', '<leader>dc', ':Diffview<CR>', {})
     end
@@ -118,4 +118,16 @@ return {
       { "<leader>gY", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
     },
   },
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'folke/snacks.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require "octo".setup()
+    end
+  }
 }
