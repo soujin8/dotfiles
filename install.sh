@@ -6,6 +6,18 @@ REPO_URL="https://github.com/soujin8/dotfiles.git"
 
 echo "=== dotfiles セットアップスクリプト ==="
 
+# macOS の場合、Command Line Tools のチェック
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    if ! xcode-select -p &> /dev/null; then
+        echo "Xcode Command Line Tools がインストールされていません。"
+        echo "インストールダイアログが表示されます。インストール完了後、このスクリプトを再実行してください。"
+        xcode-select --install
+        exit 0
+    else
+        echo "✓ Xcode Command Line Tools が確認できました。"
+    fi
+fi
+
 # chezmoi がインストールされているかチェック
 if ! command -v chezmoi &> /dev/null; then
     echo "chezmoi がインストールされていません。インストールを開始します..."
