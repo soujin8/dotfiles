@@ -1,7 +1,5 @@
 #!/bin/bash
 
-{{- if eq .chezmoi.os "darwin" -}}
-
 set -e
 
 echo "========================================="
@@ -33,7 +31,8 @@ fi
 # Brewfileからパッケージをインストール
 echo ""
 echo "==> Installing packages from Brewfile..."
-BREWFILE="{{ .chezmoi.sourceDir }}/macos/Brewfile"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BREWFILE="${SCRIPT_DIR}/../Brewfile"
 
 if [[ -f "${BREWFILE}" ]]; then
   brew bundle install --file="${BREWFILE}"
@@ -47,5 +46,3 @@ echo ""
 echo "========================================="
 echo "✓ Homebrew setup completed!"
 echo "========================================="
-
-{{ end -}}

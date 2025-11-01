@@ -1,7 +1,5 @@
 #!/bin/bash
 
-{{- if eq .chezmoi.os "darwin" -}}
-
 set -e
 
 echo "========================================="
@@ -98,5 +96,3 @@ echo "========================================="
 echo "✓ macOS configuration completed!"
 echo "========================================="
 echo "Note: Some settings may require logging out or restarting to take effect."
-
-{{ end -}}
