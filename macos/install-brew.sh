@@ -6,8 +6,21 @@ echo "==> Checking Homebrew installation..."
 
 # Homebrewのインストール
 if ! type brew &> /dev/null ; then
-  echo "Homebrew not found. Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # brewコマンドが見つからない場合
+  if [[ -f "/opt/homebrew/bin/brew" ]] || [[ -f "/usr/local/bin/brew" ]]; then
+    # Homebrewはインストール済みだがPATHが通っていない
+    echo "Homebrew is installed but not in PATH. Configuring PATH..."
+  else
+    # Homebrewがインストールされていない
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  # PATHを通す
+  if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    echo "✓ Homebrew PATH configured (Apple Silicon)."
+  fi
 else
   echo "Homebrew is already installed."
 fi
