@@ -11,7 +11,7 @@ shell 依存関係
 ```
 
 ```
-chezmoi init https://github.com/soujin8/dotfiles.git
+curl -L https://raw.githubusercontent.com/soujin8/dotfiles/refs/heads/master/install.sh | bash
 ```
 
 # Brefile
