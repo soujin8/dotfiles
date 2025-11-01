@@ -18,7 +18,7 @@
         "PATH": "/home/h-mochizuki/.local/share/mise/installs/node/23.10.0/bin"
       }
     },
-    "ESLint": {
+    "esLint": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@eslint/mcp@latest"],

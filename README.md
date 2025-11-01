@@ -1,7 +1,7 @@
 # dotfiles
 
-
 shell 依存関係
+
 ```
 .zshrc
  |- sheldon
@@ -11,5 +11,11 @@ shell 依存関係
 ```
 
 ```
-curl -L raw.githubusercontent.com/soujin8/dotfiles/refs/heads/master/install.sh | bash
+chezmoi init https://github.com/soujin8/dotfiles.git
+```
+
+# Brefile
+
+```
+brew bundle dump --force --file=./macos/Brewfile
 ```

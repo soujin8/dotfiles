@@ -1,0 +1,37 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -e
+
+# chezmoi sourceディレクトリのパス
+CHEZMOI_SOURCE_DIR="{{ .chezmoi.sourceDir }}"
+MACOS_DIR="${CHEZMOI_SOURCE_DIR}/macos"
+
+echo "========================================="
+echo "macOS Setup"
+echo "========================================="
+
+# 1. Homebrewとパッケージのインストール
+if [[ -f "${MACOS_DIR}/install-brew.sh" ]]; then
+  bash "${MACOS_DIR}/install-brew.sh"
+else
+  echo "Error: install-brew.sh not found."
+  exit 1
+fi
+
+echo ""
+
+# 2. macOS設定の適用
+if [[ -f "${MACOS_DIR}/configure-settings.sh" ]]; then
+  bash "${MACOS_DIR}/configure-settings.sh"
+else
+  echo "Error: configure-settings.sh not found."
+  exit 1
+fi
+
+echo ""
+echo "========================================="
+echo "✓ macOS setup completed successfully!"
+echo "========================================="
+
+{{ end -}}

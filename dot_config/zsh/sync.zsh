@@ -45,7 +45,6 @@ alias k='kubectl'
 alias n='nvim'
 alias be='bundle exec'
 alias rm='rm -i'
-alias claude="~/.claude/local/claude"
 alias yoro="claude --dangerously-skip-permissions"
 
 # macOSでBSD系CLIツール→GNU系に置き換える
