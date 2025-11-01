@@ -24,7 +24,7 @@ config/tmux/plugins
 **/node_modules
 
 efm-langserver
-macos/*
+macos/Brewfile
 install.sh
 installs.txt
 pkg_list.txt
