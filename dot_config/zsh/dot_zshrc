@@ -7,4 +7,4 @@ if command -v sheldon &> /dev/null; then
 fi
 # zprof
 
-. "$HOME/.local/share/../bin/env"
+# . "$HOME/.local/share/../bin/env"
