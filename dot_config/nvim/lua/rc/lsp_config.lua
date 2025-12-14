@@ -26,6 +26,8 @@ vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('stylelint_lsp')
 vim.lsp.enable('astro_ls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('rust_analyzer')
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Attach key mappings for LSP functionalities",

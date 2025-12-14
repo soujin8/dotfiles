@@ -8,5 +8,3 @@ require('rc.options')
 require('rc.plugin_manager')
 require('rc.functions')
 require('rc.lsp_config')
-
--- vim.opt.runtimepath:append("~/dev/github.com/soujin8/nvim-rails-switcher")
