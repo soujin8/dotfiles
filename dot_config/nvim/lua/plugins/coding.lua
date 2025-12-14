@@ -44,15 +44,12 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        suggestion = {
-          enabled = false,
-          auto_trigger = false,
-          keymap = {
-            accept = "<Tab>",
-          },
-        },
+        suggestion = { enabled = false },
+        panel = { enabled = false },
       })
     end,
   },
@@ -190,7 +187,9 @@ return {
   },
   {
     "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
+    dependencies = {
+      "folke/snacks.nvim",
+    },
     config = true,
     keys = {
       { "<leader>a",  nil,                              desc = "AI/Claude Code" },
