@@ -8,3 +8,6 @@ fi
 # zprof
 
 # . "$HOME/.local/share/../bin/env"
+
+# emacs-like bindingsを有効にする
+bindkey -e

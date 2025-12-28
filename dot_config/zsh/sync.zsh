@@ -213,80 +213,111 @@ function delta_diff() {
   delta <(echo "$input1") <(echo "$input2")
 }
 
-##
-# @brief 指定ディレクトリをdotfilesディレクトリへ移動し、元の場所にシンボリックリンクを作成する関数
-# @param target 移動対象のディレクトリ（必須）
-# @return 0 正常終了、1 異常終了
-#
-# Example usage:
-# mv_to_dotfiles ~/.config/nvim
-function mv_to_dotfiles() {
-  # 引数の数を確認
-  if [[ $# -ne 1 ]]; then
-    echo "Usage: mv_to_dotfiles <target_directory>"
+# ---------------------------------------------------------
+# zeno
+# ---------------------------------------------------------
+
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+
+  # if you use zsh's incremental search
+  # bindkey -M isearch ' ' self-insert
+
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+
+  bindkey '^i' zeno-completion
+
+  bindkey '^xx' zeno-insert-snippet           # open snippet picker (fzf) and insert at cursor
+
+  bindkey '^x '  zeno-insert-space
+  bindkey '^x^m' accept-line
+  bindkey '^x^z' zeno-toggle-auto-snippet
+
+  # preprompt bindings
+  bindkey '^xp' zeno-preprompt
+  bindkey '^xs' zeno-preprompt-snippet
+  # Outside ZLE you can run `zeno-preprompt git {{cmd}}` or `zeno-preprompt-snippet foo`
+  # to set the next prompt prefix; invoking them with an empty argument resets the state.
+
+  bindkey '^r' zeno-smart-history-selection # smart history widget
+
+  # fallback if completion not matched
+  # (default: fzf-completion if exists; otherwise expand-or-complete)
+  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
+fi
+
+# nb add article - Add a note with article title and URL
+# Usage: nba <url>              - Auto-fetch title from URL
+#        nba <title> <url>      - Use specified title
+function nba() {
+  if [ $# -lt 1 ]; then
+    echo "Usage: nba <url>           # Auto-fetch title"
+    echo "       nba <title> <url>   # Manual title"
     return 1
   fi
 
-  local target="$1"
-  local dotfiles_dir="$HOME/dev/github.com/soujin8/dotfiles/config"
+  local title=""
+  local url=""
 
-  # 対象が存在するか確認
-  if [[ ! -e "$target" ]]; then
-    echo "Error: '$target' does not exist."
-    return 1
-  fi
+  if [ $# -eq 1 ]; then
+    url="$1"
+    echo "Fetching title from: $url"
 
-  # 対象がディレクトリであるか確認
-  if [[ ! -d "$target" ]]; then
-    echo "Error: '$target' is not a directory."
-    return 1
-  fi
+    title=$(curl -sL --max-redirs 3 --max-time 5 --compressed "$url" | head -c 512 | perl -0777 -ne 'print $1 if /<title[^>]*>([^<]+)<\/title>/i')
+    title=$(echo "$title" | perl -pe 's/^\s+|\s+$//g; s/\s+/ /g')
 
-  # 対象がすでにシンボリックリンクの場合、ユーザーに確認
-  if [[ -L "$target" ]]; then
-    echo "Warning: '$target' is already a symbolic link. Continue? (y/N)"
-    read -q answer
-    echo
-    if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
-      echo "Operation cancelled."
+    if [ -z "$title" ]; then
+      echo "Error: Could not fetch title from URL"
       return 1
     fi
+    echo "Title: $title"
+  else
+    title="$1"
+    url="$2"
   fi
 
-  # 絶対パスを取得
-  local abs_target
-  abs_target=$(realpath "$target") || { echo "Error: failed to resolve absolute path for '$target'."; return 1; }
+  local content="# ${title}
 
-  # dotfilesディレクトリが存在しない場合はError
-  if [[ ! -d "$dotfiles_dir" ]]; then
-    echo "Error: failed to create dotfiles directory at '$dotfiles_dir'.";
+参照: [${title}](${url})"
+
+  nb add --filename "${title}.md" --content "$content"
+  echo "Note created: [${title}](${url})"
+}
+
+# nb query - Search notes and select with fzf preview
+# Usage: nbq <search query>
+function nbq() {
+  if [ -z "$1" ]; then
+    echo "Usage: nbq <search query>"
     return 1
   fi
 
-  # 移動先パスを決定（basenameのみ利用）
-  local base_name
-  base_name=$(basename "$abs_target")
-  local new_location="$dotfiles_dir/$base_name"
+  local query="$*"
+  local results=$(nb q "$query" --no-color 2>/dev/null | grep -E '^\[[0-9]+\]')
 
-  # dotfiles内に同名のファイルが存在しないか確認
-  if [[ -e "$new_location" ]]; then
-    echo "Error: '$new_location' already exists in dotfiles."
+  if [ -z "$results" ]; then
+    echo "No results found for: $query"
     return 1
   fi
 
-  # 指定ディレクトリをdotfilesへ移動
-  if ! mv "$abs_target" "$new_location"; then
-    echo "Error: failed to move '$abs_target' to '$new_location'."
-    return 1
-  fi
+  export _NBQ_QUERY="$query"
 
-  # 元の場所にシンボリックリンクを作成
-  if ! ln -s "$new_location" "$abs_target"; then
-    echo "Error: failed to create symlink at '$abs_target'."
-    # 必要に応じて元に戻す処理を検討する
-    return 1
-  fi
+  local selected=$(echo "$results" | fzf --ansi \
+    --preview 'note_id=$(echo {} | sed -E "s/^\[([0-9]+)\].*/\1/")
+               echo "=== Note [$note_id] ==="
+               echo ""
+               nb show "$note_id" | head -5
+               echo ""
+               echo "=== Matching lines ==="
+               echo ""
+               nb show "$note_id" | grep -i --color=always -C 2 "$_NBQ_QUERY" | head -30' \
+    --preview-window=right:60%:wrap \
+    --header "Search: $query")
 
-  echo "Successfully moved '$abs_target' to '$new_location' and created symlink."
-  return 0
+  unset _NBQ_QUERY
+
+  if [ -n "$selected" ]; then
+    local note_id=$(echo "$selected" | sed -E 's/^\[([0-9]+)\].*/\1/')
+    nb edit "$note_id"
+  fi
 }

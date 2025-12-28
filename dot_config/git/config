@@ -4,6 +4,8 @@
   path = ~/.config/git/.gitconfig_private
 [includeIf "gitdir:~/.local/share/chezmoi/"]
   path = ~/.config/git/.gitconfig_private
+[includeIf "gitdir:~/dev/github.com/soujin8/nb/home/"]
+  path = ~/.config/git/.gitconfig_private
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative

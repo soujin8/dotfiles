@@ -27,8 +27,6 @@ export GOPATH=$XDG_DATA_HOME/go
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 export EDITOR="nvim"
-# emacs-like bindingsを有効にする
-bindkey -e
 
 # PATH
 typeset -U path PATH
@@ -64,3 +62,8 @@ done
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# zeno
+export ZENO_HOME=~/.config/zeno
+export ZENO_GIT_CAT="bat --color=always"
+export ZENO_GIT_TREE="eza --tree"

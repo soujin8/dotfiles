@@ -37,6 +37,19 @@ snippets:
   - name: rake task
     keyword: raketask
     snippet: bin/rake -T | fzf | xargs bundle exec
+  # nb
+  - name: Edit Note
+    keyword: nbe
+    snippet: nb edit
+  - name: List Note
+    keyword: nbl
+    snippet: nb ls --limit 20
+  - name: List All Note
+    keyword: nbla
+    snippet: nb ls --all
+  - name: nb search
+    keyword: nbg
+    snippet: rg "{{keyword}}" "$(nb notebooks current --path)"
 
 completions:
   - name: kill
@@ -47,3 +60,20 @@ completions:
       --multi: true
       --prompt: "'Kill Process> '"
     callback: "awk '{print $2}'"
+  - name: nb edit
+    patterns:
+      - "^nb e( .*)? $"
+      - "^nb edit( .*)? $"
+    sourceCommand: "nb ls --no-color | grep -E '^\\[[0-9]+\\]'"
+    options:
+      --ansi: true  # ← ANSIカラー有効
+      --prompt: "'nb edit >'"
+      --preview: "echo {} | sed -E 's/^\\[([0-9]+)\\].*/\\1/' | xargs nb show"
+    callback: "sed -E 's/^\\[([0-9]+)\\].*/\\1/'"
+  - name: nb subcommands
+    patterns:
+      - ^\s*nb\s*$
+      - ^\s*nb\s+help\s*$
+    sourceCommand: nb subcommands
+    options:
+      --prompt: "'nb subcommand >'"
