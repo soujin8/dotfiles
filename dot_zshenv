@@ -41,7 +41,7 @@ path=(
   /usr/local/sbin(N-/)
   /Library/Apple/usr/bin(N-/)
   $HOME/.local/bin(N-/)
-  $HOME/.cargo/bin(N-/)
+  $CARGO_HOME/bin(N-/)
   $GOPATH/bin(N-/)
   /opt/homebrew/opt/mysql-client/bin(N-/)
   /snap/bin(N-/)
