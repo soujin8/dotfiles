@@ -180,7 +180,7 @@ return {
       notifier = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true },
+      -- scroll = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
     },
@@ -193,7 +193,7 @@ return {
     config = true,
     keys = {
       { "<leader>a",  nil,                              desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+      { "<leader>cc", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
       { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
       { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
       { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
