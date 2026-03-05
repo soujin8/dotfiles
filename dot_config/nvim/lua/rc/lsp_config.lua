@@ -9,7 +9,7 @@ vim.lsp.config('*', {
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
 })
 
-vim.lsp.enable('lua_ls', {
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
@@ -21,6 +21,7 @@ vim.lsp.enable('lua_ls', {
     },
   },
 })
+vim.lsp.enable('lua_ls')
 vim.lsp.enable('rubocop')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('ts_ls')
