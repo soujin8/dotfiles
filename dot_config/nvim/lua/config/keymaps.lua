@@ -22,3 +22,13 @@ vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
 vim.keymap.del("n", "<leader>gg")
 vim.keymap.set("n", "<leader>lg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 
+-- neogit
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
+vim.keymap.del("n", "<leader>gl")
+vim.keymap.set("n", "<leader>gl", function()
+  require("neogit").action("log", "log_current", { "--graph", "--decorate", "--max-count=256" })()
+end, { desc = "Neogit Log" })
+vim.keymap.set("n", "<leader>gc", function()
+  require("neogit").action("commit", "commit", { "--verbose" })()
+end, { desc = "Neogit Commit" })
+
