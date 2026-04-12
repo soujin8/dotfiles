@@ -13,22 +13,21 @@ local function copy_relative_file_path_to_clipboard()
   end
 end
 
-vim.keymap.set("n", "<Leader>n", copy_relative_file_path_to_clipboard, { noremap = true, silent = false, desc = "Copy relative file path to clipboard" })
+vim.keymap.set(
+  "n",
+  "<Leader>n",
+  copy_relative_file_path_to_clipboard,
+  { noremap = true, silent = false, desc = "Copy relative file path to clipboard" }
+)
 
 -- jj to escape in insert mode
 vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
 
 -- remap lazygit from <leader>gg to <leader>lg
 vim.keymap.del("n", "<leader>gg")
-vim.keymap.set("n", "<leader>lg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+vim.keymap.set("n", "<leader>lg", function()
+  Snacks.lazygit({ cwd = LazyVim.root.git() })
+end, { desc = "Lazygit (Root Dir)" })
 
 -- neogit
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
-vim.keymap.del("n", "<leader>gl")
-vim.keymap.set("n", "<leader>gl", function()
-  require("neogit").action("log", "log_current", { "--graph", "--decorate", "--max-count=256" })()
-end, { desc = "Neogit Log" })
-vim.keymap.set("n", "<leader>gc", function()
-  require("neogit").action("commit", "commit", { "--verbose" })()
-end, { desc = "Neogit Commit" })
-
