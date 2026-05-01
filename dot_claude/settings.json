@@ -1,5 +1,4 @@
 {
-  "plansDirectory": ".claude/plans",
   "cleanupPeriodDays": 30,
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "600000",
@@ -22,8 +21,10 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [],
-    "deny": []
+    "deny": [],
+    "defaultMode": "default"
   },
+  "model": "claude-opus-4-6",
   "enabledPlugins": {
     "code-documentation@claude-code-workflows": true,
     "git-pr-workflows@claude-code-workflows": false,
@@ -80,10 +81,28 @@
     "api-scaffolding@claude-code-workflows": false,
     "api-testing-observability@claude-code-workflows": false,
     "database-design@claude-code-workflows": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
   },
   "language": "Japanese",
-  "alwaysThinkingEnabled": false,
+  "effortLevel": "medium",
+  "fastMode": true,
+  "plansDirectory": ".claude/plans",
   "skipDangerousModePermissionPrompt": true,
-  "effortLevel": "high"
+  "theme": "auto",
+  "preferredNotifChannel": "notifications_disabled",
+  "autoCompactEnabled": false
 }
