@@ -33,3 +33,5 @@ Brewfile.lock.json
 **/.claude/settings.local.json
 
 .cckiro/**/*
+
+.claude/plans/**/*
