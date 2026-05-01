@@ -31,3 +31,11 @@ end, { desc = "Lazygit (Root Dir)" })
 
 -- neogit
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
+
+-- grep word under cursor in project root
+vim.keymap.set("n", "gw", function()
+  Snacks.picker.grep_word({
+    cwd = LazyVim.root(),
+    layout = { width = 1, height = 1 },
+  })
+end, { noremap = true, silent = true, desc = "Grep Word (Root Dir)" })
