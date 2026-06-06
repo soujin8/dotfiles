@@ -30,10 +30,22 @@ cargo --version
 
 echo ""
 echo "==> Installing Alacritty..."
-if command -v alacritty &> /dev/null; then
-  echo "Alacritty is already installed."
+if [[ -d "/Applications/Alacritty.app" ]]; then
+  echo "Alacritty.app is already installed."
 else
-  cargo install alacritty
+  ALACRITTY_TMP="$(mktemp -d)"
+  git clone --depth 1 https://github.com/alacritty/alacritty.git "$ALACRITTY_TMP"
+  pushd "$ALACRITTY_TMP"
+  make app
+  cp -r target/release/osx/Alacritty.app /Applications/
+  popd
+  rm -rf "$ALACRITTY_TMP"
+  echo "✓ Alacritty.app installed to /Applications/"
+fi
+
+if ! command -v alacritty &> /dev/null; then
+  sudo ln -sf /Applications/Alacritty.app/Contents/MacOS/alacritty /usr/local/bin/alacritty
+  echo "✓ Symlinked alacritty to /usr/local/bin/"
 fi
 
 echo ""
