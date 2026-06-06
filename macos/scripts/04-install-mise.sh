@@ -6,6 +6,11 @@ echo "========================================="
 echo "Running mise install"
 echo "========================================="
 
+# PATHを通す
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # miseのインストール実行
 echo "==> Running mise install..."
 if command -v mise >/dev/null 2>&1; then

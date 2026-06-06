@@ -24,8 +24,8 @@ else
 fi
 
 # PATHを通す
-if [ -f "$HOME/.zshrc" ]; then
-  source "$HOME/.zshrc"
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Brewfileからパッケージをインストール

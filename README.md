@@ -11,11 +11,12 @@ shell 依存関係
 ```
 
 ```
+xcode-select --install
 curl -L https://raw.githubusercontent.com/soujin8/dotfiles/refs/heads/master/install.sh | bash
+chezmoi cd
 chmod +x macos/setup.sh macos/scripts/*.sh
 ./macos/setup.sh
 ```
-
 # Brefile
 
 ```
