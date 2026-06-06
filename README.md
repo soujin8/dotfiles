@@ -19,5 +19,5 @@ chmod +x macos/setup.sh macos/scripts/*.sh
 # Brefile
 
 ```
-brew bundle dump --force --file=./macos/Brewfile
+brew bundle dump --no-vscode --no-go --force --file=macos/Brewfile
 ```
