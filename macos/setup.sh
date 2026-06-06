@@ -64,7 +64,9 @@ run_script "${SCRIPTS_DIR}/01-configure-macos.sh"
 run_script "${SCRIPTS_DIR}/02-setup-ssh.sh"
 run_script "${SCRIPTS_DIR}/03-install-brew.sh"
 run_script "${SCRIPTS_DIR}/04-install-mise.sh"
-run_script "${SCRIPTS_DIR}/05-install-claude.sh"
+run_script "${SCRIPTS_DIR}/05-install-coding-agent.sh"
+run_script "${SCRIPTS_DIR}/06-apply-chezmoi.sh"
+run_script "${SCRIPTS_DIR}/07-build-neovim.sh"
 
 # 完了メッセージ
 echo ""
