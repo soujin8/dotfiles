@@ -15,7 +15,12 @@ if command -v rustup &> /dev/null; then
 else
   echo "Rustup not found. Installing..."
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-  source "$HOME/.cargo/env"
+  CARGO_ENV="${CARGO_HOME:-$HOME/.cargo}/env"
+  if [[ -f "$CARGO_ENV" ]]; then
+    source "$CARGO_ENV"
+  else
+    export PATH="${CARGO_HOME:-$HOME/.cargo}/bin:$PATH"
+  fi
 fi
 
 echo ""
