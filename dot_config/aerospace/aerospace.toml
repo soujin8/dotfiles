@@ -70,7 +70,7 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'com.google.Chrome'
-    run = ['layout floating', 'move-node-to-workspace 1']
+    run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
     if.app-id = 'com.tinyapp.TablePlus'
@@ -93,12 +93,7 @@ automatically-unhide-macos-hidden-apps = false
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-    alt-enter = '''exec-and-forget osascript -e '
-    tell application "Alacritty"
-        do script
-        activate
-    end tell'
-    '''
+    alt-enter = 'exec-and-forget open -a Alacritty'
 
     alt-h = 'focus --boundaries-action wrap-around-the-workspace left'
     alt-j = 'focus --boundaries-action wrap-around-the-workspace down'
