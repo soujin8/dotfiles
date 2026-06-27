@@ -1,0 +1,7 @@
+interface:
+  display_name: "Bug Investigation"
+  short_description: "PRやコードの不具合リスクを調査"
+  default_prompt: "Use $bug-investigation to investigate whether this PR or code contains bugs."
+
+policy:
+  allow_implicit_invocation: true
