@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain Design Review"
+  short_description: "Review domain design and responsibility placement"
+  default_prompt: "Use $domain-design-review to review whether this code places domain logic and responsibilities appropriately."
