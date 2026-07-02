@@ -1,6 +1,6 @@
 ---
 name: grill-with-docs
-description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
+description: Interview the user relentlessly about a plan or design, cross-checking it against the project's existing domain model (CONTEXT.md, ADRs), and write updates to those files the moment a term or decision crystallises. Use when the user wants their plan stress-tested against the project's own language and documented decisions, not just against logic alone — e.g. "grill me against our domain model", "check this against our ADRs", or any grill-me request where CONTEXT.md or docs/adr/ already exist.
 ---
 
 <what-to-do>
@@ -10,6 +10,8 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 Ask the questions one at a time, waiting for feedback on each question before continuing.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
+
+Unlike `grill-me`, this session also cross-checks the plan against the project's documented domain model and writes updates to it inline. If no such documentation exists or the project doesn't warrant one, use `grill-me` instead.
 
 </what-to-do>
 
@@ -69,20 +71,24 @@ When domain relationships are being discussed, stress-test them with specific sc
 
 When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
 
-### Update CONTEXT.md inline
+### Update CONTEXT.md the moment a term resolves
 
-When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).
+A term is "resolved" when the user picks a definition or a canonical name during the conversation — don't wait for the whole plan to finish. The instant that happens, stop and edit `CONTEXT.md` before moving to the next question. Never batch edits for later.
 
-`CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
+Read [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md) before your first edit to `CONTEXT.md` in a session — it defines the file's structure, the single-vs-multi-context layout, and the writing rules. Follow it exactly; don't improvise a different structure.
 
-### Offer ADRs sparingly
+`CONTEXT.md` is a glossary only — never write implementation details, specs, or scratch notes into it.
 
-Only offer to create an ADR when all three are true:
+### Offer ADRs sparingly, write them the same way
 
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
+Read [ADR-FORMAT.md](./ADR-FORMAT.md) when a decision feels significant — it defines the three-part test for whether a decision qualifies, the file template, and the numbering scheme. Apply its test before offering an ADR; don't create one on a hunch.
 
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+Once the user confirms a decision qualifies, create the ADR file immediately, following the template and numbering rules in that file.
 
 </supporting-info>
+
+<when-to-stop>
+
+End the session once every branch of the plan's decision tree has a resolved answer and no open question remains. Before ending, confirm: every new or changed term is reflected in `CONTEXT.md`, and every qualifying decision has an ADR file. Summarize what was decided and which files were updated.
+
+</when-to-stop>
