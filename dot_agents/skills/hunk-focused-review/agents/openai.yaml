@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hunk Focused Review"
+  short_description: "Guide Hunk through focused, ordered diff units"
+  default_prompt: "Use $hunk-focused-review to walk this repository’s diff in focused Hunk units."
