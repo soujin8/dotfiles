@@ -35,3 +35,7 @@ Brewfile.lock.json
 .cckiro/**/*
 
 .claude/plans/**/*
+
+**/*/playwright-cli/
+.playwright-cli/
+.playwright-mcp/
