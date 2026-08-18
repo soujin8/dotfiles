@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adversarial Verification"
+  short_description: "成果物の主張を独立に反証する"
+  default_prompt: "Use $adversarial-verification to try to falsify the claims in the supplied artifact."
