@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Test Review"
+  short_description: "Review PR tests for coverage and quality"
+  default_prompt: "Use $gh-test-review to review the test code in this GitHub PR."
