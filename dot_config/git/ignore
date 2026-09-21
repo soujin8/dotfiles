@@ -39,3 +39,9 @@ Brewfile.lock.json
 **/*/playwright-cli/
 .playwright-cli/
 .playwright-mcp/
+
+mutagen.yml
+mutagen.yml.lock
+
+.eggs/
+.eggshell.toml
