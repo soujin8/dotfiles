@@ -1,0 +1,4 @@
+interface:
+  display_name: "モジュール設計レビュー"
+  short_description: "結合の強度・距離・変動性からモジュールの境界と分割をレビュー"
+  default_prompt: "$module-design-review を使って、対象のモジュール設計をレビューしてください。共有する知識と変更の波及を確認し、境界の改善案を根拠とトレードオフ付きで示してください。"
