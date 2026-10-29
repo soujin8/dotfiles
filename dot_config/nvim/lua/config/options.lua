@@ -4,3 +4,4 @@
 
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = ""
+vim.g.autoformat = false
