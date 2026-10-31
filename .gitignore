@@ -19,3 +19,7 @@ dot_claude/todos
 dot_claude/.credentials.json
 
 private_dot_config/tmux/plugins
+
+# Rex local host declarations
+/dot_config/rex/hosts.lua
+/dot_config/rex/private_hosts.lua

@@ -1,0 +1,13 @@
+[Unit]
+Description=Rex personal server
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/rex server run --listen unix://%t/rex/server.sock --state-dir %h/.local/state/rex --extra-listen tailnet://:7297
+RuntimeDirectory=rex
+RuntimeDirectoryMode=0700
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

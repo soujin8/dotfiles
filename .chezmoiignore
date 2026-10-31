@@ -1,6 +1,13 @@
 # chezmoi
 .config/chezmoi
 
+# Rex: 接続先は端末ごとに管理する
+.config/rex/hosts.lua
+
+{{ if ne .chezmoi.os "linux" }}
+.config/systemd/user/rex.service
+{{ end }}
+
 # Claude Code
 .claude/local
 .claude/projects

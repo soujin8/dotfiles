@@ -104,8 +104,8 @@ function reload() {
 }
 
 function f() {
-  local project dir repository session current_session
-  project=$(ghq list | fzf --prompt='Project >')
+  local project dir repository session current_session sessions session_id created
+  project=$(ghq list | fzf --prompt='Project >') || return
 
   if [[ $project == "" ]]; then
     return 1
@@ -130,6 +130,22 @@ function f() {
       fi
       tmux switch-client -t $session
     fi
+  elif [[ -n ${REX_SESSION:-} ]]; then
+    dir=$(ghq list --full-path --exact "$project") || return
+    [[ -d "$dir" ]] || return 1
+    repository=${dir##*/}
+    session=${repository//./-}
+    sessions=$(rex ls --json) || return
+    session_id=$(jq -r --arg label "$session" '
+      [.sessions[] | select(.label == $label)] |
+      if length > 1 then error("Rex sessions with the same name: " + $label)
+      else .[0].session_id // "" end
+    ' <<< "$sessions") || return
+    if [[ -z "$session_id" ]]; then
+      created=$(rex new "$session" --cwd "$dir" --json) || return
+      session_id=$(jq -er '.session_id' <<< "$created") || return
+    fi
+    rex do session.select "session_id=$session_id"
   else
     cd $dir
   fi
