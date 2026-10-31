@@ -50,7 +50,6 @@ rex.action{
     title = "Copy Mode (Neovim)",
     run = function(ctx)
         if not ctx.block_id then error("Focus a terminal first", 0) end
-        local focus_script = (os.getenv("XDG_CONFIG_HOME") or (os.getenv("HOME") .. "/.config")) .. "/rex/focus_copy_window.lua"
         local window, err = rex.session.new_window{
             window_label = "Copy Mode",
             layout = rex.layout.block{
@@ -63,7 +62,8 @@ trap 'rm -f "$capture"' EXIT
 trap 'exit 0' HUP INT TERM
 "$REX_BIN_DIR/rex" capture --block "$1" --trim --unwrap > "$capture"
 # 選択要求が失敗しても、閲覧用のタブは残す。
-"$REX_BIN_DIR/rex" -C "$2" do "$3" \
+focus_script="${XDG_CONFIG_HOME:-$HOME/.config}/rex/focus_copy_window.lua"
+"$REX_BIN_DIR/rex" do "$focus_script" \
     "session_id=$REX_SESSION" "block_id=$REX_BLOCK" "client_id=$2" >/dev/null || true
 nvim --clean -n -R \
     --cmd 'set nomodeline clipboard=unnamedplus' \
@@ -74,15 +74,18 @@ nvim --clean -n -R \
     -c 'normal! G$' \
     "$capture"
 "$REX_BIN_DIR/rex" focus "$1" >/dev/null
-]], "rex-copy-mode", ctx.block_id, ctx.client_id, focus_script },
+]], "rex-copy-mode", ctx.block_id, ctx.client_id },
                 },
             },
         }
         if not window then error(err, 0) end
-        rex.client.queue("session.select", {
-            session_id = ctx.session_id,
-            window_id = window.window_id,
-        })
+        -- リモートでは端末側のスクリプトに選択を任せる。
+        if not ctx.server then
+            rex.client.queue("session.select", {
+                session_id = ctx.session_id,
+                window_id = window.window_id,
+            })
+        end
         return window
     end,
 }
