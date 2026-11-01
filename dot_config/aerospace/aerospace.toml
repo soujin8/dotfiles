@@ -86,7 +86,7 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = ['move-node-to-workspace 10']
+    run = ['move-node-to-workspace q']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
