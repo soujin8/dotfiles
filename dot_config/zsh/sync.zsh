@@ -79,7 +79,6 @@ fi
 # Coding Agent
 # ---------------------------------------------------------
 
-export CLAUDE_CODE_SUBAGENT_MODEL=claude-sonnet-5
 
 # ---------------------------------------------------------
 # function
@@ -166,25 +165,6 @@ function select-history() {
 zle -N select-history
 bindkey '^r' select-history
 
-# movファイルをgifに変換 
-# 使い方：$ mov2gif hoge.mov 800 30 # 横幅800px 30FPS
-# refer: https://blog.nasbi.jp/programming/devenv/mov2gif-easy-way/
-function mov2gif() {
-	mov=$1;
-	if [[ -z $2 ]]; then
-		width=300
-	else
-		width=$2
-	fi
-	if [[ -z $3 ]]; then
-		rate=15
-	else
-		rate=$3
-	fi
-	gif=`basename $mov`".gif"
-	ffmpeg -i $mov -vf scale=$width:-1 -pix_fmt rgb24 -r $rate -f gif - | gifsicle --optimize=3 --delay=3 > $gif
-}
-
 # fzf で gcloud 切り替え
 function gcloud-activate() {
   name="$1"
@@ -235,111 +215,3 @@ function delta_diff() {
   delta <(echo "$input1") <(echo "$input2")
 }
 
-# ---------------------------------------------------------
-# zeno
-# ---------------------------------------------------------
-
-if [[ -n $ZENO_LOADED ]]; then
-  bindkey ' '  zeno-auto-snippet
-
-  # if you use zsh's incremental search
-  # bindkey -M isearch ' ' self-insert
-
-  bindkey '^m' zeno-auto-snippet-and-accept-line
-
-  bindkey '^i' zeno-completion
-
-  bindkey '^xx' zeno-insert-snippet           # open snippet picker (fzf) and insert at cursor
-
-  bindkey '^x '  zeno-insert-space
-  bindkey '^x^m' accept-line
-  bindkey '^x^z' zeno-toggle-auto-snippet
-
-  # preprompt bindings
-  bindkey '^xp' zeno-preprompt
-  bindkey '^xs' zeno-preprompt-snippet
-  # Outside ZLE you can run `zeno-preprompt git {{cmd}}` or `zeno-preprompt-snippet foo`
-  # to set the next prompt prefix; invoking them with an empty argument resets the state.
-
-  bindkey '^r' zeno-smart-history-selection # smart history widget
-
-  # fallback if completion not matched
-  # (default: fzf-completion if exists; otherwise expand-or-complete)
-  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
-fi
-
-# nb add article - Add a note with article title and URL
-# Usage: nba <url>              - Auto-fetch title from URL
-#        nba <title> <url>      - Use specified title
-function nba() {
-  if [ $# -lt 1 ]; then
-    echo "Usage: nba <url>           # Auto-fetch title"
-    echo "       nba <title> <url>   # Manual title"
-    return 1
-  fi
-
-  local title=""
-  local url=""
-
-  if [ $# -eq 1 ]; then
-    url="$1"
-    echo "Fetching title from: $url"
-
-    title=$(curl -sL --max-redirs 3 --max-time 5 --compressed "$url" | head -c 512 | perl -0777 -ne 'print $1 if /<title[^>]*>([^<]+)<\/title>/i')
-    title=$(echo "$title" | perl -pe 's/^\s+|\s+$//g; s/\s+/ /g')
-
-    if [ -z "$title" ]; then
-      echo "Error: Could not fetch title from URL"
-      return 1
-    fi
-    echo "Title: $title"
-  else
-    title="$1"
-    url="$2"
-  fi
-
-  local content="# ${title}
-
-参照: [${title}](${url})"
-
-  nb add --filename "${title}.md" --content "$content"
-  echo "Note created: [${title}](${url})"
-}
-
-# nb query - Search notes and select with fzf preview
-# Usage: nbq <search query>
-function nbq() {
-  if [ -z "$1" ]; then
-    echo "Usage: nbq <search query>"
-    return 1
-  fi
-
-  local query="$*"
-  local results=$(nb q "$query" --no-color 2>/dev/null | grep -E '^\[[0-9]+\]')
-
-  if [ -z "$results" ]; then
-    echo "No results found for: $query"
-    return 1
-  fi
-
-  export _NBQ_QUERY="$query"
-
-  local selected=$(echo "$results" | fzf --ansi \
-    --preview 'note_id=$(echo {} | sed -E "s/^\[([0-9]+)\].*/\1/")
-               echo "=== Note [$note_id] ==="
-               echo ""
-               nb show "$note_id" | head -5
-               echo ""
-               echo "=== Matching lines ==="
-               echo ""
-               nb show "$note_id" | grep -i --color=always -C 2 "$_NBQ_QUERY" | head -30' \
-    --preview-window=right:60%:wrap \
-    --header "Search: $query")
-
-  unset _NBQ_QUERY
-
-  if [ -n "$selected" ]; then
-    local note_id=$(echo "$selected" | sed -E 's/^\[([0-9]+)\].*/\1/')
-    nb edit "$note_id"
-  fi
-}

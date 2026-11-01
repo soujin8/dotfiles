@@ -2,6 +2,11 @@
 if [ -f /opt/homebrew/bin/brew ]; then
   export PATH=/opt/homebrew/bin:$PATH
 fi
+
+# emacs-like bindingsを有効にする
+bindkey -e
+
+# sheldon読み込み
 if command -v sheldon &> /dev/null; then
   eval "$(sheldon source)"
 fi
@@ -9,5 +14,8 @@ fi
 
 # . "$HOME/.local/share/../bin/env"
 
-# emacs-like bindingsを有効にする
-bindkey -e
+
+# rex
+if [ -n "$REX_BIN_DIR" ]; then
+    export PATH="$REX_BIN_DIR:$PATH"
+fi
