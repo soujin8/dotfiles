@@ -1,10 +1,11 @@
 # zmodload zsh/zprof
-if [ -f /opt/homebrew/bin/brew ]; then
-  export PATH=/opt/homebrew/bin:$PATH
-fi
-
 # emacs-like bindingsを有効にする
 bindkey -e
+
+# zeno
+export ZENO_HOME=~/.config/zeno
+export ZENO_GIT_CAT="bat --color=always"
+export ZENO_GIT_TREE="eza --tree"
 
 # sheldon読み込み
 if command -v sheldon &> /dev/null; then
@@ -12,10 +13,12 @@ if command -v sheldon &> /dev/null; then
 fi
 # zprof
 
-# . "$HOME/.local/share/../bin/env"
-
-
 # rex
 if [ -n "$REX_BIN_DIR" ]; then
     export PATH="$REX_BIN_DIR:$PATH"
+fi
+
+# direnv
+if (( $+commands[direnv] )); then
+  eval "$(direnv hook zsh)"
 fi

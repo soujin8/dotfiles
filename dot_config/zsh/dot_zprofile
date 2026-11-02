@@ -1,0 +1,16 @@
+# PATH
+# /etc/zprofile (path_helper) overwrites PATH set in .zshenv on macOS login shells.
+# Re-apply custom PATH entries here, as .zprofile is sourced after /etc/zprofile.
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  $HOME/.local/bin(N-/)
+  $CARGO_HOME/bin(N-/)
+  $GOPATH/bin(N-/)
+  /opt/homebrew/opt/mysql-client/bin(N-/)
+  /snap/bin(N-/)
+  /opt/nvim-linux-x86_64/bin(N-/)
+  $HOME/.local/share/aquaproj-aqua/bin(N-/)
+  $path
+)
