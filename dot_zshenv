@@ -50,6 +50,11 @@ path=(
   $HOME/.local/share/aquaproj-aqua/bin(N-/)
 )
 
+# rex
+if [[ -n "$REX_BIN_DIR" ]]; then
+  path=("$REX_BIN_DIR" $path)
+fi
+
 # load envfile
 envfiles=(
   $HOME/.local/share/cargo/env(N)

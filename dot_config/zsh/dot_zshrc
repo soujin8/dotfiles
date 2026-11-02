@@ -13,11 +13,6 @@ if command -v sheldon &> /dev/null; then
 fi
 # zprof
 
-# rex
-if [ -n "$REX_BIN_DIR" ]; then
-    export PATH="$REX_BIN_DIR:$PATH"
-fi
-
 # direnv
 if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
