@@ -1,4 +1,6 @@
 [tools]
+aqua = "latest"
+bat = "latest"
 bun = "latest"
 deno = "latest"
 ghq = "latest"
