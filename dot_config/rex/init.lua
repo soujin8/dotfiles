@@ -67,6 +67,7 @@ focus_script="${XDG_CONFIG_HOME:-$HOME/.config}/rex/focus_copy_window.lua"
     "session_id=$REX_SESSION" "block_id=$REX_BLOCK" "client_id=$2" >/dev/null || true
 nvim --clean -n -R \
     --cmd 'set nomodeline clipboard=unnamedplus' \
+    --cmd 'if has("linux") | let g:clipboard = "osc52" | endif' \
     -c 'call delete(expand("%:p"))' \
     -c 'setlocal buftype=nofile bufhidden=wipe noswapfile nomodifiable' \
     -c 'nnoremap <silent> q :qa!<CR>' \
