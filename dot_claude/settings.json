@@ -17,5 +17,9 @@
   },
   "enabledPlugins": {
     "pstack@cursor-plugins": true
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   }
 }
