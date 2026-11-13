@@ -1,0 +1,29 @@
+{
+  "description": "Personal real_estimator container execution policy.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(Bash|PowerShell)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/h_mochizuki/.local/share/mise/installs/node/23.10.0/bin/node \"/Users/h_mochizuki/.codex/hooks/real_estimator_container_guard.js\"",
+            "timeout": 5,
+            "statusMessage": "Checking real_estimator container execution policy"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -c 'rex __internal session-start --agent codex --feature-session-naming=false 2>/dev/null || true'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
