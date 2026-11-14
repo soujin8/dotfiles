@@ -44,8 +44,10 @@ The detailed procedure is as follows.
 2. Attach the prepared comments and launch difit — or reuse a running server.
 
 - **Reuse before launch**
-  - Keep at most one live difit server per Git root and review target. If a difit server you started earlier is still running for the same target, do not launch another or reopen its URL; add the new findings to it with `<difit-command> comment add --port <port> '<json>'` (same JSON shape as `--comment`) and let the open page pick them up.
-  - If review rounds are expected to repeat, launch with `--keep-alive` or `--background` (a detached keep-alive server that prints JSON connection info such as `{"port":4966,"url":"http://localhost:4966","pid":123}` without auto-opening a browser), then use `comment add` / `comment get --port <port>` for later rounds.
+  - Keep at most one live difit server per Git root and review target. Reuse the running server and tab for the requested target, including ones the user started.
+  - Check `<difit-command> --version` and `<difit-command> comment --help`. If help lists `add` and `get`, use a read-only `comment get --port <port> --format json` to check server support, then add findings with `<difit-command> comment add --port <port> '<json>'` and read them back. The ordinary diff launcher help (`[commit-ish] [compare-with]`) means the subcommands are unavailable, as in difit 4.0.4.
+  - If the CLI or server lacks support, explain the mismatch briefly and add the comments on the verified diff lines in the existing tab. Verify they appear. `--comment` imports at startup, so keep the running session and its existing comments intact.
+  - For a new server that will handle repeat reviews, use `--keep-alive` or, if listed in `--help`, `--background`.
 - **difit launch options**
   - Use `<difit-command> <target> [compare-with]` to specify the target diff.
   - For uncommitted changes use `<difit-command> .`, for working tree changes use `<difit-command> working`, and for staged changes use `<difit-command> staged`.
