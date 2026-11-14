@@ -73,11 +73,12 @@ Keep at most one live difit server per Git root and review target. When you edit
 
 - Before starting difit, check whether a difit server you started earlier is still running for the same Git root (for example, the background process you launched is still alive).
 - If one is running for the same target, do not start another and do not reopen its URL. For working-tree targets (`.`, `working`, `staged`, and the HEAD default) difit watches the repository, and the open page prompts the user to reload when the diff changes.
-- If review rounds are expected to repeat, start the server with `--keep-alive` (the server survives browser disconnects) or `--background` (a detached keep-alive server; prints JSON like `{"port":4966,"url":"http://localhost:4966","pid":123}` and does not auto-open a browser, so share the URL with the user once).
-- While the server stays alive, exchange feedback without restarting it:
-  - `<difit-command> comment get --port <port>` — read the user's review comments (`--format json` for structured output).
-  - `<difit-command> comment add --port <port> '<json>'` — add new comments to the running server (same JSON shape as `--comment`).
-  - `<difit-command> comment resolve <threadId...> --port <port>` — resolve threads you have addressed.
+- For repeat reviews, use `--keep-alive`. Use `--background` for a detached server only if the installed CLI lists that option in `--help`.
+- Before managing comments on a running server, check `<difit-command> --version` and `<difit-command> comment --help`. If help prints the ordinary diff launcher usage (`[commit-ish] [compare-with]`), the comment subcommands are unavailable. difit 4.0.4 behaves this way. Only use the operations the comment help lists, and confirm the running server supports them with a read-only `comment get` against the requested port.
+  - `<difit-command> comment get --port <port> --format json` reads the threads and their IDs.
+  - `<difit-command> comment add --port <port> '<json>'` adds comments using the same JSON shape as `--comment`.
+  - `<difit-command> comment resolve <threadId...> --port <port>` closes the specified threads. Verify the result with another read.
+- If the CLI or running server lacks support, explain the version mismatch briefly and use the existing difit tab. For an authorized close, select the requested thread, click **Resolve thread**, confirm with **Resolve** if prompted, and verify the thread is gone from the active comments. Keep other threads and the running session intact. `--comment` only imports comments at startup, and `--clean` clears existing review data.
 - If the review target changes (for example, a different commit range), stop the existing server and start a new one rather than leaving two servers for the same repository.
 
 ## Constraints
